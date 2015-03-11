@@ -1,14 +1,10 @@
-// var underscore = angular.module('underscore', []);
-// underscore.factory('_', function() {
-//   return window._; //Underscore must already be loaded on the page
-// });
 var myApp = angular.module('myApp', ['ui.router']);//, 'underscore']);
 
 myApp.factory('datasvc', function(){
-	var svc ={};
+	var svc = {};
 	svc.getData = function(item){
-			var data = item;
-			return data;
+		var data = item;
+		return data;
 	}
 	return svc;
 });
@@ -17,23 +13,12 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
 	$scope.active = true;
 	$scope.hideData=[];
 	$scope.selectedApp = {};
-	$scope.Envs=[];
-
-  $http.get('/envs').success(function(data){
-		$scope.Env = data;
-			$scope.display = function () {
-     	return $scope.Hobbies = en.Hobbies;
- 		}
-	});
+	$scope.Envs = [];
 
   $http.get('/apps').success(function(data){
 		$scope.App = data;
 		$scope.selectedApp = data;
 	});
-
- 	$scope.disp = function(){
- 		console.log($scope.listOfEnvs)
- 	}
 
 	$scope.showDetail = function(data){
 		debugger;
@@ -41,6 +26,7 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
 		$scope.item = datasvc.getData(data)
 		console.log("data is : ", $scope.item)
 	}
+
   $scope.getStatus = function(index){
   	return $scope.hideData[index] || false
  	}
@@ -49,11 +35,11 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
    	$scope.hideData[index]=true;
   }
 
-	$scope.listOfEnvs = [];
-	$scope.show = function (data) {
-		console.log("show data : ", data)
- 		$scope.listOfEnvs = data.Env;
-	}
+	$scope.$watch('selectedApp', function(app) {
+    if (app) {
+      $scope.Envs = app.Env;
+    }
+  });
 }]);
 
 
@@ -67,8 +53,7 @@ myApp.directive("myEnv", function() {
 	return {
 		templateUrl : 'templates/env-template.html',
 		controller: ["$scope", 'datasvc', function($scope, datasvc) {
-			$scope.panel=true;
-
+			$scope.panel = true;
 			datasvc.currentItem = $scope.item;
 
 			$scope.setPanel = function(){
@@ -82,10 +67,8 @@ myApp.directive("myEnv", function() {
 				console.log("data is : ", datasvc.currentItem)
 			}
 
-			console.log("panel is : ",$scope.panel)
 			$scope.hidePanel = function(){
  				$scope.panel = false;
- 				console.log("hidePanel is : ",$scope.panel)
 			};
 		}],
 	};

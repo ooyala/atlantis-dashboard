@@ -1,5 +1,5 @@
- <div class="row">
-    <div class="column" style="padding-left:40px;padding-right:140px;padding-top:30px;padding-bottom:30px">
+ <div class="row container">
+    <div class="column page-caption">
       <div class="ui large message">
         <h5 class="ui huge header">Environment Configuration And Management</h5>
       </div>
@@ -7,35 +7,29 @@
 
 		<div class="ui grid">
 				<!-- Application DropDown  -->
-			 	<div class="eight wide column">
-			  	<span class="text" style="padding-left:53px">Application</span>
-			  	<div class="ui dropdown icon button">
-					  <div class="text">Choose here</div>
-					  <i class="dropdown icon"></i>
-					  <div class="menu">
-					  	<div ng-repeat="app in App">
-					  		<div class="item" ng-click="show(app)">{{app.Name}}</div>
-					  	</div>
-					  </div>
-					</div>
+			 	<div class="ten wide column">
+			  	<span class="text">Application</span>
+			  	<select ng-model="selectedApp" ng-options="app.Name for app in App">
+			  		<option value="">Choose here</option>
+			  	</select>
 			  </div>
 
 			  <!-- Register Dependencies -->
-			  <div class="four wide column">
-			 	 <div class="ui right floated button" style="margin-left:55px" ng-click="disp()">Register Dependencies</div>
+			  <div class="three wide column floated right">
+			 	 <div class="ui right floated button" ng-click="disp()">Register Dependencies</div>
 			  </div>
 
 			  <!-- Delete Environment -->
-			  <div class="four wide column">
-					<div class="ui right floated button" style="margin-right:140px">New Environment</div>
+			  <div class="three wide column floated right">
+					<div class="ui right floated button">New Environment</div>
 			  </div>
 		</div>
 
 		<!-- to list details of environment -->
-		<div class="ui three column grid" style="padding-left:40px;padding-right:140px">
-		 	<div class="column" ng-repeat="item in listOfEnvs">
+		<div class="ui three column grid">
+		 	<div class="column" ng-repeat="item in Envs">
 				<div class="three wide column" ng-show="item">
-					<div class = "ui segment"  my-env item="{{item}}">
+					<div class="ui segment" my-env item="{{item}}">
 			 		</div>
 				</div>
 		 	</div>
