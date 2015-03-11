@@ -12,25 +12,28 @@
         <select ng-model="selectedApp" ng-options="app.Name for app in App">
           <option value="">Choose here</option>
         </select>
-      </div>
 
-      <!-- Register Dependencies -->
-      <div class="three wide column floated right">
-       <div class="ui right floated button" ng-click="disp()">Register Dependencies</div>
-      </div>
-
-      <!-- Delete Environment -->
-      <div class="three wide column floated right">
-        <div class="ui right floated button">New Environment</div>
-      </div>
-    </div>
-
-    <!-- to list details of environment -->
-    <div class="ui three column grid">
-      <div class="column" ng-repeat="item in Envs">
-        <div ng-show="item">
-          <div class="ui segment" my-env item="{{item}}">
+        <div class="column"></div>
+        <!-- to list details of environment -->
+        <div class="ui grid env-panel">
+          <div class="eight wide column" ng-repeat="item in Envs">
+            <div ng-show="item">
+              <div class="ui segment" my-env item="{{item}}">
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="six wide column">
+        <!-- Register Dependencies -->
+        <div class="three wide column floated right">
+         <div class="ui right floated button" ng-click="disp()">Register Dependencies</div>
+        </div>
+
+        <!-- Delete Environment -->
+        <div class="three wide column floated right">
+          <div class="ui right floated button">New Environment</div>
         </div>
       </div>
     </div>

@@ -11,13 +11,11 @@ myApp.factory('datasvc', function(){
 
 myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, datasvc) {
   $scope.active = true;
-  $scope.hideData=[];
-  $scope.selectedApp = {};
+  $scope.hideData = [];
   $scope.Envs = [];
 
   $http.get('/apps').success(function(data){
     $scope.App = data;
-    $scope.selectedApp = data;
   });
 
   $scope.showDetail = function(data){
@@ -34,6 +32,15 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
   $scope.showPanel = function(index){
     $scope.hideData[index]=true;
   }
+
+  // $scope.deleteEnv = function(env){
+  //   var envs;
+  //   envs = _.reject($scope.selectedApp.Env, function(record) {
+  //     return record.Name == env.Name;
+  //   });
+  //   $scope.selectedApp.Env = envs;
+  //   $scope.$apply();
+  // }
 
   $scope.$watch('selectedApp', function(app) {
     if (app) {

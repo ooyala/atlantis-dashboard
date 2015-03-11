@@ -5,8 +5,8 @@
   {{item.Container}} Containers per zone <br>
   {{item.CPU_Shares}} CPU Shares Each<br>
   {{item.Memory}}MB of RAM Each<br>
-  <h3> Dependencies : </h3>
-  <div class="ui three column grid">
+  <div class="ui label">Dependencies :</div>
+  <div class="ui three column grid dependency-panel">
     <div class="column" ng-repeat="dep in item.Dependencies">
       <div class="ui floated segment">
         {{dep}}<br>
