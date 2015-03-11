@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp',['ui.router']);
+var myApp = angular.module('myApp', ['ui.router']);
 
 myApp.factory('datasvc', function(){
 
@@ -62,7 +62,7 @@ myApp.controller('DemoController2', ['$scope', '$http', 'datasvc',
 
 myApp.directive("myCustomer", function() {
 	return {
-		templateUrl : 'templates/template.html',
+		templateUrl : 'templates/env-template.html',
 		controller: ["$scope", 'datasvc', function($scope, datasvc) {
 			$scope.panel=true;
 
