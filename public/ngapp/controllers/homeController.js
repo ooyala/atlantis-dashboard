@@ -1,7 +1,10 @@
-var myApp = angular.module('myApp', ['ui.router']);
+// var underscore = angular.module('underscore', []);
+// underscore.factory('_', function() {
+//   return window._; //Underscore must already be loaded on the page
+// });
+var myApp = angular.module('myApp', ['ui.router']);//, 'underscore']);
 
 myApp.factory('datasvc', function(){
-
 	var svc ={};
 	svc.getData = function(item){
 			var data = item;
@@ -15,13 +18,6 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
 	$scope.hideData=[];
 	$scope.selectedApp = {};
 	$scope.Envs=[];
-
-  $http.get('/envs').success(function(data){
-		$scope.Env = data;
-			$scope.display = function () {
-     	return $scope.Hobbies = en.Hobbies;
- 		}
-	});
 
   $http.get('/apps').success(function(data){
 		$scope.App = data;
@@ -102,3 +98,19 @@ myApp.config(["$stateProvider", "$urlRouterProvider",
 		});
 	}
 ]);
+
+// filters
+myApp.filter("titleize", function() {
+  return function(str) {
+  	if(str) {
+	    var i, words, updated_words = [];
+	    str = str.replace(/_/g, ' ');
+	    words = str.split(' ');
+	    for (i=0; i<words.length; ++i) {
+	      updated_words.push(words[i].charAt(0).toUpperCase() + words[i].slice(1));
+	    }
+	    return updated_words.join(' ');
+	  }
+	  return '';
+	};
+});

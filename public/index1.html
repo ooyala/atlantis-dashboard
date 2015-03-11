@@ -1,48 +1,41 @@
- <div  class="row">
-
+ <div class="row">
     <div class="column" style="padding-left:40px;padding-right:140px;padding-top:30px;padding-bottom:30px">
       <div class="ui large message">
         <h5 class="ui huge header">Environment Configuration And Management</h5>
       </div>
     </div>
 
-
 		<div class="ui grid">
 				<!-- Application DropDown  -->
-		  	<!-- column 1 -->
-			  <div class="four wide column" style="padding-left:53px">
-			  	<div class="ui compact selection dropdown" >
-						  <i class="dropdown icon"></i>
-						  <div class="text" >Application</div>
-						  <div class="menu">
-						  	<div ng-repeat="app in App">
-						  		<div class="item" ng-click="show(app)">{{app.Name}}</div>
-
-						  	</div>
-						  </div>
+			 	<div class="eight wide column">
+			  	<span class="text" style="padding-left:53px">Application</span>
+			  	<div class="ui dropdown icon button">
+					  <div class="text">Choose here</div>
+					  <i class="dropdown icon"></i>
+					  <div class="menu">
+					  	<div ng-repeat="app in App">
+					  		<div class="item" ng-click="show(app)">{{app.Name}}</div>
+					  	</div>
+					  </div>
 					</div>
 			  </div>
 
 			  <!-- attributes of Application -->
-			  <!-- column 2 -->
-			  <div class="four wide column">
-			  </div>
-
+<!-- 			  <div class="four wide column">
+			  </div> -->
 
 			  <!-- Register Dependencies -->
-				<!-- column 3 -->
 			  <div class="four wide column">
 			 	 <div class="ui right floated button" style="margin-left:55px" ng-click="disp()">Register Dependencies</div>
 			  </div>
 
 			  <!-- Delete Environment -->
-				<!-- column 4 -->
 			  <div class="four wide column">
 					<div class="ui right floated button" style="margin-right:140px">New Environment</div>
 			  </div>
 		</div>
 
-			<!-- to list details of environment -->
+		<!-- to list details of environment -->
 		<div class="ui three column grid" style="padding-left:40px;padding-right:140px">
 		 	<div class="column" ng-repeat="item in listOfEnvs">
 				<div class="three wide column" ng-show="item">
@@ -51,5 +44,4 @@
 				</div>
 		 	</div>
 		</div>
-
 </div>
