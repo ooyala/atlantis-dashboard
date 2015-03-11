@@ -1,3 +1,7 @@
+.menu.navbar {
+  margin-top: 10px !important;
+}
+
 .remove.icon {
   cursor: pointer;
 }

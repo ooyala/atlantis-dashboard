@@ -19,6 +19,13 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
 	$scope.selectedApp = {};
 	$scope.Envs=[];
 
+  $http.get('/envs').success(function(data){
+		$scope.Env = data;
+			$scope.display = function () {
+     	return $scope.Hobbies = en.Hobbies;
+ 		}
+	});
+
   $http.get('/apps').success(function(data){
 		$scope.App = data;
 		$scope.selectedApp = data;
@@ -56,7 +63,7 @@ myApp.controller('DemoController2', ['$scope', '$http', 'datasvc',
 	}
 ]);
 
-myApp.directive("myCustomer", function() {
+myApp.directive("myEnv", function() {
 	return {
 		templateUrl : 'templates/env-template.html',
 		controller: ["$scope", 'datasvc', function($scope, datasvc) {
@@ -86,15 +93,15 @@ myApp.directive("myCustomer", function() {
 
 myApp.config(["$stateProvider", "$urlRouterProvider",
   function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('page1');
+    $urlRouterProvider.otherwise('dashboard');
 		$stateProvider.state('page2',{
 			url : '/page2',
 			controller : 'DemoController2',
 			templateUrl : 'index2.html'
-		}).state('page1',{
-			url : '/page1',
+		}).state('dashboard',{
+			url : '/dashboard',
 			controller : 'DemoController',
-			templateUrl : 'index1.html'
+			templateUrl : 'dashboard.html'
 		});
 	}
 ]);

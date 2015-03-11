@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Delphi-UI",
+    "env": [
+      ["staging", 1, 2, 3, ["redis", "sql", "heroku"]],
+      ["production", 4, 5, 6, ["redis1", "sql1", "heroku1"], [101, 102, 103]]
+    ]
+  },
+  {
+    "name": "Ooyala-Live",
+    "env": [
+      ["staging", 1, 2, 3, ["redis2", "sql2", "heroku2"], [20, 21, 22]],
+      ["production", 4, 5, 6, ["redis1", "sql1", "heroku1"], [101, 102, 103]]
+    ]
+  }
+]

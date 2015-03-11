@@ -14,9 +14,9 @@
   <body ng-app="myApp">
   	<!-- menu -->
   	<div class="ui page grid">
-	  	<div class="computer tablet only row  active" style="margin-right:140px">
+	  	<div class="computer tablet only row  active">
 	      <div class="ui menu navbar">
-	        <a href="index1.html" class="active	 item">Atlantis UI</a>
+	        <a href="dashboard.html" class="active item">Atlantis UI</a>
 	        <a href="" class="item">Release Wizard</a>
 	        <a href="" class="item">Deploy</a>
 	        <a href="" class="item">Manage</a>
@@ -32,9 +32,9 @@
 
   	<!-- for dropdown selection -->
   	<script>
-  		onload = function(){
-  			$('.ui.dropdown').dropdown();
-  		};
+      $(window).load(function(){
+        $('.ui.dropdown').dropdown();
+      });
   	</script>
   </body>
 </html>
