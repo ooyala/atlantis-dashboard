@@ -1,0 +1,26 @@
+<!-- <body ng-controller="TemplateController" ng-app="myApp"> -->
+<i class="remove icon right floated left aligned column" ng-click="item=null"></i>
+<!-- <div ui-view> -->
+	<div ng-app="myApp">
+		<div  ng-show="panel">
+
+	 		<div> </div>
+	 		{{item.Env}}
+	   	<a ui-sref='page2' ng-click="showDetails(item)"><h3>{{item.Name}}</h3></a>
+	   	<!-- <div class ="title" ng-click=><h1>{{item.Name}}</h1></div> -->
+			{{item.Container}} Containers per zone <br>
+	  	{{item.CPU_Shares}} CPU Shares Each<br>
+			{{item.Memory}}MB of RAM Each<br>
+			<h3> Dependencies : </h3>
+			<div class="ui three column grid">
+				<div class="column" ng-repeat="dep in item.Dependencies">
+					<div class="ui floated segment">
+						{{dep}}<br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- </body> -->

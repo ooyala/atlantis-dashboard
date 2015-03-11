@@ -1,0 +1,29 @@
+<div ng-app="myApp">
+
+	<div  ng-show="Panel">
+
+		<div class="rows ui secondary segment" >
+			<div ng-repeat="item in listOfEnvs">
+		  <div class="four column ui grid">
+	   		<div class="column">
+	  			<div class="ui horizontal segment">
+	  				<div class="close" ng-click="hidePanel()" >x</div>
+		  		 	<div class ="title"><h1>{{item.Name}}</h1></div>
+		 					Container : {{item.Container}}<br>
+			  			CPU_Shares : {{item.CPU_Shares}}<br>
+							Memory : {{item.Memory}}<br>
+							<div class="column">
+									<div ng-repeat="dep in item.Dependencies">
+										<div> </div>
+											<div class="ui segment">
+												{{dep}}
+											</div>
+			 						</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- ng-app  -->
+</div>
+</div>

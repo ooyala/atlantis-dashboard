@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Atlantis</title>
+  	<script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
+  	<script type="text/javascript" src="public/js/semantic.min.js"></script>
+  	<script type="text/javascript" src ="public/js/angular.min.js"></script>
+  	<script type="text/javascript" src = "public/ngapp/controllers/homeController.js"></script>
+
+  	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script> -->
+    <script type="text/javascript" src="public/js/angular-ui-router.min.js"></script>
+  	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.7.0/semantic.min.css"> -->
+  	<link rel="stylesheet" type="text/css" href="public/css/semantic.min.css"/>
+  </head>
+  <body ng-app="myApp">
+  	<!-- menu -->
+  	<div class="ui page grid">
+  	  	<div class="computer tablet only row  active" style="margin-right:140px">
+  	      <div class="ui menu navbar" >
+
+  	        <a href="public/index1.html" class="active	 item" >Atlantis UI</a>
+  	        <a href="" class="item">Release Wizard</a>
+  	        <a href="" class="item">Deploy</a>
+  	        <a href="" class="item">Manage</a>
+  	        <a href="" class="item">User Administration</a>
+  	        <a href="" class="item">Logout</a>
+  	      </div>
+  	  	</div>
+    	</div>
+
+  	<!-- Environment Configuration And Management -->
+    <div ui-view>
+    </div>
+
+  	<!-- for dropdown selection -->
+  	<script>
+  		onload = function(){
+  			$('.ui.dropdown').dropdown();
+  		};
+  	</script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!-- <div class="ui grid"> -->
+<!-- <div ng-app="myApp"> -->
+
+<div class="row" ng-app="myApp">
+  <div class="column" style="padding-left:40px;padding-right:140px;padding-top:30px;padding-bottom:30px">
+    <div class="ui large message">
+      <h5 class="ui header">Environment Detail / Container Management</h5>
+    </div>
+  </div>
+
+  <div class="ui three column grid">
+
+    <!-- <div class="four wide column">
+ 			<div class = "ui segment" ng-show="item.Name">
+				<i class="remove icon right floated left aligned column" ng-click="item.Name=null"></i>
+					{{item.Name}}<br>
+ 				</div>
+		</div>
+ -->
+		<div class="four wide column">
+				<div ng-repeat="sha in item.Sha">
+
+				<div class = "ui segment" ng-show="sha">
+
+					{{sha}}
+					<i class="remove icon right floated left aligned column" ng-click="sha= null"></i>
+				</div>
+				<div> </div>
+			</div>
+	</div>
+ </div>
+
