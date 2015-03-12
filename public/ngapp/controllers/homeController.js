@@ -9,7 +9,7 @@ myApp.factory('datasvc', function(){
   return svc;
 });
 
-myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, datasvc) {
+myApp.controller('DashboardCtrl', ['$scope', '$http', function($scope, $http, datasvc) {
   $scope.active = true;
   $scope.hideData = [];
   $scope.Envs = [];
@@ -50,7 +50,7 @@ myApp.controller('DemoController', ['$scope', '$http', function($scope, $http, d
 }]);
 
 
-myApp.controller('DemoController2', ['$scope', '$http', 'datasvc',
+myApp.controller('EnvCtrl', ['$scope', '$http', 'datasvc',
   function($scope, $http, datasvc) {
     $scope.item = datasvc.currentItem;
   }
@@ -83,14 +83,14 @@ myApp.directive("myEnv", function() {
 
 myApp.config(["$stateProvider", "$urlRouterProvider",
   function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('dashboard');
-    $stateProvider.state('page2',{
-      url : '/page2',
-      controller : 'DemoController2',
-      templateUrl : 'index2.html'
-    }).state('dashboard',{
+    $urlRouterProvider.otherwise('dashboardState');
+    $stateProvider.state('envState',{
+      url : '/environment',
+      controller : 'EnvCtrl',
+      templateUrl : 'environment.html'
+    }).state('dashboardState',{
       url : '/dashboard',
-      controller : 'DemoController',
+      controller : 'DashboardCtrl',
       templateUrl : 'dashboard.html'
     });
   }
