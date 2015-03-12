@@ -18,30 +18,6 @@ myApp.controller('DashboardCtrl', ['$scope', '$http', function($scope, $http, da
     $scope.App = data;
   });
 
-  $scope.showDetail = function(data){
-    debugger;
-    console.log(" data in showDetail : ", data)
-    $scope.item = datasvc.getData(data)
-    console.log("data is : ", $scope.item)
-  }
-
-  $scope.getStatus = function(index){
-    return $scope.hideData[index] || false
-  }
-
-  $scope.showPanel = function(index){
-    $scope.hideData[index]=true;
-  }
-
-  // $scope.deleteEnv = function(env){
-  //   var envs;
-  //   envs = _.reject($scope.selectedApp.Env, function(record) {
-  //     return record.Name == env.Name;
-  //   });
-  //   $scope.selectedApp.Env = envs;
-  //   $scope.$apply();
-  // }
-
   $scope.$watch('selectedApp', function(app) {
     if (app) {
       $scope.Envs = app.Env;
@@ -62,21 +38,6 @@ myApp.directive("myEnv", function() {
     controller: ["$scope", 'datasvc', function($scope, datasvc) {
       $scope.panel = true;
       datasvc.currentItem = $scope.item;
-
-      $scope.setPanel = function(){
-        $scope.panel = true;
-        return $scope.panel
-      }
-
-      $scope.showDetails = function(data){
-        $scope.item = data
-        datasvc.currentItem = data;
-        console.log("data is : ", datasvc.currentItem)
-      }
-
-      $scope.hidePanel = function(){
-        $scope.panel = false;
-      };
     }],
   };
 });
