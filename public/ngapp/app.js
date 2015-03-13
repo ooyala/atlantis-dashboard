@@ -5,11 +5,11 @@ var atlantisApp = angular.module('atlantisApp', [
 
 atlantisApp.config(["$stateProvider", "$urlRouterProvider",
   function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('dashboardState');
+    $urlRouterProvider.otherwise('dashboard');
     $stateProvider.state('envState',{
       url : '/environment',
       controller : 'EnvCtrl',
-      templateUrl : 'ngapp/templates/environment.html'
+      templateUrl : 'ngapp/templates/env_content.html'
     }).state('dashboardState',{
       url : '/dashboard',
       controller : 'DashboardCtrl',

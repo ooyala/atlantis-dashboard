@@ -1,0 +1,23 @@
+<div class="row container">
+  <div class="column page-caption">
+    <div class="ui large message">
+      <h5 class="ui huge header">Environment Detail / Container Management</h5>
+    </div>
+  </div>
+
+  <div class="ui grid">
+    <div class="eight wide column">
+      <div class="one column grid">
+        <div ng-repeat="sha in item.Sha">
+          <div class="ui segment" ng-show="sha">
+            {{sha}}
+            <i class="remove icon right floated left aligned column" ng-click="sha= null"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="six wide column">
+      <div env-depedency item="{{item}}"></div>
+    </div>
+  </div>
+</div>

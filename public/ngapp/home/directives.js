@@ -9,3 +9,12 @@ directives.directive("myEnv", function() {
     }],
   };
 });
+
+directives.directive("envDepedency", function() {
+  return {
+    templateUrl : 'ngapp/templates/dependencies.html',
+    controller: ["$scope", 'datasvc', function($scope, datasvc) {
+      datasvc.currentItem = $scope.item;
+    }],
+  };
+});

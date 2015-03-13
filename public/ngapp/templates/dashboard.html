@@ -9,20 +9,9 @@
       <!-- Application DropDown  -->
       <div class="ten wide column">
         <span class="text">Application</span>
-        <select ng-model="selectedApp" ng-options="app.Name for app in App">
+        <select ng-model="selectedApp" ng-options="app.Name for app in apps" ng-change="renderEnvPanel()">
           <option value="">Choose here</option>
         </select>
-
-        <div class="column"></div>
-        <!-- to list details of environment -->
-        <div class="ui grid env-panel">
-          <div class="eight wide column" ng-repeat="item in Envs">
-            <div ng-show="item">
-              <div class="ui segment" my-env item="{{item}}">
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="six wide column">
@@ -34,6 +23,20 @@
         <!-- Delete Environment -->
         <div class="three wide column floated right">
           <div class="ui right floated button">New Environment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- to list details of environment -->
+    <div class="ui grid">
+      <div class="eleven wide column">
+        <div class="ui grid env-panel">
+          <div class="eight wide column" ng-repeat="item in Envs">
+            <div ng-show="item">
+              <div class="ui segment" my-env item="{{item}}">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
