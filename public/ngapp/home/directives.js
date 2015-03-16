@@ -6,6 +6,8 @@ directives.directive("myEnv", function() {
     controller: ["$scope", 'datasvc', function($scope, datasvc) {
       $scope.panel = true;
       datasvc.currentItem = $scope.item;
+      datasvc.selectedApp = $scope.selectedApp;
+      datasvc.apps = $scope.apps;
     }],
   };
 });

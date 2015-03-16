@@ -18,5 +18,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state',
 controllers.controller('EnvCtrl', ['$scope', '$http', 'datasvc',
   function($scope, $http, datasvc) {
     $scope.item = datasvc.currentItem;
+    $scope.selectedApp = datasvc.selectedApp;
+    $scope.appps = datasvc.apps;
   }
 ]);

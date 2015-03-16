@@ -1,9 +1,8 @@
 <i class="remove icon right floated left aligned column" ng-click="item=null"></i>
-<div>
-    {{item.Env}}
-  <a ui-sref='envState' ng-click="showDetails(item)"><h3>{{item.Name | titleize}}</h3></a>
+<a ui-sref='envState' ng-click="showDetails(item)"><b>{{item.Name | titleize}}</b></a>
+<p>
   {{item.Container}} Containers per zone <br>
   {{item.CPU_Shares}} CPU Shares Each<br>
   {{item.Memory}}MB of RAM Each<br>
   <div env-depedency item="{{item}}"></div>
-</div>
+</p>

@@ -19,3 +19,7 @@
 .env-panel, .dependency-panel {
   margin-top: 0 !important;
 }
+
+.sha_panel {
+  margin-bottom: 10px !important;
+}
