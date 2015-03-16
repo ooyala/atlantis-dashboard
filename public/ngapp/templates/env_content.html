@@ -7,10 +7,10 @@
 
   <div class="ui grid">
     <div class="ten wide column">
-      <span class="text">Application</span>
-      <select ng-model="selectedApp" ng-options="app.Name for app in apps" ng-change="renderEnvPanel()">
-        <option value="">Choose here</option>
-      </select>
+        <span class="text">Application</span>
+        <select ng-model="selected" ng-options="app.Name for app in apps">
+          <option value="">Choose here</option>
+        </select>
     </div>
     <div class="eight wide column">
       <div class="one column grid">

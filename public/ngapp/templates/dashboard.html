@@ -9,8 +9,9 @@
       <!-- Application DropDown  -->
       <div class="ten wide column">
         <span class="text">Application</span>
-        <select ng-model="selectedApp" ng-options="app.Name for app in apps" ng-change="renderEnvPanel()">
-          <option value="">Choose here</option>
+        <select ng-model="selected" ng-change="renderEnvPanel({value: selected})"
+           ng-options="app.Name for app in apps">
+           <option value="">Choose here</option>
         </select>
       </div>
 
