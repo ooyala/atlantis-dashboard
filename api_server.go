@@ -28,7 +28,7 @@ type Environment struct {
 
 type Application struct {
 	Name string
-	Env  []Environment
+	Envs []Environment
 }
 
 func staticServe(c *gin.Context) {
