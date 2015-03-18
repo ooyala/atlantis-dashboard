@@ -12,7 +12,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
   function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
-      .state('app', {
+      .state('root', {
         url: '/',
         views: {
          'header': {
@@ -20,7 +20,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
-      .state('app.dashboard', {
+      // dashboard routes
+      .state('root.dashboard', {
         url: 'dashboard',
         views: {
           'content@' : {
@@ -30,7 +31,26 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
-      .state('app.release-wizard', {
+      .state('root.dashboard.app', {
+        url: '/{id:int}',
+        views: {
+          'body@root.dashboard' : {
+            templateUrl: 'ngapp/templates/dashboard-body.html',
+            controller: 'DashboardBodyCtrl'
+          }
+        }
+      })
+      .state('root.dashboard.app.env', {
+        url: '/:name',
+        views: {
+          'body@root.dashboard' : {
+            templateUrl: 'ngapp/templates/env-content.html',
+            controller: 'EnvContentCtrl'
+          }
+        }
+      })
+      // release wizard routes
+      .state('root.release-wizard', {
         url: 'dashboard',
         views: {
           'content@' : {
@@ -40,7 +60,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
-      .state('app.deploy', {
+      .state('root.deploy', {
         url: 'deploy',
         views: {
           'content@' : {
@@ -50,7 +70,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
-      .state('app.manage', {
+      .state('root.manage', {
         url: 'manage',
         views: {
           'content@' : {
@@ -60,7 +80,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
-      .state('app.users', {
+      .state('root.users', {
         url: 'users',
         views: {
           'content@' : {
