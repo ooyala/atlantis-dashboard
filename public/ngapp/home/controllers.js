@@ -36,13 +36,9 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
 
   console.log('in EnvContentCtrl');
   $scope.$parent.envBtnText = $stateParams.name;
-  // appsFactory.findByName($stateParams.id, $stateParams.name, function(app){
-  //   $scope.app = app;
-  //   $scope.$parent.btnText = app.Name;
-  //   $scope.$parent.Envs = app.Envs;
-  //   $scope.$parent.isEnvEnable = true;
-  // })
-
+  appsFactory.findEnv($stateParams.id, $stateParams.name, function(env) {
+    $scope.env = env;
+  })
 }]);
 
 

@@ -20,5 +20,15 @@ services.factory('appsFactory', ['$http', function($http){
     });
   };
 
+  svc.findEnv = function(id, envName, callback) {
+    var env = {}
+    this.findById(id, function(app) {
+      var env = app.Envs.filter(function(env){
+        return env.Name === envName;
+      })[0];
+      callback(env);
+    })
+  }
+
   return svc;
 }]);
