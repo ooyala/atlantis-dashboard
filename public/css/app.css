@@ -10,15 +10,15 @@
   transition: all 0.5s ease;
 }
 
-  .content.animatedFast.ng-enter {
-    -webkit-animation-name: fadeInRight;
-    animation-name: fadeInRight;
-  }
+.content.animatedFast.ng-enter {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
 
-  .content.animatedFast.ng-leave {
-    -webkit-animation-name: fadeOutLeft;
-    animation-name: fadeOutLeft;
-  }
+.content.animatedFast.ng-leave {
+  -webkit-animation-name: fadeOutLeft;
+  animation-name: fadeOutLeft;
+}
 
 html {
   position: relative;
@@ -40,5 +40,13 @@ body {
 }
 
 body > .container {
-  padding: 70px 15px 0;
+  padding: 60px 0 0;
+}
+
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
 }

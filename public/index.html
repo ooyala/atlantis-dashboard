@@ -7,15 +7,14 @@
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
   </head>
   <body ng-app="atlantisApp">
-    <div ui-view="header"></div>
     <div class="container">
-      <div ui-view="content" class="content animatedFast"></div>
+      <div class="row">
+        <div ui-view="header"></div>
+      </div>
+      <div class="row">
+        <div ui-view="content" class="content animatedFast"></div>
+      </div>
     </div>
-
-    <!-- Environment Configuration And Management -->
-    <div ui-view>
-    </div>
-
 
     <!-- Javascript files -->
     <script type="text/javascript" src="js/underscore.min.js"></script>
@@ -23,14 +22,14 @@
     <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.1.min.js"></script>
     <script type="text/javascript" src="js/angular-animate.min.js"></script>
     <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src = "ngapp/home/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/home/directives.js"></script>
-    <script type="text/javascript" src = "ngapp/home/services.js"></script>
-    <script type="text/javascript" src = "ngapp/release-wizard/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/deploy/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/manage/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/users/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/filters.js"></script>
-    <script type="text/javascript" src = "ngapp/app.js"></script>
+    <script type="text/javascript" src="ngapp/home/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/home/directives.js"></script>
+    <script type="text/javascript" src="ngapp/home/services.js"></script>
+    <script type="text/javascript" src="ngapp/release-wizard/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/deploy/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/manage/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/users/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/filters.js"></script>
+    <script type="text/javascript" src="ngapp/app.js"></script>
   </body>
 </html>

@@ -1,22 +1,35 @@
-<h4>Environment Configuration And Management</h4>
+<div ng-controller="DashboardCtrl">
+  <h4>Environment Configuration And Management</h4>
 
-<!-- <div class="panel panel-default">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-2 col-xs-4">
-        <ul class="nav nav-pills nav-stacked">
-          <li ui-sref-active="selected" ng-repeat="subscriber in vm.subscribers">
-            <a ui-sref=".detail({id: subscriber.id})"><i class="glyphicon glyphicon-user"></i> {{subscriber.name}}</a>
-          </li>
-        </ul>
-      </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Choose Application -->
+          <div ng-controller="DropdownCtrl">
+            <span class="text">Application : </span>
+            <div class="btn-group" dropdown is-open="status.isopen">
+              <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                {{btnText}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="app in apps">
+                  <a href="#" ng-click="chooseOption(app)">{{app.Name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      <div class="col-md-10 col-xs-8">
-        <div class="subscriber" ui-view="detail"></div>
+        <div class="col-md-4">
+          <button type="button" class="btn btn-primary btn-sm">New Environment</button>
+          <button type="button" class="btn btn-info btn-sm">Register Dependencies</button>
+        </div>
       </div>
+      <div ui-view class="row"></div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!--
 <div class="row container">
