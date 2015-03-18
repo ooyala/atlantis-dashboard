@@ -2,36 +2,35 @@
 <html>
   <head>
     <title>Atlantis</title>
-    <link rel="stylesheet" type="text/css" href="css/semantic.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/underscore.min.js"></script>
-    <script type="text/javascript" src="js/semantic.min.js"></script>
-    <script type="text/javascript" src ="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src = "ngapp/home/controllers.js"></script>
-    <script type="text/javascript" src = "ngapp/home/directives.js"></script>
-    <script type="text/javascript" src = "ngapp/home/services.js"></script>
-    <script type="text/javascript" src = "ngapp/filters.js"></script>
-    <script type="text/javascript" src = "ngapp/app.js"></script>
   </head>
   <body ng-app="atlantisApp">
-    <!-- menu -->
-    <div class="ui page grid">
-      <div class="computer tablet only row  active">
-        <div class="ui menu navbar">
-          <a ui-sref="dashboardState" class="active item">Atlantis UI</a>
-          <a href="" class="item">Release Wizard</a>
-          <a href="" class="item">Deploy</a>
-          <a href="" class="item">Manage</a>
-          <a href="" class="item">User Administration</a>
-          <a href="" class="item">Logout</a>
-        </div>
-      </div>
+    <div ui-view="header"></div>
+    <div class="container">
+      <div ui-view="content" class="content animatedFast"></div>
     </div>
 
     <!-- Environment Configuration And Management -->
     <div ui-view>
     </div>
+
+
+    <!-- Javascript files -->
+    <script type="text/javascript" src="js/underscore.min.js"></script>
+    <script type="text/javascript" src ="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src = "ngapp/home/controllers.js"></script>
+    <script type="text/javascript" src = "ngapp/home/directives.js"></script>
+    <script type="text/javascript" src = "ngapp/home/services.js"></script>
+    <script type="text/javascript" src = "ngapp/release-wizard/controllers.js"></script>
+    <script type="text/javascript" src = "ngapp/deploy/controllers.js"></script>
+    <script type="text/javascript" src = "ngapp/manage/controllers.js"></script>
+    <script type="text/javascript" src = "ngapp/users/controllers.js"></script>
+    <script type="text/javascript" src = "ngapp/filters.js"></script>
+    <script type="text/javascript" src = "ngapp/app.js"></script>
   </body>
 </html>
