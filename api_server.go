@@ -27,6 +27,7 @@ type Environment struct {
 }
 
 type Application struct {
+	Id   int
 	Name string
 	Envs []Environment
 }
@@ -57,7 +58,7 @@ func main() {
 
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		app[0] = Application{"Delphi-UI", []Environment{
+		app[0] = Application{1, "Delphi-UI", []Environment{
 			{"staging", 20, 5, 512, []string{"Minerva", "Helios", "CMK"}, []string{
 				"adf56a4d", "bad2313a", "basd313a",
 			}},
@@ -68,7 +69,7 @@ func main() {
 				"pasdfa4d", "t232fd31", "basd313a",
 			}},
 		}}
-		app[1] = Application{"Ooyala-Live", []Environment{
+		app[1] = Application{2, "Ooyala-Live", []Environment{
 			{"staging", 5, 3, 256, []string{"Redis", "Helios", "CMK"}, []string{
 				"abasdf23", "l242afsf", "pa23131a",
 			}},
