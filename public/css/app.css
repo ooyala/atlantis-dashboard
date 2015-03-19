@@ -50,3 +50,19 @@ body > .container {
   left: 0;
   z-index: 20;
 }
+
+.glyphicon-remove {
+  cursor: pointer;
+}
+
+.element-right-margin {
+  margin-right: 5px;
+}
+
+.panel-header-style {
+  padding: 5px 40px 0 15px;
+}
+
+.panel-body {
+  padding: 10px;
+}
