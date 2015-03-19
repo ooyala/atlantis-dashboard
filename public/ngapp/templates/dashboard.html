@@ -1,8 +1,9 @@
 <div ng-controller="DashboardCtrl">
-  <h4>Environment Configuration And Management</h4>
+  <h4>{{headerTitle}}</h4>
 
+<div class="row">
   <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-header panel-header-style">
       <div class="row">
         <div class="col-md-8">
           <div class="col-md-4">
@@ -36,54 +37,13 @@
         </div>
 
         <div class="col-md-4">
-          <button type="button" class="btn btn-primary btn-sm">New Environment</button>
-          <button type="button" class="btn btn-info btn-sm">Register Dependencies</button>
+          <button type="button" class="btn btn-info pull-right btn-sm">Register Dependencies</button>
+          <button type="button" class="btn btn-primary element-right-margin pull-right btn-sm">New Environment</button>
         </div>
       </div>
+    </div>
+    <div class="panel-body">
       <div ui-view="body" class="row"></div>
     </div>
   </div>
 </div>
-
-<!--
-<div class="row container">
-    <div class="column page-caption">
-      <div class="ui large message">
-        <h5 class="ui huge header">Environment Configuration And Management</h5>
-      </div>
-    </div>
-
-    <div class="ui grid">
-      <div class="ten wide column">
-        <span class="text">Application : </span>
-        <select ng-model="selected" ng-change="renderEnvPanel({value: selected})"
-           ng-options="app.Name for app in apps">
-           <option value="">Choose here</option>
-        </select>
-      </div>
-
-      <div class="six wide column">
-        <div class="three wide column floated right">
-         <div class="ui right floated button" ng-click="disp()">Register Dependencies</div>
-        </div>
-
-        <div class="three wide column floated right">
-          <div class="ui right floated button">New Environment</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ui grid">
-      <div class="eleven wide column">
-        <div class="ui grid env-panel">
-          <div class="eight wide column" ng-repeat="item in Envs">
-            <div ng-show="item">
-              <div class="ui segment" my-env item="{{item}}">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
- -->

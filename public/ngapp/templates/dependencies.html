@@ -1,10 +1,10 @@
-<div class="ui segment">
-  <div class="header">Dependencies :</div>
-  <div class="ui three column grid dependency-panel">
-    <div class="column" ng-repeat="dep in item.Dependencies">
-      <div class="ui floated segment">
-        {{dep}}<br>
-      </div>
+<div class="row">
+  <div class="col-md-12">
+    <span class="label label-warning">Dependencies :</span>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-4 well" ng-repeat="dep in env.Dependencies">
+      {{dep}}
     </div>
   </div>
 </div>

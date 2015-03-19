@@ -1,1 +1,29 @@
-<h2>Welcome to Dashboard Body with app {{app.Name}}</h2>
+<div class="col-md-9">
+  <div class="row">
+    <div ng-repeat="env in envs">
+      <div class="col-md-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <div class="col-md-10">
+              <a ui-sref="root.dashboard.app.env({name: env.Name})"><b>{{env.Name | titleize}}</b></a>
+            </div>
+            <i class="glyphicon glyphicon-remove float-right" ng-click="env=null"></i>
+          </div>
+          <div class="panel-body">
+            {{env.Container}} Containers per zone <br>
+            {{env.CPU_Shares}} CPU Shares Each<br>
+            {{env.Memory}}MB of RAM Each<br>
+            <div env-depedency env="{{env}}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-3">
+  <button class="btn btn-primary">Dep1</button>
+  <button class="btn btn-primary">Dep2</button>
+  <button class="btn btn-primary">Dep3</button>
+  <button class="btn btn-primary">Dep4</button>
+  <button class="btn btn-primary">Dep5</button>
+</div>

@@ -1,1 +1,25 @@
-<h2>Welcome to {{env.Name}} environment</h2>
+<div class="col-md-3">
+  <div class="col-md-11" ng-repeat="sha in env.Shas">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="col-md-10">
+          SHA: {{sha.ShaId}}
+        </div>
+        <i class="glyphicon glyphicon-remove float-right" ng-click="sha=null"></i>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-12">
+          <button ng-repeat="region in sha.Regions" class="btn btn-primary btn-block">
+            {{region}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-5">
+  <h2>View to display sha info</h2>
+</div>
+<div class="col-md-4">
+  <div env-depedency env="{{env}}" class="well"></div>
+</div>
