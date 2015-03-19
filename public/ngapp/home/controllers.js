@@ -40,14 +40,3 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
     $scope.env = env;
   })
 }]);
-
-
-// controllers.controller('EnvCtrl', ['$scope', '$http', 'appsFactory',
-//   function($scope, $http, appsFactory) {
-//     $scope.item = appsFactory.currentEnv;
-//     $scope.apps = appsFactory.allApps();
-//     $scope.selected = appsFactory.getSelectedApp();
-//     $scope.envs = $scope.selected.Envs;
-//     $scope.selectedEnv = appsFactory.currentEnv
-//   }
-// ]);
