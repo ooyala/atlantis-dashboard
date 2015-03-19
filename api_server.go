@@ -12,9 +12,9 @@ const (
 	staticDir = "public"
 )
 
-type Person struct {
-	Name    string   `json:name`
-	Hobbies []string `json:hobbies`
+type Sha struct {
+	ShaId   string
+	Regions []string
 }
 
 type Environment struct {
@@ -23,7 +23,7 @@ type Environment struct {
 	CPU_Shares   int32
 	Memory       int32
 	Dependencies []string
-	Sha          []string
+	Shas         []Sha
 }
 
 type Application struct {
@@ -59,23 +59,28 @@ func main() {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
 		app[0] = Application{1, "Delphi-UI", []Environment{
-			{"staging", 20, 5, 512, []string{"Minerva", "Helios", "CMK"}, []string{
-				"adf56a4d", "bad2313a", "basd313a",
-			}},
-			{"production", 3, 5, 256, []string{"Minerva", "Helios", "CMK"}, []string{
-				"n2326a4d", "k4543313", "osgf313a",
-			}},
-			{"next-staging", 5, 10, 256, []string{"Minerva", "Helios", "CMK"}, []string{
-				"pasdfa4d", "t232fd31", "basd313a",
-			}},
+			{"staging", 20, 5, 512, []string{"Minerva", "Helios", "CMK"}, []Sha{
+				{"adf56a4d", []string{"us-east-1a"}}, {"bad2313a", []string{"us-east-1a", "us-east-1d"}},
+				{"basd313a", []string{"us-east-1a", "us-east-1d", "us-east-1e"}}},
+			},
+			{"production", 3, 5, 256, []string{"Minerva", "Helios", "CMK"}, []Sha{
+				{"n2326a4d", []string{"us-east-1a", "us-east-1c"}}, {"k4543313", []string{"us-east-1e"}},
+				{"osgf313a", []string{"us-east-1a", "us-east-1e"}}},
+			},
+			{"next-staging", 5, 10, 256, []string{"Minerva", "Helios", "CMK"}, []Sha{
+				{"pasdfa4d", []string{"us-east-1a", "us-east-1d", "us-east-1e"}},
+				{"t232fd31", []string{"us-east-1e"}}, {"basd313a", []string{"us-east-1a"}}},
+			},
 		}}
 		app[1] = Application{2, "Ooyala-Live", []Environment{
-			{"staging", 5, 3, 256, []string{"Redis", "Helios", "CMK"}, []string{
-				"abasdf23", "l242afsf", "pa23131a",
-			}},
-			{"production", 10, 10, 512, []string{"Redis", "Helios", "CMK"}, []string{
-				"madsfdf2", "qerwerfs", "kasdf131",
-			}},
+			{"staging", 5, 3, 256, []string{"Redis", "Helios", "CMK"}, []Sha{
+				{"abasdf23", []string{"us-west-1c", "us-west-1e"}}, {"l242afsf", []string{"us-west-1b"}},
+				{"pa23131a", []string{"us-west-1a"}}},
+			},
+			{"production", 10, 10, 512, []string{"Redis", "Helios", "CMK"}, []Sha{
+				{"madsfdf2", []string{"us-west-1c", "us-west-1d", "us-west-1e"}},
+				{"qerwerfs", []string{"us-west-1b"}}, {"kasdf131", []string{"us-west-1a"}}},
+			},
 		}}
 		c.JSON(200, &app)
 	})
