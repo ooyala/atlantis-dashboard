@@ -26,7 +26,7 @@ services.factory('appsFactory', ['$http', function($http){
       var env = app.Envs.filter(function(env){
         return env.Name === envName;
       })[0];
-      callback(env);
+      callback(env, app);
     })
   }
 
