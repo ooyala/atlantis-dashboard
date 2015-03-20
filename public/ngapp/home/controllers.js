@@ -35,13 +35,35 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', 'appsFact
 controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory',
   function ($scope, $stateParams, appsFactory) {
 
-  console.log('in EnvContentCtrl');
   $scope.$parent.envBtnText = $stateParams.name;
   $scope.$parent.isEnvEnable = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
+
+  $scope.isShaInfoPanelEnabled = false;
   appsFactory.findEnv($stateParams.id, $stateParams.name, function(env, app) {
     $scope.$parent.appBtnText = app.Name;
     $scope.$parent.envs = app.Envs;
     $scope.env = env;
   })
+
+  $scope.renderShaInfo = function(sha_id, region) {
+    $scope.region = {}
+    appsFactory.getShaById(sha_id, function(data) {
+      $scope.region = _.filter(data.Regions, function(record) {
+        return record.Name == region;
+      })[0];
+      if(!_.isEmpty($scope.region)) {
+        $scope.selectedSha = data;
+        $scope.isShaInfoEnabled = true;
+      }
+    });
+  }
+
+  $scope.renderContainerInfo = function(container) {
+    $scope.selectedContainerName = container.Name;
+  }
+
+  $scope.isContainerInfoVisible = function(name) {
+    return $scope.selectedContainerName === name
+  }
 }]);
