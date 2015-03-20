@@ -6,7 +6,7 @@
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -36,7 +36,7 @@
             }
           },
           {
-            "Name": "Container 2",
+            "Name": "Container 2(us-east-1a)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -66,7 +66,7 @@
             }
           },
           {
-            "Name": "Container 3",
+            "Name": "Container 3(us-east-1a)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -106,7 +106,7 @@
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -141,7 +141,7 @@
         "Name": "us-east-1d",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1d)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -175,13 +175,13 @@
     ]
   },
   {
-    "ShaId": "bad2313a",
+    "ShaId": "basd313a",
     "Regions": [
       {
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -216,7 +216,7 @@
         "Name": "us-east-1d",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1d)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -251,7 +251,7 @@
         "Name": "us-east-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1e)",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -291,7 +291,7 @@
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -326,7 +326,7 @@
         "Name": "us-east-1c",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1c)",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -366,7 +366,7 @@
         "Name": "us-east-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1e)",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -406,7 +406,7 @@
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -441,7 +441,7 @@
         "Name": "us-east-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1e)",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -481,7 +481,7 @@
         "Name": "us-east-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1a)",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -516,7 +516,7 @@
         "Name": "us-east-1d",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1d)",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -551,7 +551,7 @@
         "Name": "us-east-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-east-1e)",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -591,8 +591,7 @@
         "Name": "us-west-1c",
         "Containers": [
           {
-            "Name": "Container 1",
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1c)",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -627,7 +626,7 @@
         "Name": "us-west-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1e)",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -667,7 +666,7 @@
         "Name": "us-west-1b",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1b)",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -707,7 +706,7 @@
         "Name": "us-west-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1a)",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -747,7 +746,7 @@
         "Name": "us-west-1c",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1c)",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -782,7 +781,7 @@
         "Name": "us-west-1d",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1d)",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -817,7 +816,7 @@
         "Name": "us-west-1e",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1e)",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -857,7 +856,7 @@
         "Name": "us-west-1b",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1b)",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -897,7 +896,7 @@
         "Name": "us-west-1a",
         "Containers": [
           {
-            "Name": "Container 1",
+            "Name": "Container 1(us-west-1a)",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
