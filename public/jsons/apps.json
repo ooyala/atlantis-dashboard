@@ -1,16 +1,180 @@
 [
-  {
-    "name": "Delphi-UI",
-    "env": [
-      ["staging", 1, 2, 3, ["redis", "sql", "heroku"]],
-      ["production", 4, 5, 6, ["redis1", "sql1", "heroku1"], [101, 102, 103]]
-    ]
-  },
-  {
-    "name": "Ooyala-Live",
-    "env": [
-      ["staging", 1, 2, 3, ["redis2", "sql2", "heroku2"], [20, 21, 22]],
-      ["production", 4, 5, 6, ["redis1", "sql1", "heroku1"], [101, 102, 103]]
-    ]
-  }
+    {
+        "Id": 1,
+        "Name": "Delphi-UI",
+        "Envs": [
+            {
+                "Name": "staging",
+                "ContainersPerZone": 20,
+                "CPUShares": 5,
+                "Memory": 512,
+                "Dependencies": [
+                    "Minerva",
+                    "Helios",
+                    "CMK"
+                ],
+                "Shas": [
+                    {
+                        "ShaId": "adf56a4d",
+                        "Regions": [
+                            "us-east-1a"
+                        ]
+                    },
+                    {
+                        "ShaId": "bad2313a",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-east-1d"
+                        ]
+                    },
+                    {
+                        "ShaId": "basd313a",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-east-1d",
+                            "us-east-1e"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "production",
+                "ContainersPerZone": 3,
+                "CPUShares": 5,
+                "Memory": 256,
+                "Dependencies": [
+                    "Minerva",
+                    "Helios",
+                    "CMK"
+                ],
+                "Shas": [
+                    {
+                        "ShaId": "n2326a4d",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-east-1c"
+                        ]
+                    },
+                    {
+                        "ShaId": "k4543313",
+                        "Regions": [
+                            "us-east-1e"
+                        ]
+                    },
+                    {
+                        "ShaId": "osgf313a",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-east-1e"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "next-staging",
+                "ContainersPerZone": 5,
+                "CPUShares": 10,
+                "Memory": 256,
+                "Dependencies": [
+                    "Minerva",
+                    "Helios",
+                    "CMK"
+                ],
+                "Shas": [
+                    {
+                        "ShaId": "pasdfa4d",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-east-1d",
+                            "us-east-1e"
+                        ]
+                    },
+                    {
+                        "ShaId": "t232fd31",
+                        "Regions": [
+                            "us-east-1e"
+                        ]
+                    },
+                    {
+                        "ShaId": "basd313a",
+                        "Regions": [
+                            "us-east-1a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Id": 2,
+        "Name": "Ooyala-Live",
+        "Envs": [
+            {
+                "Name": "staging",
+                "ContainersPerZone": 5,
+                "CPUShares": 3,
+                "Memory": 256,
+                "Dependencies": [
+                    "Redis",
+                    "Helios",
+                    "CMK"
+                ],
+                "Shas": [
+                    {
+                        "ShaId": "abasdf23",
+                        "Regions": [
+                            "us-west-1c",
+                            "us-west-1e"
+                        ]
+                    },
+                    {
+                        "ShaId": "l242afsf",
+                        "Regions": [
+                            "us-east-1a",
+                            "us-west-1b"
+                        ]
+                    },
+                    {
+                        "ShaId": "pa23131a",
+                        "Regions": [
+                            "us-west-1a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "production",
+                "ContainersPerZone": 10,
+                "CPUShares": 10,
+                "Memory": 512,
+                "Dependencies": [
+                    "Redis",
+                    "Helios",
+                    "CMK"
+                ],
+                "Shas": [
+                    {
+                        "ShaId": "madsfdf2",
+                        "Regions": [
+                            "us-west-1c",
+                            "us-west-1d",
+                            "us-west-1e"
+                        ]
+                    },
+                    {
+                        "ShaId": "qerwerfs",
+                        "Regions": [
+                            "us-west-1b"
+                        ]
+                    },
+                    {
+                        "ShaId": "kasdf131",
+                        "Regions": [
+                            "us-west-1a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 ]

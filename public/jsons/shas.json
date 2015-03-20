@@ -1,13 +1,12 @@
 [
-// Delphi-UI
-  // staging
   {
     "ShaId": "adf56a4d",
     "Regions": [
       {
-        "name": "us-east-1a",
-        "containers": [
+        "Name": "us-east-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -35,18 +34,9 @@
                   "./app.rb"
               ]
             }
-          }
-        ]
-      },
-    ]
-  },
-  {
-    "ShaId": "bad2313a",
-    "Regions": [
-      {
-        "name": "us-east-1a",
-        "containers": [
+          },
           {
+            "Name": "Container 2",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -74,13 +64,9 @@
                   "./app.rb"
               ]
             }
-          }
-        ]
-      },
-      {
-        "name": "us-east-1d",
-        "containers": [
+          },
           {
+            "Name": "Container 3",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -117,9 +103,10 @@
     "ShaId": "bad2313a",
     "Regions": [
       {
-        "name": "us-east-1a",
-        "containers": [
+        "Name": "us-east-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -151,43 +138,10 @@
         ]
       },
       {
-        "name": "us-east-1d",
-        "containers": [
+        "Name": "us-east-1d",
+        "Containers": [
           {
-            "ID": "delphi-ui-d37f05-staging-0a6fFG",
-            "Description": "UI Server for Delphi",
-            "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
-            "Env": "test",
-            "PrimaryPort": 61000,
-            "SecondaryPorts": [
-              61200,
-              61300,
-              61400,
-              61500,
-              61600
-            ],
-            "SSHPort": 61100,
-            "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
-            "Manifest": {
-              "AppType": "ruby1.9.3",
-              "CPUShares": 1,
-              "Deps": {},
-              "Description": "Hello World Ruby Server",
-              "Instances": 1,
-              "JavaType": "",
-              "MemoryLimit": 16,
-              "Name": "hello-ruby1.9.3",
-              "RunCommands": [
-                  "./app.rb"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "us-east-1e",
-        "containers": [
-          {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -220,14 +174,124 @@
       }
     ]
   },
-  // production
+  {
+    "ShaId": "bad2313a",
+    "Regions": [
+      {
+        "Name": "us-east-1a",
+        "Containers": [
+          {
+            "Name": "Container 1",
+            "ID": "delphi-ui-d37f05-staging-0a6fFG",
+            "Description": "UI Server for Delphi",
+            "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
+            "Env": "test",
+            "PrimaryPort": 61000,
+            "SecondaryPorts": [
+              61200,
+              61300,
+              61400,
+              61500,
+              61600
+            ],
+            "SSHPort": 61100,
+            "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
+            "Manifest": {
+              "AppType": "ruby1.9.3",
+              "CPUShares": 1,
+              "Deps": {},
+              "Description": "Hello World Ruby Server",
+              "Instances": 1,
+              "JavaType": "",
+              "MemoryLimit": 16,
+              "Name": "hello-ruby1.9.3",
+              "RunCommands": [
+                  "./app.rb"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Name": "us-east-1d",
+        "Containers": [
+          {
+            "Name": "Container 1",
+            "ID": "delphi-ui-d37f05-staging-0a6fFG",
+            "Description": "UI Server for Delphi",
+            "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
+            "Env": "test",
+            "PrimaryPort": 61000,
+            "SecondaryPorts": [
+              61200,
+              61300,
+              61400,
+              61500,
+              61600
+            ],
+            "SSHPort": 61100,
+            "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
+            "Manifest": {
+              "AppType": "ruby1.9.3",
+              "CPUShares": 1,
+              "Deps": {},
+              "Description": "Hello World Ruby Server",
+              "Instances": 1,
+              "JavaType": "",
+              "MemoryLimit": 16,
+              "Name": "hello-ruby1.9.3",
+              "RunCommands": [
+                  "./app.rb"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Name": "us-east-1e",
+        "Containers": [
+          {
+            "Name": "Container 1",
+            "ID": "delphi-ui-d37f05-staging-0a6fFG",
+            "Description": "UI Server for Delphi",
+            "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
+            "Env": "test",
+            "PrimaryPort": 61000,
+            "SecondaryPorts": [
+              61200,
+              61300,
+              61400,
+              61500,
+              61600
+            ],
+            "SSHPort": 61100,
+            "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
+            "Manifest": {
+              "AppType": "ruby1.9.3",
+              "CPUShares": 1,
+              "Deps": {},
+              "Description": "Hello World Ruby Server",
+              "Instances": 1,
+              "JavaType": "",
+              "MemoryLimit": 16,
+              "Name": "hello-ruby1.9.3",
+              "RunCommands": [
+                  "./app.rb"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
   {
     "ShaId": "n2326a4d",
     "Regions": [
       {
-        "name": "us-east-1a",
-        "containers": [
+        "Name": "us-east-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -259,9 +323,10 @@
         ]
       },
       {
-        "name": "us-east-1c",
-        "containers": [
+        "Name": "us-east-1c",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -298,9 +363,10 @@
     "ShaId": "k4543313",
     "Regions": [
       {
-        "name": "us-east-1e",
-        "containers": [
+        "Name": "us-east-1e",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -337,9 +403,10 @@
     "ShaId": "osgf313a",
     "Regions": [
       {
-        "name": "us-east-1a",
-        "containers": [
+        "Name": "us-east-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -371,9 +438,10 @@
         ]
       },
       {
-        "name": "us-east-1e",
-        "containers": [
+        "Name": "us-east-1e",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-production-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -406,14 +474,14 @@
       }
     ]
   },
-  // next-staging
   {
     "ShaId": "pasdfa4d",
     "Regions": [
       {
-        "name": "us-east-1a",
-        "containers": [
+        "Name": "us-east-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -445,9 +513,10 @@
         ]
       },
       {
-        "name": "us-east-1d",
-        "containers": [
+        "Name": "us-east-1d",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -479,9 +548,10 @@
         ]
       },
       {
-        "name": "us-east-1e",
-        "containers": [
+        "Name": "us-east-1e",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
             "Description": "UI Server for Delphi",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -513,16 +583,16 @@
         ]
       }
     ]
-  }
-// Ooyala-Live
-  // staging
+  },
   {
     "ShaId": "abasdf23",
     "Regions": [
       {
-        "name": "us-west-1c",
-        "containers": [
+        "Name": "us-west-1c",
+        "Containers": [
           {
+            "Name": "Container 1",
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -554,9 +624,10 @@
         ]
       },
       {
-        "name": "us-west-1e",
-        "containers": [
+        "Name": "us-west-1e",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -593,9 +664,10 @@
     "ShaId": "l242afsf",
     "Regions": [
       {
-        "name": "us-west-1b",
-        "containers": [
+        "Name": "us-west-1b",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -632,9 +704,10 @@
     "ShaId": "pa23131a",
     "Regions": [
       {
-        "name": "us-west-1a",
-        "containers": [
+        "Name": "us-west-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-staging-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -667,14 +740,14 @@
       }
     ]
   },
-  // production
   {
     "ShaId": "madsfdf2",
     "Regions": [
       {
-        "name": "us-west-1c",
-        "containers": [
+        "Name": "us-west-1c",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -706,9 +779,10 @@
         ]
       },
       {
-        "name": "us-west-1d",
-        "containers": [
+        "Name": "us-west-1d",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -738,11 +812,12 @@
             }
           }
         ]
-      }
+      },
       {
-        "name": "us-west-1e",
-        "containers": [
+        "Name": "us-west-1e",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -779,9 +854,10 @@
     "ShaId": "qerwerfs",
     "Regions": [
       {
-        "name": "us-west-1b",
-        "containers": [
+        "Name": "us-west-1b",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
@@ -818,9 +894,10 @@
     "ShaId": "kasdf131",
     "Regions": [
       {
-        "name": "us-west-1a",
-        "containers": [
+        "Name": "us-west-1a",
+        "Containers": [
           {
+            "Name": "Container 1",
             "ID": "ooyala-live-d37f05-production-0a6fFG",
             "Description": "UI Server for Ooyala-Live",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
