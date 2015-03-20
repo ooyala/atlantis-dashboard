@@ -30,5 +30,9 @@ services.factory('appsFactory', ['$http', function($http){
     })
   }
 
+  svc.getShaById = function(id, callback){
+    $http.get('/shas/'+id, { cache: true }).success(callback);
+  }
+
   return svc;
 }]);
