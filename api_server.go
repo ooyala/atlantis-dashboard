@@ -107,11 +107,11 @@ func main() {
 	})
 
 	r.GET("/apps", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
 		var apps [2]Application
 
 		filename := "public/jsons/apps.json"
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
 		content := readJSON(filename)
 		json.Unmarshal([]byte(content), &apps)
 
@@ -119,13 +119,13 @@ func main() {
 	})
 
 	r.GET("/shas/:id", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
 		var data []ShaInfo
 		var expectedSha ShaInfo
 
 		filename := "public/jsons/shas.json"
 		shaID := c.Params.ByName("id")
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
 		content := readJSON(filename)
 		json.Unmarshal([]byte(content), &data)
 
