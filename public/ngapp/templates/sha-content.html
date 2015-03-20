@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="col-md-10">
+      SHA: {{sha.ShaId}}
+    </div>
+    <i class="glyphicon glyphicon-remove float-right" ng-click="sha=null"></i>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block">
+        {{region}}
+      </button>
+    </div>
+  </div>
+</div>
