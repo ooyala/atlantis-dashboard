@@ -1,16 +1,57 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/GeertJohan/go.rice"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 const (
 	staticDir = "public"
 )
+
+type Dependency struct {
+}
+
+type AppManifest struct {
+	AppType     string
+	CPUShares   int
+	Deps        []Dependency
+	Description string
+	Instances   int
+	JavaType    string
+	MemoryLimit int
+	Name        string
+	RunCommands []string
+}
+
+type Container struct {
+	Name           string
+	ID             string
+	Description    string
+	Host           string
+	Env            string
+	PrimaryPort    int
+	SecondaryPorts []int
+	SSHPort        int
+	DockerID       string
+	Manifest       AppManifest
+}
+
+type Region struct {
+	Name       string
+	Containers []Container
+}
+
+type ShaInfo struct {
+	ShaId   string
+	Regions []Region
+}
 
 type Sha struct {
 	ShaId   string
@@ -18,12 +59,12 @@ type Sha struct {
 }
 
 type Environment struct {
-	Name         string
-	Container    int32
-	CPU_Shares   int32
-	Memory       int32
-	Dependencies []string
-	Shas         []Sha
+	Name              string
+	ContainersPerZone int32
+	CPUShares         int32
+	Memory            int32
+	Dependencies      []string
+	Shas              []Sha
 }
 
 type Application struct {
@@ -44,6 +85,18 @@ func staticServe(c *gin.Context) {
 	c.Request.URL.Path = original
 }
 
+func readJSON(filepath string) []byte {
+	_, err := os.Stat(filepath)
+	if err != nil {
+		panic("file doesn't exists")
+	}
+	content, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic("error reading file")
+	}
+	return []byte(content)
+}
+
 func main() {
 	r := gin.Default()
 
@@ -54,35 +107,35 @@ func main() {
 	})
 
 	r.GET("/apps", func(c *gin.Context) {
-		var app [2]Application
+		var apps [2]Application
 
+		filename := "public/jsons/apps.json"
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		app[0] = Application{1, "Delphi-UI", []Environment{
-			{"staging", 20, 5, 512, []string{"Minerva", "Helios", "CMK"}, []Sha{
-				{"adf56a4d", []string{"us-east-1a"}}, {"bad2313a", []string{"us-east-1a", "us-east-1d"}},
-				{"basd313a", []string{"us-east-1a", "us-east-1d", "us-east-1e"}}},
-			},
-			{"production", 3, 5, 256, []string{"Minerva", "Helios", "CMK"}, []Sha{
-				{"n2326a4d", []string{"us-east-1a", "us-east-1c"}}, {"k4543313", []string{"us-east-1e"}},
-				{"osgf313a", []string{"us-east-1a", "us-east-1e"}}},
-			},
-			{"next-staging", 5, 10, 256, []string{"Minerva", "Helios", "CMK"}, []Sha{
-				{"pasdfa4d", []string{"us-east-1a", "us-east-1d", "us-east-1e"}},
-				{"t232fd31", []string{"us-east-1e"}}, {"basd313a", []string{"us-east-1a"}}},
-			},
-		}}
-		app[1] = Application{2, "Ooyala-Live", []Environment{
-			{"staging", 5, 3, 256, []string{"Redis", "Helios", "CMK"}, []Sha{
-				{"abasdf23", []string{"us-west-1c", "us-west-1e"}}, {"l242afsf", []string{"us-west-1b"}},
-				{"pa23131a", []string{"us-west-1a"}}},
-			},
-			{"production", 10, 10, 512, []string{"Redis", "Helios", "CMK"}, []Sha{
-				{"madsfdf2", []string{"us-west-1c", "us-west-1d", "us-west-1e"}},
-				{"qerwerfs", []string{"us-west-1b"}}, {"kasdf131", []string{"us-west-1a"}}},
-			},
-		}}
-		c.JSON(200, &app)
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &apps)
+
+		c.JSON(200, apps)
+	})
+
+	r.GET("/shas/:id", func(c *gin.Context) {
+		var data []ShaInfo
+		var expectedSha ShaInfo
+
+		filename := "public/jsons/shas.json"
+		shaID := c.Params.ByName("id")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &data)
+
+		for _, sha := range data {
+			if sha.ShaId == shaID {
+				expectedSha = sha
+				break
+			}
+		}
+		c.JSON(200, expectedSha)
 	})
 
 	fmt.Println("Listening on port 5000")
