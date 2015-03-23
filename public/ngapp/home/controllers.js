@@ -34,12 +34,17 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', 'appsFact
 
 controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory',
   function ($scope, $stateParams, appsFactory) {
+  $scope.visibleInfo = [
+    "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID", "Description",
+    "CPUShares", "MemoryLimit", "AppType"
+  ];
 
   $scope.$parent.envBtnText = $stateParams.name;
   $scope.$parent.isEnvEnable = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
-
   $scope.isShaInfoPanelEnabled = false;
+  $scope.isContainerInfoVisible = false;
+
   appsFactory.findEnv($stateParams.id, $stateParams.name, function(env, app) {
     $scope.$parent.appBtnText = app.Name;
     $scope.$parent.envs = app.Envs;
@@ -60,10 +65,28 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
   }
 
   $scope.renderContainerInfo = function(container) {
-    $scope.selectedContainerName = container.Name;
+    $scope.isContainerInfoVisible = true;
+    $scope.containerInfo = $scope.filterContainerInfo(container);
   }
 
-  $scope.isContainerInfoVisible = function(name) {
-    return $scope.selectedContainerName === name
+  $scope.filterContainerInfo = function(container) {
+    var info = {};
+    _.each(container, function(value, key) {
+      if($scope.visibleInfo.indexOf(key) !== -1) {
+        if(key === 'DockerID') {
+          // info[key] = value.slice(0, 20) + "...";
+          info[key] = value;
+        } else if(key === 'Manifest') {
+          _.each(value, function(v, k) {
+            info[k] = v;
+          });
+        } else {
+          info[key] = value;
+        }
+      }
+    });
+    info["Healthz"] = "http://" + info.Host + ":" + info.PrimaryPort + "/healthz";
+    info["To SSH"] = "atlantis ssh " + info.ID;
+    return info;
   }
 }]);
