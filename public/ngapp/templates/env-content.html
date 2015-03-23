@@ -1,5 +1,5 @@
 <div class="col-md-3">
-  <div class="col-md-11" ng-repeat="sha in env.Shas">
+  <div class="col-md-12" ng-repeat="sha in env.Shas">
     <div class="panel panel-success">
       <div class="panel-heading">
         <div class="col-md-10">
@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="col-md-5">
-  <div class="panel panel-default" ng-show="isShaInfoEnabled">
+  <div class="panel panel-default sha-panel" ng-show="isShaInfoEnabled">
     <div class="panel-heading">
       <div class="col-md-10">
         SHA: {{selectedSha.ShaId}}
@@ -33,12 +33,10 @@
           </button>
         </div>
       </div>
-      <div ng-repeat="container in region.Containers" class="col-md-12" ng-show="isContainerInfoVisible(container.Name)">
-        <div class="well">
-          <div ng-repeat="(key, value) in container">
-            <div class="col-md-4">{{key}}</div>
-            <div class="col-md-8">{{value}}</div>
-          </div>
+      <div class="col-md-12 container-panel well" ng-show="isContainerInfoVisible">
+        <div ng-repeat="(key, value) in containerInfo">
+          <div class="col-md-4">{{key}}</div>
+          <div class="col-md-8">{{value}}</div>
         </div>
       </div>
     </div>
