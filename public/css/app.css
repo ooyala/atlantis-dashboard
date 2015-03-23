@@ -20,6 +20,20 @@
   animation-name: fadeOutLeft;
 }
 
+.container-panel {
+  margin-top: 10px;
+}
+.container-panel div {
+  word-wrap: break-word;
+}
+.sha-panel, .container-panel {
+  transition: 0.5s linear all;
+  font-size: 12px;
+}
+.sha-panel.ng-hide, .container-panel.ng-hide {
+  opacity: 0;
+}
+
 html {
   position: relative;
   min-height: 100%;
