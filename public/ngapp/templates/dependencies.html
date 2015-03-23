@@ -1,10 +1,15 @@
-<div class="row">
-  <div class="col-md-12">
-    <span class="label label-warning">Dependencies :</span>
+<div class="deps-panel panel panel-warning">
+  <div class="panel-heading">
+    <h4 class="panel-title">Dependencies</h4>
   </div>
-  <div class="col-md-12">
-    <div class="col-md-4 well" ng-repeat="dep in env.Dependencies">
-      {{dep}}
+  <div class="panel-body">
+    <div class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
+      <p>
+        {{dep}}
+      </p>
+      <p>
+        OK
+      </p>
     </div>
   </div>
 </div>

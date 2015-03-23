@@ -86,3 +86,11 @@ body > .container {
   background-color: #337ab7;
   border-color: #2e6da4;
 }
+
+.deps-panel {
+  margin: 0;
+}
+.deps-panel .dep-panel {
+  margin-right: 15px;
+  margin-bottom: 0;
+}

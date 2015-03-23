@@ -3,13 +3,13 @@
     <div class="panel panel-success">
       <div class="panel-heading">
         <div class="col-md-10">
-          SHA: {{sha.ShaId}}
+          <h3 class="panel-title text-primary">SHA: {{sha.ShaId}}</h3>
         </div>
         <i class="glyphicon glyphicon-remove float-right" ng-click="sha=null"></i>
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-          <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block" ng-click="renderShaInfo(sha.ShaId, region)">
+          <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block" ng-click="renderShaInfo(sha.ShaId, region)" ng-class="{active:isActive(sha.ShaId, region)}">
             {{region}}
           </button>
         </div>
@@ -21,7 +21,7 @@
   <div class="panel panel-default sha-panel" ng-show="isShaInfoEnabled">
     <div class="panel-heading">
       <div class="col-md-10">
-        SHA: {{selectedSha.ShaId}}
+        <h3 class="panel-title text-primary">SHA: {{selectedSha.ShaId}}</h3>
       </div>
       <i class="glyphicon glyphicon-remove float-right" ng-click="selectedSha=null"></i>
     </div>
@@ -43,5 +43,5 @@
   </div>
 </div>
 <div class="col-md-4">
-  <div env-depedency env="{{env}}" class="well"></div>
+  <div env-depedency env="{{env}}"></div>
 </div>

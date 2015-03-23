@@ -50,7 +50,12 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
     $scope.env = env;
   })
 
+  $scope.isActive = function(sha_id, region) {
+    return $scope.selectedShaId === sha_id && $scope.region.Name == region;
+  }
+
   $scope.renderShaInfo = function(sha_id, region) {
+
     $scope.isContainerInfoVisible = false;
     $scope.region = {}
     appsFactory.getShaById(sha_id, function(data) {
@@ -59,6 +64,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
       })[0];
       if(!_.isEmpty($scope.region)) {
         $scope.selectedSha = data;
+        $scope.selectedShaId = sha_id;
         $scope.isShaInfoEnabled = true;
       }
     });
