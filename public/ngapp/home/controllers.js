@@ -54,9 +54,14 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
     return $scope.selectedShaId === sha_id && $scope.region.Name == region;
   }
 
+  $scope.isContainerActive = function(container) {
+    return $scope.containerInfo.Name === container.Name;
+  }
+
   $scope.renderShaInfo = function(sha_id, region) {
 
     $scope.isContainerInfoVisible = false;
+    $scope.containerInfo = {};
     $scope.region = {}
     appsFactory.getShaById(sha_id, function(data) {
       $scope.region = _.filter(data.Regions, function(record) {

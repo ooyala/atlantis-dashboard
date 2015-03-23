@@ -28,7 +28,7 @@
     <div class="panel-body">
       <div class="col-md-12">
         <div class="col-md-6">
-          <button ng-repeat="container in region.Containers" class="btn btn-default btn-block" ng-click="renderContainerInfo(container)">
+          <button ng-repeat="container in region.Containers" class="btn btn-default btn-block" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
             {{container.Name}}
           </button>
         </div>
