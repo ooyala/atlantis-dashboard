@@ -35,15 +35,14 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', 'appsFact
 controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory',
   function ($scope, $stateParams, appsFactory) {
   $scope.visibleInfo = [
-    "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID", "Description",
-    "CPUShares", "MemoryLimit", "AppType"
+    "Name", "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID",
+    "Description", "CPUShares", "MemoryLimit", "AppType"
   ];
 
   $scope.$parent.envBtnText = $stateParams.name;
   $scope.$parent.isEnvEnable = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
   $scope.isShaInfoPanelEnabled = false;
-  $scope.isContainerInfoVisible = false;
 
   appsFactory.findEnv($stateParams.id, $stateParams.name, function(env, app) {
     $scope.$parent.appBtnText = app.Name;
@@ -52,6 +51,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
   })
 
   $scope.renderShaInfo = function(sha_id, region) {
+    $scope.isContainerInfoVisible = false;
     $scope.region = {}
     appsFactory.getShaById(sha_id, function(data) {
       $scope.region = _.filter(data.Regions, function(record) {
