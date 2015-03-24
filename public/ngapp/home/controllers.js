@@ -45,11 +45,11 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
 
   $scope.deleteEnv = function(env) {
     var modalInstance = $modal.open({
-      templateUrl: 'deleteModal.html',
-      controller: function ($scope, $modalInstance, envName) {
-        $scope.envName = envName;
+      templateUrl: 'ngapp/templates/deleteModal.html',
+      controller: function ($scope, $modalInstance, name) {
+        $scope.name = name;
         $scope.ok = function () {
-          $modalInstance.close(envName);
+          $modalInstance.close(name);
         };
 
         $scope.cancel = function () {
@@ -57,18 +57,18 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
         };
       },
       resolve: {
-        envName: function() {
+        name: function() {
           return env.Name;
         }
       }
     });
 
-    modalInstance.result.then(function(envName) {
+    modalInstance.result.then(function(name) {
       $scope.envs = _.filter($scope.envs, function(env) {
-        return env.Name !== envName;
+        return env.Name !== name;
       })
       $scope.$parent.addAlert({
-        type: 'success', message: "Environment '" + envName + "' deleted successfully.",
+        type: 'success', message: "Environment '" + name + "' deleted successfully.",
         icon: 'glyphicon glyphicon-ok-sign'
       });
     }, function(result) {
@@ -77,8 +77,8 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   };
 }]);
 
-controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory',
-  function ($scope, $stateParams, appsFactory) {
+controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'appsFactory',
+  function ($scope, $modal, $stateParams, appsFactory) {
   $scope.visibleInfo = [
     "Name", "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID",
     "Description", "CPUShares", "MemoryLimit", "AppType"
@@ -87,12 +87,13 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
   $scope.$parent.envBtnText = $stateParams.name;
   $scope.$parent.isEnvEnable = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
-  $scope.isShaInfoPanelEnabled = false;
+  $scope.isShaInfoEnabled = false;
 
   appsFactory.findEnv($stateParams.id, $stateParams.name, function(env, app) {
     $scope.$parent.appBtnText = app.Name;
     $scope.$parent.envs = app.Envs;
     $scope.env = env;
+    $scope.shas = env.Shas;
   })
 
   $scope.isActive = function(sha_id, region) {
@@ -145,4 +146,38 @@ controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory
     info["To SSH"] = "atlantis ssh " + info.ID;
     return info;
   }
+
+  $scope.deleteSha = function(sha) {
+    var modalInstance = $modal.open({
+      templateUrl: 'ngapp/templates/deleteModal.html',
+      controller: function ($scope, $modalInstance, name) {
+        $scope.name = name;
+        $scope.ok = function () {
+          $modalInstance.close(name);
+        };
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+      },
+      resolve: {
+        name: function() {
+          return sha.ShaId;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(name) {
+      $scope.shas = _.filter($scope.shas, function(sha) {
+        return sha.ShaId !== name;
+      })
+      $scope.$parent.addAlert({
+        type: 'success', message: "Environment '" + name + "' deleted successfully.",
+        icon: 'glyphicon glyphicon-ok-sign'
+      });
+      $scope.isShaInfoEnabled = false;
+    }, function(result) {
+      console.log(result);
+    });
+  };
 }]);

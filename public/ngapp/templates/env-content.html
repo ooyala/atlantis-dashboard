@@ -1,11 +1,11 @@
 <div class="col-md-3">
-  <div class="col-md-12" ng-repeat="sha in env.Shas">
+  <div class="col-md-12" ng-repeat="sha in shas">
     <div class="panel panel-success">
       <div class="panel-heading">
         <div class="col-md-10">
           <h3 class="panel-title text-primary">SHA: {{sha.ShaId}}</h3>
         </div>
-        <i class="glyphicon glyphicon-remove float-right" ng-click="sha=null"></i>
+        <i class="glyphicon glyphicon-remove float-right" ng-click="deleteSha(sha)"></i>
       </div>
       <div class="panel-body">
         <div class="col-md-12">
@@ -23,7 +23,7 @@
       <div class="col-md-10">
         <h3 class="panel-title text-primary">SHA: {{selectedSha.ShaId}}</h3>
       </div>
-      <i class="glyphicon glyphicon-remove float-right" ng-click="selectedSha=null"></i>
+      <i class="glyphicon glyphicon-remove float-right" ng-click="deleteSha(selectedSha)"></i>
     </div>
     <div class="panel-body">
       <div class="col-md-12">
