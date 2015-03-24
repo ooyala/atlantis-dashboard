@@ -1,8 +1,9 @@
 var controllers = angular.module('atlantisApp.homeControllers', []);
 
-controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', 'appsFactory',
-  function($scope, $http, $state, appsFactory) {
+controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout',
+  'appsFactory', function($scope, $http, $state, $timeout, appsFactory) {
 
+  $scope.alerts = [];
   $scope.envs = [];
   $scope.isEnvEnable = false;
   $scope.envBtnText  = $scope.appBtnText = "Choose here";
@@ -17,6 +18,17 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', 'appsFacto
   appsFactory.list(function(data) {
     $scope.apps = data;
   });
+
+  $scope.addAlert = function(alert) {
+    $scope.alerts.push(alert);
+    $scope.closeAlert($scope.alerts.length - 1);
+  };
+
+  $scope.closeAlert = function(index) {
+    $timeout(function(){
+      $scope.alerts.splice(index, 1);
+    }, 3000);
+  };
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
@@ -55,6 +67,10 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
       $scope.envs = _.filter($scope.envs, function(env) {
         return env.Name !== envName;
       })
+      $scope.$parent.addAlert({
+        type: 'success', message: "Environment '" + envName + "' deleted successfully.",
+        icon: 'glyphicon glyphicon-ok-sign'
+      });
     }, function(result) {
       console.log(result);
     });
