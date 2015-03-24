@@ -57,6 +57,10 @@ body > .container {
   padding: 60px 0 0;
 }
 
+.nopadding {
+  padding: 0px;
+}
+
 .navbar-wrapper {
   position: absolute;
   top: 0;
@@ -71,6 +75,10 @@ body > .container {
 
 .element-right-margin {
   margin-right: 5px;
+}
+
+.element-bottom-margin {
+  margin-top: 5px;
 }
 
 .panel-header-style {
@@ -103,4 +111,14 @@ body > .container {
 }
 .modal-footer {
   border-radius: 0 0 6px 6px;
+}
+
+.container-remove-button {
+  line-height: 39px;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.glyphicon.glyphicon-remove:hover {
+  color: rgb(229, 66, 66);
 }

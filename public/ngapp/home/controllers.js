@@ -114,6 +114,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
         return record.Name == region;
       })[0];
       if(!_.isEmpty($scope.region)) {
+        $scope.containers = $scope.region.Containers;
         $scope.selectedSha = data;
         $scope.selectedShaId = sha_id;
         $scope.isShaInfoEnabled = true;
@@ -172,10 +173,44 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
         return sha.ShaId !== name;
       })
       $scope.$parent.addAlert({
-        type: 'success', message: "Environment '" + name + "' deleted successfully.",
+        type: 'success', message: "Sha '" + name + "' deleted successfully.",
         icon: 'glyphicon glyphicon-ok-sign'
       });
       $scope.isShaInfoEnabled = false;
+    }, function(result) {
+      console.log(result);
+    });
+  };
+
+  $scope.deleteContainer = function(container) {
+    var modalInstance = $modal.open({
+      templateUrl: 'ngapp/templates/deleteModal.html',
+      controller: function ($scope, $modalInstance, name) {
+        $scope.name = name;
+        $scope.ok = function () {
+          $modalInstance.close(name);
+        };
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+      },
+      resolve: {
+        name: function() {
+          return container.Name;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(name) {
+      $scope.containers = _.filter($scope.containers, function(container) {
+        return container.Name !== name;
+      })
+      $scope.$parent.addAlert({
+        type: 'success', message: "Container '" + name + "' deleted successfully.",
+        icon: 'glyphicon glyphicon-ok-sign'
+      });
+      $scope.isContainerInfoVisible = false;
     }, function(result) {
       console.log(result);
     });
