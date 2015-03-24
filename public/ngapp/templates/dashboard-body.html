@@ -7,7 +7,7 @@
             <div class="col-md-10 panel-title text-primary">
               <a ui-sref="root.dashboard.app.env({name: env.Name})"><b>{{env.Name | titleize}}</b></a>
             </div>
-            <i class="glyphicon glyphicon-remove float-right" ng-click="env=null"></i>
+            <i class="glyphicon glyphicon-remove float-right" ng-click="deleteEnv(env)"></i>
           </div>
           <div class="panel-body">
             {{env.Container}} Containers per zone <br>
@@ -27,3 +27,17 @@
   <button class="btn btn-primary">Dep4</button>
   <button class="btn btn-primary">Dep5</button>
 </div>
+
+<!-- Template for Delete Modal -->
+<script type="text/ng-template" id="deleteModal.html">
+  <div class="modal-header">
+    <span class="panel-title">Delete {{envName}}?</span>
+  </div>
+  <div class="modal-body">
+    <h3>Are you sure?</h3>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ng-click="ok()">Yes</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
