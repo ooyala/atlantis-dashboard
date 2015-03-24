@@ -19,8 +19,8 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', 'appsFacto
   });
 }]);
 
-controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', 'appsFactory',
-  function ($scope, $stateParams, appsFactory) {
+controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
+  'appsFactory', function ($scope, $stateParams, $modal, appsFactory) {
 
   appsFactory.findById($stateParams.id, function(app){
     $scope.$parent.isEnvEnable = false;
@@ -30,6 +30,35 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', 'appsFact
     $scope.$parent.envBtnText = "Choose here";        // reset
     $scope.$parent.envs = app.Envs;
   })
+
+  $scope.deleteEnv = function(env) {
+    var modalInstance = $modal.open({
+      templateUrl: 'deleteModal.html',
+      controller: function ($scope, $modalInstance, envName) {
+        $scope.envName = envName;
+        $scope.ok = function () {
+          $modalInstance.close(envName);
+        };
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+      },
+      resolve: {
+        envName: function() {
+          return env.Name;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(envName) {
+      $scope.envs = _.filter($scope.envs, function(env) {
+        return env.Name !== envName;
+      })
+    }, function(result) {
+      console.log(result);
+    });
+  };
 }]);
 
 controllers.controller('EnvContentCtrl', ['$scope', '$stateParams', 'appsFactory',
