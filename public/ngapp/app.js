@@ -49,6 +49,15 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         }
       })
+      // .state('root.dashboard.app.dep', {
+      //   url: '/:name',
+      //   views: {
+      //     'body@root.dashboard' : {
+      //       templateUrl: 'ngapp/templates/env-content.html',
+      //       controller: 'EnvContentCtrl'
+      //     }
+      //   }
+      // })
       // release wizard routes
       .state('root.release-wizard', {
         url: 'dashboard',

@@ -1,0 +1,26 @@
+[
+    {
+        "Name": "Minerva",
+        "Status": "",
+        "Host": "",
+        "Port": 0
+    },
+    {
+        "Name": "Redis",
+        "Status": "",
+        "Host": "",
+        "Port": 0
+    },
+    {
+        "Name": "Helios",
+        "Status": "",
+        "Host": "",
+        "Port": 0
+    },
+    {
+        "Name": "CMK",
+        "Status": "",
+        "Host": "",
+        "Port": 0
+    }
+]

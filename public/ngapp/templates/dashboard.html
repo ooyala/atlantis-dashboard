@@ -17,7 +17,7 @@
               </button>
               <ul class="dropdown-menu" role="menu">
                 <li ng-repeat="app in apps">
-                  <a ui-sref="root.dashboard.app({id: app.Id})">{{app.Name}}</a>
+                  <a ui-sref=".app({id: app.Id})">{{app.Name}}</a>
                 </li>
               </ul>
             </div>
@@ -31,7 +31,7 @@
               </button>
               <ul class="dropdown-menu" role="menu">
                 <li ng-repeat="env in envs">
-                  <a ui-sref="root.dashboard.app.env({name: env.Name})">{{env.Name}}</a>
+                  <a ui-sref=".app.env({name: env.Name})">{{env.Name}}</a>
                 </li>
               </ul>
             </div>
