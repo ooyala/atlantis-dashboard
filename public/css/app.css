@@ -103,6 +103,9 @@ body > .container {
   margin-top: 10px;
   margin-bottom: 0;
 }
+.deps-panel .popover {
+  margin-top: 5px;
+}
 
 .modal-header, .modal-footer {
   background-color: #f5f5f5;
