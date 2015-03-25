@@ -86,6 +86,14 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
       console.log(result);
     });
   };
+
+  $scope.leftDrop = function() {
+    alert('Dropped in left bin');
+  };
+
+  $scope.rightDrop = function() {
+    alert('Dropped in right bin');
+  };
 }]);
 
 controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'appsFactory',
