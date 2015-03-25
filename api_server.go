@@ -142,6 +142,17 @@ func main() {
 		c.JSON(200, expectedSha)
 	})
 
+	r.GET("/deps", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var deps []Dependency
+
+		filename := "public/jsons/deps.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &deps)
+		c.JSON(200, deps)
+	})
+
 	fmt.Println("Listening on port 5000")
 	// this must be last line
 	r.Run(":5000")
