@@ -73,12 +73,17 @@ body > .container {
   cursor: pointer;
 }
 
+.element-top-margin {
+  margin-top: 5px;
+}
 .element-right-margin {
   margin-right: 5px;
 }
-
 .element-bottom-margin {
-  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.element-left-margin {
+  margin-left: 5px;
 }
 
 .panel-header-style {
