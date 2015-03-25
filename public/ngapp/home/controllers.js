@@ -36,7 +36,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
     appsFactory.getDeps(function(data) {
       $scope.deps = data;
     });
-  }
+  };
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
@@ -52,7 +52,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     $scope.envs = app.Envs;
     $scope.$parent.envBtnText = "Choose here";        // reset
     $scope.$parent.envs = app.Envs;
-  })
+  });
 
   $scope.deleteEnv = function(env) {
     var modalInstance = $modal.open({
@@ -105,18 +105,17 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     $scope.$parent.envs = app.Envs;
     $scope.env = env;
     $scope.shas = env.Shas;
-  })
+  });
 
   $scope.isActive = function(sha_id, region) {
     return $scope.selectedShaId === sha_id && $scope.region.Name == region;
-  }
+  };
 
   $scope.isContainerActive = function(container) {
     return $scope.containerInfo.Name === container.Name;
-  }
+  };
 
   $scope.renderShaInfo = function(sha_id, region) {
-
     $scope.isContainerInfoVisible = false;
     $scope.containerInfo = {};
     $scope.region = {}
@@ -131,12 +130,12 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
         $scope.isShaInfoEnabled = true;
       }
     });
-  }
+  };
 
   $scope.renderContainerInfo = function(container) {
     $scope.isContainerInfoVisible = true;
     $scope.containerInfo = $scope.filterContainerInfo(container);
-  }
+  };
 
   $scope.filterContainerInfo = function(container) {
     var info = {};
@@ -157,7 +156,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     info["Healthz"] = "http://" + info.Host + ":" + info.PrimaryPort + "/healthz";
     info["To SSH"] = "atlantis ssh " + info.ID;
     return info;
-  }
+  };
 
   $scope.deleteSha = function(sha) {
     var modalInstance = $modal.open({
