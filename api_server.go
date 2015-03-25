@@ -16,6 +16,10 @@ const (
 )
 
 type Dependency struct {
+	Name   string
+	Status string
+	Host   string
+	Port   int
 }
 
 type AppManifest struct {
@@ -63,7 +67,7 @@ type Environment struct {
 	ContainersPerZone int32
 	CPUShares         int32
 	Memory            int32
-	Dependencies      []string
+	Dependencies      []Dependency
 	Shas              []Sha
 }
 
