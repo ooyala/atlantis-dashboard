@@ -28,11 +28,15 @@ services.factory('appsFactory', ['$http', function($http){
       })[0];
       callback(env, app);
     })
-  }
+  };
 
   svc.getShaById = function(id, callback){
     $http.get('/shas/'+id, { cache: true }).success(callback);
-  }
+  };
+
+  svc.getDeps = function(callback) {
+    $http.get('/deps', { cache: true }).success(callback);
+  };
 
   return svc;
 }]);

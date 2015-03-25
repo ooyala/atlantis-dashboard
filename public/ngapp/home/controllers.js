@@ -5,7 +5,8 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
 
   $scope.alerts = [];
   $scope.envs = [];
-  $scope.isEnvEnable = false;
+  $scope.deps = [];
+  $scope.isEnvEnable = $scope.isAppVisible = false;
   $scope.envBtnText  = $scope.appBtnText = "Choose here";
   $scope.headerTitle = "Environment Configuration And Management";
   $scope.appStatus = {
@@ -29,10 +30,20 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
       $scope.alerts.splice(index, 1);
     }, 3000);
   };
+
+  $scope.showRegisterDependency = function() {
+    $scope.isRegisterDependency = true;
+    appsFactory.getDeps(function(data) {
+      $scope.deps = data;
+    });
+  }
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   'appsFactory', function ($scope, $stateParams, $modal, appsFactory) {
+
+  $scope.$parent.isAppVisible = true;
+  $scope.$parent.isRegisterDependency = false
 
   appsFactory.findById($stateParams.id, function(app){
     $scope.$parent.isEnvEnable = false;
