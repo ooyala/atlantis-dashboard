@@ -1,13 +1,17 @@
-<div class="col-md-9">
+<div class="col-md-8">
   <div class="row">
     <div ng-repeat="env in envs">
       <div class="col-md-6">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <div class="col-md-10 panel-title text-primary">
-              <a ui-sref="root.dashboard.app.env({name: env.Name})"><b>{{env.Name | titleize}}</b></a>
+            <div class="row">
+              <div class="col-md-10">
+                <a ui-sref="root.dashboard.app.env({name: env.Name})"><b>{{env.Name | titleize}}</b></a>
+              </div>
+              <div class="col-md-2">
+                <i class="glyphicon glyphicon-remove element-right-margin pull-right" ng-click="deleteEnv(env)"></i>
+              </div>
             </div>
-            <i class="glyphicon glyphicon-remove float-right" ng-click="deleteEnv(env)"></i>
           </div>
           <div class="panel-body">
             {{env.Container}} Containers per zone <br>
@@ -20,5 +24,5 @@
     </div>
   </div>
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
 </div>
