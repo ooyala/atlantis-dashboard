@@ -24,8 +24,9 @@
     </div>
   </div>
 </div>
-<div class="col-md-4" ng-show="$parent.isRegisterDependency">
-  <div class="deps-panel panel panel-info">
+<div class="col-md-4">
+  <!-- Dependencies List -->
+  <div class="deps-panel panel panel-info" ng-show="$parent.isRegisterDependency">
     <div class="panel-heading">
       <h4 class="panel-title">Dependencies</h4>
     </div>
@@ -39,4 +40,19 @@
       </div>
     </div>
   </div>
+  <!-- Environment -->
+  <div class="deps-panel panel panel-info" ng-show="$parent.isEnvironment">
+    <div class="panel-heading">
+      <h4 class="panel-title">New Environment</h4>
+    </div>
+    <div class="panel-body">
+      <form class="form-inline">
+        <div class="form-group">
+          <input ng-model="newEnvName" type="text" class="form-control" placeholder="Name here...">
+        </div>
+        <button class="btn btn-success" ng-click="createEnv()">OK</button>
+      </form>
+    </div>
+  </div>
 </div>
+

@@ -37,13 +37,20 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
       $scope.deps = data;
     });
   };
+
+  $scope.showNewEnvironment = function() {
+    $scope.isEnvironment = true;
+    appsFactory.getDeps(function(data) {
+      $scope.deps = data;
+    });
+  };
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   'appsFactory', function ($scope, $stateParams, $modal, appsFactory) {
 
   $scope.$parent.isAppVisible = true;
-  $scope.$parent.isRegisterDependency = false
+  $scope.$parent.isRegisterDependency = $scope.$parent.isEnvironment = false;
 
   appsFactory.findById($stateParams.id, function(app){
     $scope.$parent.isEnvEnable = false;
@@ -78,7 +85,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
       $scope.envs = _.filter($scope.envs, function(env) {
         return env.Name !== name;
       })
-      $scope.$parent.addAlert({
+      $scope.addAlert({
         type: 'success', message: "Environment '" + name + "' deleted successfully.",
         icon: 'glyphicon glyphicon-ok-sign'
       });
@@ -94,10 +101,30 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   $scope.rightDrop = function() {
     alert('Dropped in right bin');
   };
+
+  $scope.createEnv = function() {
+    var env = {
+      "Name": $scope.newEnvName,
+      "ContainersPerZone": 0,
+      "CPUShares": 0,
+      "Memory": 0,
+      "Dependencies": [],
+      "Shas": []
+    };
+
+    $scope.envs.push(env);
+    $scope.addAlert({
+      type: 'success', message: "Environment '" + env.Name + "' created successfully.",
+      icon: 'glyphicon glyphicon-ok-sign'
+    });
+    $scope.newEnvName = '';
+    $scope.$parent.isEnvironment = false;
+  }
 }]);
 
 controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'appsFactory',
   function ($scope, $modal, $stateParams, appsFactory) {
+
   $scope.visibleInfo = [
     "Name", "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID",
     "Description", "CPUShares", "MemoryLimit", "AppType"
@@ -190,7 +217,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
       $scope.shas = _.filter($scope.shas, function(sha) {
         return sha.ShaId !== name;
       })
-      $scope.$parent.addAlert({
+      $scope.addAlert({
         type: 'success', message: "Sha '" + name + "' deleted successfully.",
         icon: 'glyphicon glyphicon-ok-sign'
       });
@@ -224,7 +251,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
       $scope.containers = _.filter($scope.containers, function(container) {
         return container.Name !== name;
       })
-      $scope.$parent.addAlert({
+      $scope.addAlert({
         type: 'success', message: "Container '" + name + "' deleted successfully.",
         icon: 'glyphicon glyphicon-ok-sign'
       });
