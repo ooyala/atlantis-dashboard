@@ -3,12 +3,12 @@
     <h4 class="panel-title">Dependencies</h4>
   </div>
   <div class="panel-body">
-    <div class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
+    <div popover="{{dep.Name+' @ http://'+dep.Host+':'+dep.Port+'/'}}" popover-trigger="mouseenter" class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
       <p>
-        {{dep}}
+        {{dep.Name}}
       </p>
       <p>
-        OK
+        {{dep.Status}}
       </p>
     </div>
   </div>
