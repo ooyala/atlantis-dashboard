@@ -1,10 +1,17 @@
 <div class="modal-header">
-  <span class="panel-title">Delete {{name}}?</span>
+  <span class="panel-title">Are you ABSOLUTELY sure??</span>
 </div>
 <div class="modal-body">
-  <h3>Are you sure?</h3>
+  <div ng-show="itemType == 'env'">
+    <h5>Please type in the {{type}} to confirm.</h5>
+    <input ng-model="confirmName" type="text" class="form-control ng-pristine ng-valid ng-touched"></input>
+  </div>
+  <div ng-show="itemType != 'env'">
+    <h4>Delete {{name}}?</h4>
+  </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger" ng-click="ok()">Yes</button>
+  <button class="btn btn-danger" ng-click="ok()" ng-disabled="confirmName != name" ng-show="itemType === 'env'">Yes</button>
+  <button class="btn btn-danger" ng-click="ok()" ng-show="itemType != 'env'">Yes</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

@@ -66,6 +66,9 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     var modalInstance = $modal.open({
       templateUrl: 'ngapp/templates/deleteModal.html',
       controller: function ($scope, $modalInstance, name) {
+        $scope.confirmName = '';
+        $scope.type = 'environment name';
+        $scope.itemType = 'env';
         $scope.name = name;
         $scope.ok = function () {
           $modalInstance.close(name);
@@ -234,7 +237,10 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     var modalInstance = $modal.open({
       templateUrl: 'ngapp/templates/deleteModal.html',
       controller: function ($scope, $modalInstance, name) {
+        $scope.confirmName = '';
+        $scope.type = 'sha ID';
         $scope.name = name;
+        $scope.itemType = 'sha';
         $scope.ok = function () {
           $modalInstance.close(name);
         };
@@ -268,7 +274,10 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     var modalInstance = $modal.open({
       templateUrl: 'ngapp/templates/deleteModal.html',
       controller: function ($scope, $modalInstance, name) {
+        $scope.confirmName = '';
+        $scope.type = "container name";
         $scope.name = name;
+        $scope.itemType = 'container';
         $scope.ok = function () {
           $modalInstance.close(name);
         };
