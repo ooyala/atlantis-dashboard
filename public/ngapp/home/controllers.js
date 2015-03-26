@@ -40,6 +40,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
 
   $scope.showNewEnvironment = function() {
     $scope.isEnvironment = true;
+    $scope.isRegisterDependency = false;
     appsFactory.getDeps(function(data) {
       $scope.deps = data;
     });
