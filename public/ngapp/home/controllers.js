@@ -87,7 +87,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
       })
       $scope.addAlert({
         type: 'success', message: "Environment '" + name + "' deleted successfully.",
-        icon: 'glyphicon glyphicon-ok-sign'
+        icon: 'glyphicon glyphicon-ok'
       });
     }, function(result) {
       console.log(result);
@@ -115,11 +115,47 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     $scope.envs.push(env);
     $scope.addAlert({
       type: 'success', message: "Environment '" + env.Name + "' created successfully.",
-      icon: 'glyphicon glyphicon-ok-sign'
+      icon: 'glyphicon glyphicon-ok'
     });
     $scope.newEnvName = '';
     $scope.$parent.isEnvironment = false;
-  }
+  };
+
+  $scope.dropValidateHandler = function($drop, $event, $data) {
+    if ($drop.element[0] === $event.srcElement.parentNode) {
+      // Don't allow moving to same container
+      return false;
+    }
+    return true;
+  };
+
+  $scope.onDrop = function($event, $data, array, index) {
+    var alert = {
+      type: 'danger', message: "Error dropping dependency.",
+      icon: 'glyphicon glyphicon-remove'
+    }
+    deps = _.filter(array[index].Dependencies, function(dep) {
+      return $data.Name === dep.Name;
+    });
+    if(deps.length > 0) {
+      $scope.addAlert({
+        type: 'danger', message: "Dependency '" + $data.Name + "' aleardy registered.",
+        icon: 'glyphicon glyphicon-remove'
+      });
+      return;
+    }
+    if (index !== undefined) {
+      $data.Status = 'Pending Request';
+      array[index].Dependencies.push($data);
+      alert.type = 'success';
+      alert.message = "Dependency '" + $data.Name + "' added for registration.";
+    }
+    $scope.addAlert(alert);
+  };
+
+  $scope.handleDependency = function(action) {
+    alert(action);
+  };
 }]);
 
 controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'appsFactory',
@@ -219,7 +255,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
       })
       $scope.addAlert({
         type: 'success', message: "Sha '" + name + "' deleted successfully.",
-        icon: 'glyphicon glyphicon-ok-sign'
+        icon: 'glyphicon glyphicon-ok'
       });
       $scope.isShaInfoEnabled = false;
     }, function(result) {
@@ -253,7 +289,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
       })
       $scope.addAlert({
         type: 'success', message: "Container '" + name + "' deleted successfully.",
-        icon: 'glyphicon glyphicon-ok-sign'
+        icon: 'glyphicon glyphicon-ok'
       });
       $scope.isContainerInfoVisible = false;
     }, function(result) {
