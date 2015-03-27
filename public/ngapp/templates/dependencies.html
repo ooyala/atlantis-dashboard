@@ -3,17 +3,23 @@
     <h4 class="panel-title">Dependencies</h4>
   </div>
   <div class="panel-body">
-    <div popover="{{dep.Host ? dep.Name+' @ http://'+dep.Host+':'+dep.Port+'/' : ''}}" popover-trigger="mouseenter" class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
+    <div ng-mouseenter="hover(dep)" ng-mouseleave="hover(dep)"
+        popover="{{dep.Host ? dep.Name+' @ http://'+dep.Host+':'+dep.Port+'/' : ''}}" popover-trigger="mouseenter"
+        class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
       <p>
         {{dep.Name}}
       </p>
       <p>
         {{dep.Status}}
       </p>
-
-      <div ng-show="dep.Status === 'Pending Request'">
-        <i class="glyphicon glyphicon-plus" title="Accept the Dependency" ng-click="handleDependency('accept')"></i>
-        <i class="glyphicon glyphicon-minus pull-right" title="Reject the Dependency" ng-click="handleDependency('reject')"></i>
+      <div ng-show="dep.showFlag && dep.Status != 'Pending Request'" popover="Unregister" popover-trigger="mouseenter">
+        <button class="btn btn-xs btn-block" ng-click="unregisterDependency(dep)"><i class="glyphicon glyphicon-remove"></i></button>
+      </div>
+      <div ng-show="dep.showFlag && dep.Status === 'Pending Request'">
+        <i class="glyphicon glyphicon-plus" popover="Accept the Dependency"
+          popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'accept')"></i>
+        <i class="glyphicon glyphicon-minus pull-right"
+          popover="Reject the Dependency" popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'reject')"></i>
       </div>
     </div>
   </div>
