@@ -150,6 +150,9 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     }
     if (index !== undefined) {
       $data.Status = 'Pending Request';
+      if(!array[index].Dependencies) {
+        return;
+      }
       array[index].Dependencies.push($data);
       alert.type = 'success';
       alert.message = "Dependency '" + $data.Name + "' added for registration.";

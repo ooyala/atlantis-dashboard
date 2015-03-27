@@ -32,9 +32,10 @@ directives.directive("envDependency", function() {
         });
 
         modalInstance.result.then(function(name) {
-          $scope.deps = _.filter($scope.deps, function(dep) {
+          var deps = _.filter($scope.env.Dependencies, function(dep) {
             return dep.Name !== name;
           })
+          $scope.env.Dependencies = deps;
           $scope.addAlert({
             type: 'success', message: "Dependency '" + name + "' unregistered successfully.",
             icon: 'glyphicon glyphicon-ok'
