@@ -157,8 +157,23 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     $scope.addAlert(alert);
   };
 
-  $scope.handleDependency = function(action) {
-    alert(action);
+  $scope.handleDependency = function(env, dep, action) {
+    var index;
+    if(action === 'accept') {
+      dep.Status = 'OK';
+      dep.Host = 'internal-router.services.ooyala.com';
+      dep.Port = 45935;
+      $scope.addAlert({
+        type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
+        icon: 'glyphicon glyphicon-ok'
+      });
+    } else {
+      env.Dependencies = _.filter(env.Dependencies, function(record){ return record.Name != dep.Name });
+      $scope.addAlert({
+        type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
+        icon: 'glyphicon glyphicon-ok'
+      });
+    }
   };
 }]);
 
