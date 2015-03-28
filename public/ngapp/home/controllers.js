@@ -181,7 +181,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
 }]);
 
 controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'appsFactory',
-  function ($scope, $modal, $stateParams, appsFactory) {
+  'deleteModal', function ($scope, $modal, $stateParams, appsFactory, deleteModal) {
 
   $scope.visibleInfo = [
     "Name", "Host", "PrimaryPort", "SecondaryPorts", "SSHPort", "DockerID", "ID",
@@ -252,28 +252,10 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteSha = function(sha) {
-    var modalInstance = $modal.open({
-      templateUrl: 'ngapp/templates/deleteModal.html',
-      controller: function ($scope, $modalInstance, name) {
-        $scope.confirmName = '';
-        $scope.type = 'sha ID';
-        $scope.name = name;
-        $scope.itemType = 'sha';
-        $scope.ok = function () {
-          $modalInstance.close(name);
-        };
+    var templateUrl = 'ngapp/templates/deleteModal.html',
+        type = 'sha ID', name = sha.ShaId, itemType = 'sha';
 
-        $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-        };
-      },
-      resolve: {
-        name: function() {
-          return sha.ShaId;
-        }
-      }
-    });
-
+    modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
     modalInstance.result.then(function(name) {
       $scope.shas = _.filter($scope.shas, function(sha) {
         return sha.ShaId !== name;
