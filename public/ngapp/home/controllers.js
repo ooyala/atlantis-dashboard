@@ -48,7 +48,8 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
-  'appsFactory', function ($scope, $stateParams, $modal, appsFactory) {
+  'appsFactory', 'deleteModal', function ($scope, $stateParams, $modal, appsFactory,
+  deleteModal) {
 
   $scope.$parent.isAppVisible = true;
   $scope.$parent.isRegisterDependency = $scope.$parent.isEnvironment = false;
@@ -63,28 +64,10 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   });
 
   $scope.deleteEnv = function(env) {
-    var modalInstance = $modal.open({
-      templateUrl: 'ngapp/templates/deleteModal.html',
-      controller: function ($scope, $modalInstance, name) {
-        $scope.confirmName = '';
-        $scope.type = 'environment name';
-        $scope.itemType = 'env';
-        $scope.name = name;
-        $scope.ok = function () {
-          $modalInstance.close(name);
-        };
+    var templateUrl = 'ngapp/templates/deleteModal.html',
+        type = 'environment name', name = env.Name, itemType = 'env';
 
-        $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-        };
-      },
-      resolve: {
-        name: function() {
-          return env.Name;
-        }
-      }
-    });
-
+    modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
     modalInstance.result.then(function(name) {
       $scope.envs = _.filter($scope.envs, function(env) {
         return env.Name !== name;
@@ -271,28 +254,10 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteContainer = function(container) {
-    var modalInstance = $modal.open({
-      templateUrl: 'ngapp/templates/deleteModal.html',
-      controller: function ($scope, $modalInstance, name) {
-        $scope.confirmName = '';
-        $scope.type = "container name";
-        $scope.name = name;
-        $scope.itemType = 'container';
-        $scope.ok = function () {
-          $modalInstance.close(name);
-        };
+    var templateUrl = 'ngapp/templates/deleteModal.html',
+        type = 'container name', name = container.Name, itemType = 'container';
 
-        $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-        };
-      },
-      resolve: {
-        name: function() {
-          return container.Name;
-        }
-      }
-    });
-
+    modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
     modalInstance.result.then(function(name) {
       $scope.containers = _.filter($scope.containers, function(container) {
         return container.Name !== name;
