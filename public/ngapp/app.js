@@ -1,5 +1,5 @@
 var atlantisApp = angular.module('atlantisApp', [
-  'ngAnimate', 'ui.bootstrap', 'ui.router', 'ang-drag-drop',
+  'ngAnimate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'ang-drag-drop',
   'atlantisApp.homeControllers', 'atlantisApp.releaseWizardControllers',
   'atlantisApp.deployControllers', 'atlantisApp.manageControllers',
   'atlantisApp.usersControllers',
