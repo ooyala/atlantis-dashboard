@@ -110,7 +110,8 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   };
 
   $scope.dropValidateHandler = function($drop, $event, $data) {
-    if ($drop.element[0] === $event.srcElement.parentNode) {
+    var target = $event.target || $event.srcElement;
+    if ($drop.element[0] === target.parentNode) {
       // Don't allow moving to same container
       return false;
     }
