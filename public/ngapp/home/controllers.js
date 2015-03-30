@@ -82,14 +82,6 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     });
   };
 
-  $scope.leftDrop = function() {
-    alert('Dropped in left bin');
-  };
-
-  $scope.rightDrop = function() {
-    alert('Dropped in right bin');
-  };
-
   $scope.createEnv = function() {
     var env = {
       "Name": $scope.newEnvName,
@@ -281,5 +273,24 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     }, function(result) {
       console.log(result);
     });
+  };
+
+  $scope.handleDependency = function(env, dep, action) {
+    var index;
+    if(action === 'accept') {
+      dep.Status = 'OK';
+      dep.Host = 'internal-router.services.ooyala.com';
+      dep.Port = 45935;
+      $scope.addAlert({
+        type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
+        icon: 'glyphicon glyphicon-ok'
+      });
+    } else {
+      env.Dependencies = _.filter(env.Dependencies, function(record){ return record.Name != dep.Name });
+      $scope.addAlert({
+        type: 'success', message: "Dependency '" + dep.Name + "' removed successfully.",
+        icon: 'glyphicon glyphicon-ok'
+      });
+    }
   };
 }]);
