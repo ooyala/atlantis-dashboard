@@ -6,10 +6,6 @@ directives.directive("envDependency", function() {
     controller: ['$scope', '$modal', 'appsFactory', 'deleteModal',
       function($scope, $modal, appsFactory, deleteModal) {
 
-      $scope.hover = function(dep) {
-        return dep.showFlag = !dep.showFlag;
-      };
-
       $scope.unregisterDependency = function(dep) {
         var templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'dependency name', name = dep.Name, itemType = 'dependency';
