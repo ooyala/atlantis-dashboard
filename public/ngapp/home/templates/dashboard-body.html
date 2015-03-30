@@ -1,8 +1,8 @@
 <div class="col-md-8">
   <div class="row">
     <div ng-repeat="env in envs track by $index"
-      ui-draggable="true" drag="env" drag-channel="dependencies"
-      ui-on-drop="onDrop($event,$data, envs, $index)" drop-channel="dependencies"
+      drag="env" drag-channel="dependencies" drop-channel="dependencies"
+      ui-on-drop="onDrop($event,$data, envs, $index)"
       drop-validate="dropValidateHandler($drop, $event, $data)">
       <div class="col-md-6">
         <div class="panel panel-success">
