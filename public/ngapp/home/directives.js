@@ -2,7 +2,7 @@ var directives = angular.module('atlantisApp.homeDirectives', []);
 
 directives.directive("envDependency", function() {
   return {
-    templateUrl : 'ngapp/templates/dependencies.html',
+    templateUrl : 'ngapp/home/templates/dependencies.html',
     controller: ['$scope', '$modal', 'appsFactory', 'deleteModal',
       function($scope, $modal, appsFactory, deleteModal) {
 

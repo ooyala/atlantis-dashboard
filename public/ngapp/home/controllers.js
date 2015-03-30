@@ -65,7 +65,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   });
 
   $scope.deleteEnv = function(env) {
-    var templateUrl = 'ngapp/templates/deleteModal.html',
+    var templateUrl = 'ngapp/home/templates/deleteModal.html',
         type = 'environment name', name = env.Name, itemType = 'env';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
@@ -140,6 +140,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
       }
       array[index].Dependencies.push($data);
       alert.type = 'success';
+      alert.icon = 'glyphicon glyphicon-ok';
       alert.message = "Dependency '" + $data.Name + "' added for registration.";
     }
     $scope.addAlert(alert);
@@ -158,7 +159,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     } else {
       env.Dependencies = _.filter(env.Dependencies, function(record){ return record.Name != dep.Name });
       $scope.addAlert({
-        type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
+        type: 'success', message: "Dependency '" + dep.Name + "' removed successfully.",
         icon: 'glyphicon glyphicon-ok'
       });
     }
@@ -245,7 +246,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteSha = function(sha) {
-    var templateUrl = 'ngapp/templates/deleteModal.html',
+    var templateUrl = 'ngapp/home/templates/deleteModal.html',
         type = 'sha ID', name = sha.ShaId, itemType = 'sha';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
@@ -264,7 +265,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteContainer = function(container) {
-    var templateUrl = 'ngapp/templates/deleteModal.html',
+    var templateUrl = 'ngapp/home/templates/deleteModal.html',
         type = 'container name', name = container.Name, itemType = 'container';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);

@@ -25,7 +25,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: 'dashboard',
         views: {
           'content@' : {
-            templateUrl: 'ngapp/templates/dashboard.html',
+            templateUrl: 'ngapp/home/templates/dashboard.html',
             controller: 'DashboardCtrl',
             controllerAs: 'vm'
           }
@@ -35,7 +35,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: '/{id:int}',
         views: {
           'body@root.dashboard' : {
-            templateUrl: 'ngapp/templates/dashboard-body.html',
+            templateUrl: 'ngapp/home/templates/dashboard-body.html',
             controller: 'DashboardBodyCtrl'
           }
         }
@@ -44,7 +44,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: '/:name',
         views: {
           'body@root.dashboard' : {
-            templateUrl: 'ngapp/templates/env-content.html',
+            templateUrl: 'ngapp/home/templates/env-content.html',
             controller: 'EnvContentCtrl'
           }
         }
@@ -53,7 +53,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: 'dashboard',
         views: {
           'content@' : {
-            templateUrl: 'ngapp/templates/release-wizard.html',
+            templateUrl: 'ngapp/release-wizard/templates/release-wizard.html',
             controller: 'ReleaseWizardCtrl',
             controllerAs: 'vm'
           }
@@ -63,7 +63,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: 'deploy',
         views: {
           'content@' : {
-            templateUrl: 'ngapp/templates/deploy.html',
+            templateUrl: 'ngapp/deploy/templates/deploy.html',
             controller: 'DeployCtrl',
             controllerAs: 'vm'
           }
@@ -73,7 +73,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: 'manage',
         views: {
           'content@' : {
-            templateUrl: 'ngapp/templates/manage.html',
+            templateUrl: 'ngapp/manage/templates/manage.html',
             controller: 'ManageCtrl',
             controllerAs: 'vm'
           }
@@ -83,7 +83,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         url: 'users',
         views: {
           'content@' : {
-            templateUrl: 'ngapp/templates/users.html',
+            templateUrl: 'ngapp/users/templates/users.html',
             controller: 'UsersCtrl',
             controllerAs: 'vm'
           }
