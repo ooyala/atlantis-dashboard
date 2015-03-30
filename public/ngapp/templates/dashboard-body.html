@@ -47,9 +47,17 @@
     </div>
   </div>
   <!-- Environment -->
-  <div class="deps-panel panel panel-info" ng-show="$parent.isEnvironment">
+  <div class="deps-panel panel panel-info" ng-show="$parent.isEnvironment"
+    ng-mouseenter="handleEnvPanelVisibility()" ng-mouseleave="handleEnvPanelVisibility()">
     <div class="panel-heading">
-      <h4 class="panel-title">New Environment</h4>
+      <div class="row">
+        <div class="col-md-9">
+          <h4 class="panel-title">New Environment</h4>
+        </div>
+        <div class="col-md-3" ng-show="isShowEnvPanel">
+          <i class="glyphicon glyphicon-remove pull-right" ng-click="closeEnvPanel()"></i>
+        </div>
+      </div>
     </div>
     <div class="panel-body">
       <form class="form-inline">

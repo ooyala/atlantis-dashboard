@@ -51,6 +51,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   'appsFactory', 'deleteModal', function ($scope, $stateParams, $modal, appsFactory,
   deleteModal) {
 
+  $scope.isShowEnvPanel = false;
   $scope.$parent.isAppVisible = true;
   $scope.$parent.isRegisterDependency = $scope.$parent.isEnvironment = false;
 
@@ -160,6 +161,14 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
         icon: 'glyphicon glyphicon-ok'
       });
     }
+  };
+
+  $scope.handleEnvPanelVisibility = function() {
+    $scope.isShowEnvPanel = !$scope.isShowEnvPanel;
+  };
+
+  $scope.closeEnvPanel = function() {
+    $scope.$parent.isEnvironment = false;
   };
 }]);
 
