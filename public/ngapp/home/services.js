@@ -51,6 +51,8 @@ services.factory('deleteModal', ['$modal', function($modal){
           $scope.type = type;
           $scope.name = name;
           $scope.itemType = itemType;
+          $scope.headerText = "<h5>Please type in the "+type+" <b>"+name+"</b> to confirm.</h5>";
+
           $scope.ok = function () {
             $modalInstance.close(name);
           };

@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
   <div ng-show="['env', 'dependency'].indexOf(itemType) != -1">
-    <h5>Please type in the {{type}} to confirm.</h5>
+    <h5 ng-bind-html="headerText"></h5>
     <input ng-model="confirmName" type="text" class="form-control ng-pristine ng-valid ng-touched"></input>
   </div>
   <div ng-show="['env', 'dependency'].indexOf(itemType) == -1">
