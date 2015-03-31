@@ -6,7 +6,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout'
   $scope.alerts = [];
   $scope.envs = [];
   $scope.deps = [];
-  $scope.isEnvEnable = $scope.isAppVisible = false;
+  $scope.isEnvEnable = $scope.isAppVisible = $scope.isEnvSelected = false;
   $scope.envBtnText  = $scope.appBtnText = "Choose here";
   $scope.headerTitle = "Environment Configuration And Management";
   $scope.appStatus = {
@@ -176,6 +176,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
 
   $scope.$parent.envBtnText = $stateParams.name;
   $scope.$parent.isEnvEnable = true;
+  $scope.$parent.isEnvSelected = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
   $scope.isShaInfoEnabled = false;
 

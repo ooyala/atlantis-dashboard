@@ -40,7 +40,7 @@
 
         <div class="col-md-4" ng-show="isAppVisible">
           <button type="button" class="btn btn-info pull-right btn-sm" ng-click="showRegisterDependency()">Register Dependencies</button>
-          <button type="button" class="btn btn-primary element-right-margin pull-right btn-sm"  ng-click="showNewEnvironment()">New Environment</button>
+          <button ng-hide="isEnvSelected" type="button" class="btn btn-primary element-right-margin pull-right btn-sm"  ng-click="showNewEnvironment()">New Environment</button>
         </div>
       </div>
     </div>
