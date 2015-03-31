@@ -53,6 +53,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
 
   $scope.isShowEnvPanel = false;
   $scope.$parent.isAppVisible = true;
+  $scope.$parent.isEnvSelected = false;
   $scope.$parent.isRegisterDependency = $scope.$parent.isEnvironment = false;
 
   appsFactory.findById($stateParams.id, function(app){
