@@ -50,7 +50,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         }
       })
       .state('root.release-wizard', {
-        url: 'dashboard',
+        url: 'release-wizard',
         views: {
           'content@' : {
             templateUrl: 'ngapp/release-wizard/templates/release-wizard.html',
