@@ -1,7 +1,7 @@
 var controllers = angular.module('atlantisApp.homeControllers', []);
 
-controllers.controller('DashboardCtrl', ['$scope', '$http', '$state', '$timeout',
-  'appsFactory', function($scope, $http, $state, $timeout, appsFactory) {
+controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory',
+  function($scope, $timeout, appsFactory) {
 
   $scope.alerts = [];
   $scope.envs = [];
