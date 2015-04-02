@@ -1,18 +1,16 @@
-<h4>Release Wizard</h4>
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
   <i class="{{alert.icon}}"></i>  {{alert.message}}
 </alert>
 
-<div class="row">
-  <div class="panel panel-default">
-    <div class="panel-header panel-header-style">
-      <div class="row">
-        <tabset>
-          <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled" ng-click="processTab(tab)">
-            <div ng-include="tab.template"></div>
-          </tab>
-        </tabset>
-      </div>
-    </div>
+<div class="container release-wizard">
+  <div class="col-md-12">
+    <h3>Release Wizard</h3>
+    <ul>
+      <li class="release-item" ng-repeat="tab in tabs" ng-class="{active:tab.active, visited:tab.visited}"
+        ng-click="processTab(tab)">{{tab.title}}</li>
+    </ul>
+  </div>
+  <div class="col-md-12">
+    <div ng-include="currentTab.template"></div>
   </div>
 </div>
