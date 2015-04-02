@@ -131,3 +131,31 @@ body > .container {
 .glyphicon.glyphicon-remove:hover {
   color: rgb(229, 66, 66);
 }
+
+/*Release-wizard tabs CSS*/
+.release-wizard li.release-item {
+  float: left;
+  background-color: rgb(200,200,200);
+  padding: 5px 19px;
+  margin: 5px 2px 5px 0px;
+  color: white;
+  list-style: none;
+  border-top-right-radius: 50px;
+}
+.release-wizard li.release-item:hover, .release-wizard li.release-item:hover a {
+  background-color: #337ab7;
+  color:white;
+}
+.release-wizard li.release-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 21px;
+  font-style: italic;
+  text-shadow: 1px 0px 3px rgb(157, 157, 157);
+}
+.release-wizard li.release-item.active {
+  background-color: #337ab7;
+}
+.release-wizard li.release-item.visited {
+  background-color: #286090;
+}
