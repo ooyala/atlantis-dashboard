@@ -1,1 +1,32 @@
-<h1>Release Step2</h1>
+<div class="row">
+  <div class="col-md-12 release-wizard-body-header">
+    <div class="container">
+      <h4> Step 2: Container Settings </h4>
+    </div>
+  </div>
+  <div class="col-md-12 release-wizard-body-content">
+    <div class="col-md-10 container-settings">
+      <div class="col-md-4">
+        <label >Container RAM (MB)</label>
+        <div class="col-md-8 nopadding">
+          <input ng-modal="container_ram" type="text" class='form-control wizard-input' pattern="[0-9]" ng-required="true" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label >Containers per Zone</label>
+        <div class="col-md-8 nopadding">
+          <input ng-modal="containers_per_zone" type="number" class='form-control wizard-input' name="container-per-zone" min="1" step="1" pattern="[0-9]" required />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label >CPU Shares per Container</label>
+        <div class="col-md-8 nopadding">
+          <input ng-modal="cpu_shares" type="number" class='form-control wizard-input' name="cpu-per-container" min="1" step="1" pattern="[0-9]" required />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary release-next-btn" ng-click="nextStep()">Next</button>
+    </div>
+  </div>
+</div>

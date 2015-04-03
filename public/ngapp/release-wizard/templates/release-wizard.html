@@ -4,13 +4,14 @@
 
 <div class="container release-wizard">
   <div class="col-md-12">
-    <h3>Release Wizard</h3>
-    <ul>
-      <li class="release-item" ng-repeat="tab in tabs" ng-class="{active:tab.active, visited:tab.visited}"
-        ng-click="processTab(tab)">{{tab.title}}</li>
-    </ul>
+    <div class="col-md-12">
+      <h3>Release Wizard</h3>
+    </div>
+    <div class="col-md-12">
+      <div class="release-item" ng-repeat="tab in tabs" ng-class="{active:tab.active, visited:tab.visited}">{{tab.title}}</div>
+    </div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12 release-wizard-body">
     <div ng-include="currentTab.template"></div>
   </div>
 </div>
