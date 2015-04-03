@@ -133,29 +133,59 @@ body > .container {
 }
 
 /*Release-wizard tabs CSS*/
-.release-wizard li.release-item {
+.release-wizard .release-item {
   float: left;
   background-color: rgb(200,200,200);
   padding: 5px 19px;
-  margin: 5px 2px 5px 0px;
+  margin: 5px 2px 0 0;
   color: white;
   list-style: none;
+  font-size: 13px;
   border-top-right-radius: 50px;
 }
-.release-wizard li.release-item:hover, .release-wizard li.release-item:hover a {
+.release-wizard .release-item:hover {
   background-color: #337ab7;
   color:white;
 }
-.release-wizard li.release-item a {
-  text-decoration: none;
-  color: white;
-  font-size: 21px;
-  font-style: italic;
-  text-shadow: 1px 0px 3px rgb(157, 157, 157);
-}
-.release-wizard li.release-item.active {
+.release-wizard .release-item.active {
   background-color: #337ab7;
 }
-.release-wizard li.release-item.visited {
+.release-wizard .release-item.visited {
   background-color: #286090;
 }
+
+.release-wizard-body {
+  border: 1px solid #ccc;
+  min-height: 350px;
+}
+.release-wizard-body-header {
+  margin-top: 1%;
+  padding: 0 50px;
+}
+.release-wizard-body-content {
+  padding: 0 50px;
+}
+.wizard-input {
+  height: 40px;
+  font-size: 20px;
+  padding: 6px;
+  text-align: right;
+}
+.release-next-btn {
+  width: 80%;
+}
+.container-settings {
+  margin-top: 20px;
+}
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
