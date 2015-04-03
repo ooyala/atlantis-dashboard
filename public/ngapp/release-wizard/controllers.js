@@ -19,16 +19,27 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
     $scope.apps = data;
   });
 
+  $scope.envs = [
+    { Name: 'staging', CurrentSha: '34ddef' },
+    { Name: 'next-staging', CurrentSha: '8b2sdf' },
+    { Name: 'production-0', CurrentSha: '95df1c' },
+    { Name: 'production-1', CurrentSha: '5a4sdf' },
+    { Name: 'next-staging-dark', CurrentSha: '8b2sdf' },
+    { Name: 'next-next-staging-dark', CurrentSha: '8b2sdf' },
+    { Name: 'staging-dark', CurrentSha: '34ddef' },
+  ];
+
   $scope.currentTab = $scope.tabs[0];
 
-  $scope.processTab = function(tab) {
-    if (tab.index == 5) {
+  $scope.nextStep = function() {
+    var nextTab = $scope.tabs[$scope.currentTab.index];
+    if (nextTab.index == 5) {
       alert('All tabs done');
       return;
     }
-    $scope.currentTab = tab;
-    $scope.tabs[tab.index].active = true;
-    $scope.tabs[tab.index - 1].active = false;
-    $scope.tabs[tab.index - 1].visited = true;
+    nextTab.active = true;
+    $scope.currentTab.active = false;
+    $scope.currentTab.visited = true;
+    $scope.currentTab = nextTab;
   };
 }]);
