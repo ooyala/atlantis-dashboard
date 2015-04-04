@@ -177,6 +177,9 @@ body > .container {
 .container-settings {
   margin-top: 20px;
 }
+.confirm_details_body, .confirm_details_footer {
+  margin-top: 10px;
+}
 
 input[type=checkbox] { display:none; } /* to hide the checkbox itself */
 input[type=checkbox] + label:before {
