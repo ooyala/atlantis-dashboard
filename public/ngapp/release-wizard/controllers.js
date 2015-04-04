@@ -30,6 +30,7 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
   ];
 
   $scope.currentTab = $scope.tabs[0];
+  $scope.selectedEnvs = [];
 
   $scope.nextStep = function() {
     var nextTab = $scope.tabs[$scope.currentTab.index];
@@ -41,5 +42,9 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
     $scope.currentTab.active = false;
     $scope.currentTab.visited = true;
     $scope.currentTab = nextTab;
+  };
+
+  $scope.selectEnv = function(env, a) {
+    $scope.selectedEnvs.push(env);
   };
 }]);
