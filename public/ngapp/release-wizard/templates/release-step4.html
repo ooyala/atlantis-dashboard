@@ -3,9 +3,8 @@
     <h4> Step 4: Confirm </h4>
   </div>
   <div class="col-md-12 release-wizard-body-content">
-    <div class="col-md-10 nopadding">
-      <div class="col-md-8">
-        <div class="panel panel-default">
+    <div class="col-md-6" ng-repeat="env in selectedEnvs">
+      <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12 confirm_details_header">
@@ -14,7 +13,7 @@
               <br>
               <div class="col-md-12 confirm_details_body">
                 App - Deplhi-UI <br>
-                Environment - Staging <br>
+                Environment - {{env.Name}} <br>
                 SHA - 56asd3423kjoj3olklafsdf2lk9405923af523 <br>
                 RAM - 256 MB
                 CPU Shares - 5
@@ -26,11 +25,10 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary release-next-btn" ng-click="nextStep()">Deploy</button>
-    </div>
+  </div>
+  <div class="col-md-12">
+    <button class="btn btn-primary pull-right" ng-click="nextStep()">Deploy</button>
   </div>
 </div>

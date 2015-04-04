@@ -37,7 +37,7 @@
         </div>
         <div class="panel-body">
           <div ng-repeat="env in envs" class="checkbox">
-            <input id="{{env.Name}}" type="checkbox" ng-checked="false">
+            <input id="{{env.Name}}" type="checkbox" ng-checked="false" ng-click="selectEnv(env)">
             <label for="{{env.Name}}">{{env.Name}} (Current SHA: {{env.CurrentSha}})</label>
           </div>
         </div>
