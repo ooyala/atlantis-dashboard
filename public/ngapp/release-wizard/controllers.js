@@ -31,6 +31,7 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
 
   $scope.currentTab = $scope.tabs[0];
   $scope.selectedEnvs = [];
+  $scope.appBtnText = 'Select App';
 
   $scope.nextStep = function() {
     var nextTab = $scope.tabs[$scope.currentTab.index];
@@ -42,6 +43,10 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
     $scope.currentTab.active = false;
     $scope.currentTab.visited = true;
     $scope.currentTab = nextTab;
+  };
+
+  $scope.selectApp = function(app) {
+    $scope.appBtnText = $scope.selectedApp = app.Name;
   };
 
   $scope.selectEnv = function(env, a) {

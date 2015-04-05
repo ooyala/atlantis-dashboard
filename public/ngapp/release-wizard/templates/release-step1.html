@@ -14,11 +14,11 @@
             <center>
               <div class="btn-group" dropdown is-open="appStatus.isopen">
                 <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                  Select App <span class="caret"></span>
+                  {{appBtnText}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li ng-repeat="app in apps">
-                    <a href="#">{{app.Name}}</a>
+                    <a href="" ng-click="selectApp(app)">{{app.Name}}</a>
                   </li>
                 </ul>
               </div>
