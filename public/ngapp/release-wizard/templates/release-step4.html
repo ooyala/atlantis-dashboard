@@ -15,13 +15,13 @@
                 App - Deplhi-UI <br>
                 Environment - {{env.Name}} <br>
                 SHA - {{shaToDeploy}} <br>
-                RAM - 256 MB
-                CPU Shares - 5
-                Containers / Zone - 3
+                RAM - {{container_ram}} MB
+                CPU Shares - {{cpu_shares}}
+                Containers / Zone - {{containers_per_zone}}
               </div>
               <br><br>
-              <div class="col-md-12 confirm_details_fo">
-                Post-Deploy - Email Notification
+              <div class="col-md-12 confirm_details_footer">
+                Post-Deploy - {{post_deploy_message}}
               </div>
             </div>
           </div>
@@ -29,6 +29,6 @@
     </div>
   </div>
   <div class="col-md-12">
-    <button class="btn btn-primary pull-right" ng-click="nextStep()">Deploy</button>
+    <button class="btn btn-primary element-bottom-margin pull-right" ng-click="nextStep()">Deploy</button>
   </div>
 </div>

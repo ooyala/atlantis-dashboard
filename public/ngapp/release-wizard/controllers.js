@@ -35,14 +35,20 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
 
   $scope.nextStep = function() {
     var nextTab = $scope.tabs[$scope.currentTab.index];
+
     if (nextTab.index == 5) {
       alert('All tabs done');
       return;
     }
+
     nextTab.active = true;
     $scope.currentTab.active = false;
     $scope.currentTab.visited = true;
     $scope.currentTab = nextTab;
+
+    if ($scope.notify_on_success) {
+      $scope.post_deploy_message = "Email Notification"
+    }
   };
 
   $scope.selectApp = function(app) {
