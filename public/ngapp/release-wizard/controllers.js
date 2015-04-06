@@ -30,16 +30,12 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
   ];
 
   $scope.currentTab = $scope.tabs[0];
-  $scope.selectedEnvs = [];
+  $scope.selectedEnvs = $scope.results = [];
   $scope.appBtnText = 'Select App';
 
   $scope.nextStep = function() {
-    var nextTab = $scope.tabs[$scope.currentTab.index];
-
-    if (nextTab.index == 5) {
-      alert('All tabs done');
-      return;
-    }
+    var record,
+        nextTab = $scope.tabs[$scope.currentTab.index];
 
     nextTab.active = true;
     $scope.currentTab.active = false;
@@ -48,6 +44,31 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
 
     if ($scope.notify_on_success) {
       $scope.post_deploy_message = "Email Notification"
+    }
+
+    if (nextTab.index == 5) {
+      _.each($scope.selectedEnvs, function(env) {
+        record = {
+          DeployID: 'lk2ljaoidsjllk3',
+          Details: {
+            App: $scope.selectedApp,
+            Environment: env.Name,
+            Sha: $scope.shaToDeploy,
+            RAM: $scope.container_ram,
+            CPUShares: $scope.cpu_shares,
+            ContainerPerZone: $scope.containers_per_zone,
+            PostDeployMessage: $scope.post_deploy_message
+          },
+          DeployingContainers: [
+            'us-east-1a', 'us-east-1b', 'us-east-1d'
+          ],
+          SanityChecks: {
+            DependenciesFulfilled: true,
+            JenkinsTestsPass: true
+          }
+        }
+        $scope.results.push(record);
+      });
     }
   };
 
