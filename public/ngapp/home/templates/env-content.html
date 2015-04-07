@@ -1,10 +1,10 @@
 <div class="col-md-3">
   <div class="col-md-12" ng-repeat="sha in shas">
-    <div class="panel panel-success">
+    <div class="panel panel-info">
       <div class="panel-heading">
         <div class="row">
           <div class="col-md-10">
-            <h3 class="panel-title text-primary">SHA: {{sha.ShaId}}</h3>
+            <h3 class="panel-title">SHA: {{sha.ShaId}}</h3>
           </div>
           <div class="col-md-2">
             <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(sha)"></i>
@@ -22,11 +22,11 @@
   </div>
 </div>
 <div class="col-md-5">
-  <div class="panel panel-default sha-panel" ng-show="isShaInfoEnabled">
+  <div class="panel panel-primary sha-panel" ng-show="isShaInfoEnabled">
     <div class="panel-heading">
       <div class="row">
         <div class="col-md-10">
-          <h3 class="panel-title text-primary">SHA: {{selectedSha.ShaId}}</h3>
+          <h3 class="panel-title">SHA: {{selectedSha.ShaId}}</h3>
         </div>
         <div class="col-md-2">
           <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(selectedSha)"></i>
@@ -35,7 +35,7 @@
     </div>
     <div class="panel-body">
       <div class="col-md-12 nopadding">
-        <div class="col-md-6 nopadding">
+        <div class="col-md-7 nopadding">
           <div ng-repeat="container in containers" class="col-md-12">
             <button  class="btn btn-default element-bottom-margin pull-left" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
               {{container.Name}}

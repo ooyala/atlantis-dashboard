@@ -5,11 +5,11 @@
       ui-on-drop="onDrop($event,$data, envs, $index)"
       drop-validate="dropValidateHandler($drop, $event, $data)">
       <div class="col-md-6">
-        <div class="panel panel-success">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <div class="row">
               <div class="col-md-10">
-                <a ui-sref=".env({name: env.Name})"><b>{{env.Name}}</b></a>
+                <a ui-sref=".env({name: env.Name})" class="panel-title"><b>{{env.Name}}</b></a>
               </div>
               <div class="col-md-2">
                 <i class="glyphicon glyphicon-remove element-right-margin pull-right" ng-click="deleteEnv(env)"></i>
