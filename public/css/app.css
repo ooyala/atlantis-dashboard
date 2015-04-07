@@ -58,7 +58,34 @@ body > .container {
 }
 
 .nopadding {
-  padding: 0px;
+  padding: 0;
+}
+.nopadding-left {
+  padding-left: 0;
+}
+.nopadding-right {
+  padding-right: 0;
+}
+.nopadding-bottom {
+  padding-bottom: 0;
+}
+.nopadding-top {
+  padding-top: 0;
+}
+.nomargin {
+  margin: 0;
+}
+.nomargin-left {
+  margin-left: 0;
+}
+.nomargin-right {
+  margin-right: 0;
+}
+.nomargin-bottom {
+  margin-bottom: 0;
+}
+.nomargin-top {
+  margin-top: 0;
 }
 
 .navbar-wrapper {
@@ -179,6 +206,16 @@ body > .container {
 }
 .confirm_details_body, .confirm_details_footer {
   margin-top: 10px;
+}
+.release-record-result {
+  padding: 5px;
+  box-shadow: 0px 0px 10px 4px #ccc;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.release-record-result-panel {
+  margin-bottom: 5px;
 }
 
 input[type=checkbox] { display:none; } /* to hide the checkbox itself */
