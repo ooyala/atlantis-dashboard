@@ -35,12 +35,12 @@
     </div>
     <div class="panel-body">
       <div class="col-md-12 nopadding">
-        <div class="col-md-7 nopadding">
+        <div class="col-md-9 nopadding">
           <div ng-repeat="container in containers" class="col-md-12">
             <button  class="btn btn-default element-bottom-margin pull-left" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
               {{container.Name}}
             </button>
-            <i class="glyphicon glyphicon-remove container-remove-button pull-left" ng-click="deleteContainer(container)"></i>
+            <i class="glyphicon glyphicon-remove container-remove-button" ng-click="deleteContainer(container)"></i>
           </div>
         </div>
       </div>
