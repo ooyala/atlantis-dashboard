@@ -1,1 +1,14 @@
-<h1>Release Step5</h1>
+<div class="row">
+  <div class="col-md-12 release-wizard-body-header">
+    <h4> Step 5: Results </h4>
+  </div>
+  <div class="col-md-12 release-wizard-body-content">
+    <div class="col-md-12" ng-repeat="record in results">
+      {{record}}
+    </div>
+  </div>
+  <div class="col-md-12 element-bottom-margin">
+    <button class="btn btn-primary pull-right" ng-click="goToDashboard()">Go to Dashboard</button>
+    <button class="btn btn-primary element-right-margin pull-right" ng-click="deployAnother()">Deploy Another App</button>
+  </div>
+</div>
