@@ -30,7 +30,8 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
   ];
 
   $scope.currentTab = $scope.tabs[0];
-  $scope.selectedEnvs = $scope.results = [];
+  $scope.selectedEnvs = [];
+  $scope.results = [];
   $scope.appBtnText = 'Select App';
 
   $scope.nextStep = function() {
@@ -60,11 +61,17 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
             PostDeployMessage: $scope.post_deploy_message
           },
           DeployingContainers: [
-            'us-east-1a', 'us-east-1b', 'us-east-1d'
+            { Region: 'us-east-1a', isDeployed: true },
+            { Region: 'us-east-1b', isDeployed: true },
+            { Region: 'us-east-1d', isDeployed: true }
           ],
           SanityChecks: {
             DependenciesFulfilled: true,
             JenkinsTestsPass: true
+          },
+          PostDeploy: {
+            Type: 'Email Notification',
+            isNotified: false
           }
         }
         $scope.results.push(record);
