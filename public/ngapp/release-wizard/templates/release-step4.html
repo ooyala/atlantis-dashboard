@@ -3,28 +3,24 @@
     <h4> Step 4: Confirm </h4>
   </div>
   <div class="col-md-12 release-wizard-body-content">
-    <div class="col-md-6" ng-repeat="env in selectedEnvs">
-      <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-12 confirm_details_header">
-                <b>Details:</b>
-              </div>
-              <br>
-              <div class="col-md-12 confirm_details_body">
-                App - {{selectedApp}} <br>
-                Environment - {{env.Name}} <br>
-                SHA - {{shaToDeploy}} <br>
-                RAM - {{container_ram}} MB <br>
-                CPU Shares - {{cpu_shares}} <br>
-                Containers / Zone - {{containers_per_zone}}
-              </div>
-              <br><br>
-              <div class="col-md-12 confirm_details_footer">
-                Post-Deploy - {{post_deploy_message}}
-              </div>
-            </div>
-          </div>
+    <div class="col-md-5 release-record-result element-right-margin" ng-repeat="env in selectedEnvs">
+      <div class="row">
+        <div class="col-md-12 confirm_details_header">
+          <b>Details:</b>
+        </div>
+        <br>
+        <div class="col-md-12 confirm_details_body">
+          App - {{selectedApp}} <br>
+          Environment - {{env.Name}} <br>
+          SHA - {{shaToDeploy}} <br>
+          RAM - {{container_ram}} MB <br>
+          CPU Shares - {{cpu_shares}} <br>
+          Containers / Zone - {{containers_per_zone}}
+        </div>
+        <br><br>
+        <div class="col-md-12 confirm_details_footer">
+          Post-Deploy - {{post_deploy_message}}
+        </div>
       </div>
     </div>
   </div>
