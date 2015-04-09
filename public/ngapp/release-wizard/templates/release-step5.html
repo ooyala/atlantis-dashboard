@@ -39,8 +39,8 @@
           <span class="box-header">Sanity Checks</span>
           <div class="panel-body">
             <div class="col-md-12 checkbox" ng-repeat="(check, value) in record.SanityChecks">
-              <input id="{{check}}" type="checkbox" ng-checked="{{value}}">
-              <label for="{{check}}">{{check}}</label>
+              <input id="{{record.DeployID + '_' + check}}" type="checkbox" ng-checked="{{value}}">
+              <label for="{{record.DeployID + '_' + check}}">{{check}}</label>
             </div>
           </div>
         </div>
@@ -48,8 +48,8 @@
           <span class="box-header">Container Deploy</span>
           <div class="panel-body">
             <div ng-repeat="container in record.DeployingContainers" class="col-md-12 checkbox">
-              <input id="{{container.Region}}" type="checkbox" ng-checked="{{container.isDeployed}}">
-              <label for="{{container.Region}}">{{container.Region}}</label>
+              <input id="{{record.DeployID + '_' + container.Region}}" type="checkbox" ng-checked="{{container.isDeployed}}">
+              <label for="{{record.DeployID + '_' + container.Region}}">{{container.Region}}</label>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="col-md-12 element-bottom-margin">
-    <button class="btn btn-info pull-right" ng-click="goToDashboard()">Go to Dashboard</button>
-    <button class="btn btn-info element-right-margin pull-right" ng-click="deployAnother()">Deploy Another App</button>
+    <a type="button" class="btn btn-info pull-right" ui-sref="dashboard">Go to Dashboard</a>
+    <a type="button" class="btn btn-info element-right-margin pull-right" ui-sref="#/">Deploy Another App</a>
   </div>
 </div>
