@@ -50,7 +50,7 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
     if (nextTab.index == 5) {
       _.each($scope.selectedEnvs, function(env) {
         record = {
-          DeployID: 'lk2ljaoidsjllk3',
+          DeployID: $scope.randString(5),
           Details: {
             App: $scope.selectedApp,
             Environment: env.Name,
@@ -77,6 +77,11 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
         $scope.results.push(record);
       });
     }
+  };
+
+  $scope.randString = function(n){
+    n = n || 5;
+    return Math.random().toString(36).substring(2, n+2);
   };
 
   $scope.selectApp = function(app) {
