@@ -222,14 +222,14 @@ body > .container {
   margin-top: 10px;
 }
 .release-record-result {
-  padding: 5px;
+  padding: 20px 20px 10px 20px;
   box-shadow: 0px 0px 10px 4px #ccc;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 .release-record-result-panel {
-  margin-bottom: 5px;
+  margin-bottom: 22px;
 }
 
 .box {
@@ -237,7 +237,11 @@ body > .container {
   border: 2px solid #ccc;
   box-shadow: 1px 3px 6px #ccc;
 }
-.box .box-header {
+.wizard-result-box {
+  padding: 5px;
+  border: 2px solid #ccc;
+}
+.box .box-header, .wizard-result-box .box-header {
   position: relative;
   top: -20px;
   left: 10px;
@@ -245,7 +249,13 @@ body > .container {
   padding: 5px;
   font-size: 18px;
 }
-.box .panel-body {
+.box .panel-body, .wizard-result-box .panel-body {
   position: relative;
   top: -10px;
+}
+.wizard-result-box .panel-body {
+  padding: 0 15px;
+}
+.wizard-result-box .checkbox {
+  margin-top: 0;
 }
