@@ -1,7 +1,5 @@
-<div class="deps-panel panel panel-info">
-  <div class="panel-heading">
-    <h4 class="panel-title">Dependencies</h4>
-  </div>
+<div class="deps-panel panel box">
+  <span class="panel-title">Dependencies</span>
   <div class="panel-body">
     <div popover="{{dep.Host ? dep.Name+' @ http://'+dep.Host+':'+dep.Port+'/' : ''}}" popover-trigger="mouseenter"
         class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">

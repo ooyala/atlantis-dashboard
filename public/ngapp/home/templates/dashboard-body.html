@@ -5,15 +5,13 @@
       ui-on-drop="onDrop($event,$data, envs, $index)"
       drop-validate="dropValidateHandler($drop, $event, $data)">
       <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-md-10">
-                <a ui-sref=".env({name: env.Name})" class="panel-title"><b>{{env.Name}}</b></a>
-              </div>
-              <div class="col-md-2">
-                <i class="glyphicon glyphicon-remove element-right-margin pull-right" ng-click="deleteEnv(env)"></i>
-              </div>
+        <div class="panel box">
+          <div class="row">
+            <div class="col-md-10">
+              <a ui-sref=".env({name: env.Name})" class="box-header"><b>{{env.Name}}</b></a>
+            </div>
+            <div class="col-md-2">
+              <i class="glyphicon glyphicon-remove element-right-margin pull-right" ng-click="deleteEnv(env)"></i>
             </div>
           </div>
           <div class="panel-body">
@@ -29,10 +27,8 @@
 </div>
 <div class="col-md-4">
   <!-- Dependencies List -->
-  <div class="deps-panel panel panel-info" ng-show="$parent.isRegisterDependency">
-    <div class="panel-heading">
-      <h4 class="panel-title">Dependencies</h4>
-    </div>
+  <div class="deps-panel panel box" ng-show="$parent.isRegisterDependency">
+    <span class="box-header">Dependencies</span>
     <div class="panel-body">
       <div class="col-md-12 nopadding">
         <div class="col-md-3 well well-sm dep-panel" ng-repeat="dep in deps track by $index"
@@ -47,16 +43,14 @@
     </div>
   </div>
   <!-- Environment -->
-  <div class="deps-panel panel panel-info" ng-show="$parent.isEnvironment"
+  <div class="deps-panel panel box" ng-show="$parent.isEnvironment"
     ng-mouseenter="handleEnvPanelVisibility()" ng-mouseleave="handleEnvPanelVisibility()">
-    <div class="panel-heading">
-      <div class="row">
-        <div class="col-md-9">
-          <h4 class="panel-title">New Environment</h4>
-        </div>
-        <div class="col-md-3" ng-show="isShowEnvPanel">
-          <i class="glyphicon glyphicon-remove pull-right" ng-click="closeEnvPanel()"></i>
-        </div>
+    <div class="row">
+      <div class="col-md-9">
+        <span class="box-header">New Environment</span>
+      </div>
+      <div class="col-md-3" ng-show="isShowEnvPanel">
+        <i class="glyphicon glyphicon-remove pull-right" ng-click="closeEnvPanel()"></i>
       </div>
     </div>
     <div class="panel-body">

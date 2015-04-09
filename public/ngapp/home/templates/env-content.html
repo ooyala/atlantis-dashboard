@@ -1,14 +1,12 @@
 <div class="col-md-3">
   <div class="col-md-12" ng-repeat="sha in shas">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-md-10">
-            <h3 class="panel-title">SHA: {{sha.ShaId}}</h3>
-          </div>
-          <div class="col-md-2">
-            <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(sha)"></i>
-          </div>
+    <div class="panel box">
+      <div class="row">
+        <div class="col-md-10">
+          <span class="box-header">SHA: {{sha.ShaId}}</span>
+        </div>
+        <div class="col-md-2">
+          <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(sha)"></i>
         </div>
       </div>
       <div class="panel-body">
@@ -22,15 +20,13 @@
   </div>
 </div>
 <div class="col-md-5">
-  <div class="panel panel-primary sha-panel" ng-show="isShaInfoEnabled">
-    <div class="panel-heading">
-      <div class="row">
-        <div class="col-md-10">
-          <h3 class="panel-title">SHA: {{selectedSha.ShaId}}</h3>
-        </div>
-        <div class="col-md-2">
-          <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(selectedSha)"></i>
-        </div>
+  <div class="panel box sha-panel" ng-show="isShaInfoEnabled">
+    <div class="row">
+      <div class="col-md-10">
+        <span class="box-header">SHA: {{selectedSha.ShaId}}</span>
+      </div>
+      <div class="col-md-2">
+        <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(selectedSha)"></i>
       </div>
     </div>
     <div class="panel-body">
