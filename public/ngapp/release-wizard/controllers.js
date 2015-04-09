@@ -1,7 +1,7 @@
 var controllers = angular.module('atlantisApp.releaseWizardControllers', []);
 
-controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
-  function($scope, appsFactory) {
+controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
+  function($scope, $state, appsFactory) {
 
   var template_base_path = 'ngapp/release-wizard/templates/';
 
@@ -33,6 +33,21 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
   $scope.selectedEnvs = [];
   $scope.results = [];
   $scope.appBtnText = 'Select App';
+
+  $scope.resetWizard = function() {
+    $scope.selectedEnvs = [];
+    $scope.results = [];
+    $scope.appBtnText = 'Select App';
+    $scope.container_ram = '';
+    $scope.containers_per_zone = '';
+    $scope.cpu_shares = '';
+    $scope.shaToDeploy = '';
+
+    _.each($scope.tabs, function(tab) {
+      tab.active = false;
+      tab.visited = false;
+    });
+  };
 
   $scope.nextStep = function() {
     var record,
@@ -90,5 +105,15 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', 'appsFactory',
 
   $scope.selectEnv = function(env, a) {
     $scope.selectedEnvs.push(env);
+  };
+
+  $scope.goToDashboard = function() {
+    $state.go('root.dashboard');
+  };
+
+  $scope.deployAnotherApp = function() {
+    $scope.resetWizard();
+    $scope.currentTab = $scope.tabs[0];
+    $scope.currentTab.active = true;
   };
 }]);
