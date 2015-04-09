@@ -6,10 +6,8 @@
     <div class="col-md-4">
       <div class="col-md-12">
         <br><br><br><br>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Application</h3>
-          </div>
+        <div class="panel box">
+          <span class="box-header">Application</span>
           <div class="panel-body">
             <center>
               <div class="btn-group" dropdown is-open="appStatus.isopen">
@@ -31,10 +29,8 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Environments</h3>
-        </div>
+      <div class="panel box">
+        <span class="box-header">Environments</span>
         <div class="panel-body">
           <div ng-repeat="env in envs" class="checkbox">
             <input id="{{env.Name}}" type="checkbox" ng-checked="false" ng-click="selectEnv(env)">

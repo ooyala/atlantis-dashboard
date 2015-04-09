@@ -5,15 +5,13 @@
   <div class="col-md-12 release-wizard-body-content">
     <div class="col-md-12 release-record-result element-bottom-margin" ng-repeat="record in results">
       <div class="col-md-4 nopadding-left">
-        <div class="panel panel-info release-record-result-panel">
-          <div class="panel-heading">
-            <span class="panel-title">Deploy ID</span>
-          </div>
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Deploy ID</span>
           <div class="panel-body">
             {{record.DeployID}}
           </div>
         </div>
-        <div class="panel panel-info nomargin-bottom">
+        <div class="panel wizard-result-box nomargin-bottom">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12 confirm_details_header">
@@ -37,10 +35,8 @@
         </div>
       </div>
       <div class="col-md-4 nopadding">
-        <div class="panel panel-info release-record-result-panel">
-          <div class="panel-heading">
-            <span class="panel-title">Sanity Checks</span>
-          </div>
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Sanity Checks</span>
           <div class="panel-body">
             <div class="col-md-12 checkbox" ng-repeat="(check, value) in record.SanityChecks">
               <input id="{{check}}" type="checkbox" ng-checked="{{value}}">
@@ -48,10 +44,8 @@
             </div>
           </div>
         </div>
-        <div class="panel panel-info nomargin-bottom">
-          <div class="panel-heading">
-            <span class="panel-title">Container Deploy</span>
-          </div>
+        <div class="panel wizard-result-box nomargin-bottom">
+          <span class="box-header">Container Deploy</span>
           <div class="panel-body">
             <div ng-repeat="container in record.DeployingContainers" class="col-md-12 checkbox">
               <input id="{{container.Region}}" type="checkbox" ng-checked="{{container.isDeployed}}">
@@ -61,10 +55,8 @@
         </div>
       </div>
       <div class="col-md-4 nopadding-right">
-        <div class="panel panel-info release-record-result-panel">
-          <div class="panel-heading">
-            <span class="panel-title">Post Deploy</span>
-          </div>
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Post Deploy</span>
           <div class="panel-body">
             <div class="col-md-12 checkbox">
               <input id="notify_{{record.DeployID}}" type="checkbox" ng-checked="{{record.PostDeploy.isNotified}}">
@@ -72,12 +64,10 @@
             </div>
           </div>
         </div>
-        <div class="panel panel-info nomargin-bottom">
-          <div class="panel-heading">
-            <span class="panel-title">Status</span>
-          </div>
+        <div class="panel wizard-result-box nomargin-bottom">
+          <span class="box-header">Status</span>
           <div class="panel-body">
-            <span class="panel-title">Still deploying...</span>
+            Still deploying...
           </div>
         </div>
       </div>
