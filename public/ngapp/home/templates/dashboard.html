@@ -12,7 +12,7 @@
           <div class="col-md-5">
             <!-- Choose Application -->
             <span class="text">Application : </span>
-            <div class="btn-group" dropdown is-open="appStatus.isopen">
+            <div class="btn-group" dropdown>
               <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                 {{appBtnText}} <span class="caret"></span>
               </button>
@@ -26,7 +26,7 @@
           <div class="col-md-5" ng-show="isEnvEnable">
            <!-- Choose Environment -->
             <span class="text">Environment : </span>
-            <div class="btn-group" dropdown is-open="envStatus.isopen">
+            <div class="btn-group" dropdown>
               <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                 {{envBtnText}} <span class="caret"></span>
               </button>

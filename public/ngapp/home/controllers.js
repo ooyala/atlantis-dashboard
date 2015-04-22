@@ -9,12 +9,6 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory',
   $scope.isEnvEnable = $scope.isAppVisible = $scope.isEnvSelected = false;
   $scope.envBtnText  = $scope.appBtnText = "Choose here";
   $scope.headerTitle = "Environment Configuration And Management";
-  $scope.appStatus = {
-    isopen: false
-  };
-  $scope.envStatus = {
-    isopen: false
-  };
 
   appsFactory.list(function(data) {
     $scope.apps = data;
