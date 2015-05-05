@@ -185,7 +185,7 @@ body > .container {
   color: white;
   list-style: none;
   font-size: 13px;
-  border-top-right-radius: 50px;
+  border-top-right-radius: 7px;
 }
 .release-wizard .release-item:hover {
   background-color: #337ab7;
