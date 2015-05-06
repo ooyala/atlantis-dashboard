@@ -32,7 +32,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         }
       })
       .state('root.dashboard.app', {
-        url: '/{id:int}',
+        url: '/:appName',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/dashboard-body.html',
@@ -41,7 +41,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         }
       })
       .state('root.dashboard.app.env', {
-        url: '/:name',
+        url: '/:envName',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/env-content.html',
