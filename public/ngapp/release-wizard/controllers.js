@@ -1,74 +1,67 @@
 var controllers = angular.module('atlantisApp.releaseWizardControllers', []);
 
-controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
-  function($scope, $state, appsFactory) {
+controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', '$interval', 'appsFactory',
+  'appInfoModal', function($scope, $state, $interval, appsFactory, appInfoModal) {
 
   var template_base_path = 'ngapp/release-wizard/templates/';
 
   $scope.isReleaseWizard = true;
 
-  $scope.tabs = [
-    { index: 1, active: true, title: 'Step 1: App-Sha-Environments', template: template_base_path + 'release-step1.html', visited: false },
-    { index: 2, active: false, title:'Step 2: Container Settings', template: template_base_path + 'release-step2.html', visited: false },
-    { index: 3, active: false, title:'Step 3: Deploy Configuration', template: template_base_path + 'release-step3.html', visited: false },
-    { index: 4, active: false, title:'Step 4: Confirm', template: template_base_path + 'release-step4.html', visited: false },
-    { index: 5, active: false,title:'Step 5: Results', template: template_base_path + 'release-step5.html', visited: false }
-  ];
-
   appsFactory.list(function(data) {
     $scope.apps = data;
   });
 
-  $scope.envs = [
-    { Name: 'staging', CurrentSha: '34ddef' },
-    { Name: 'next-staging', CurrentSha: '8b2sdf' },
-    { Name: 'production-0', CurrentSha: '95df1c' },
-    { Name: 'production-1', CurrentSha: '5a4sdf' },
-    { Name: 'next-staging-dark', CurrentSha: '8b2sdf' },
-    { Name: 'next-next-staging-dark', CurrentSha: '8b2sdf' },
-    { Name: 'staging-dark', CurrentSha: '34ddef' },
-  ];
-
-  $scope.currentTab = $scope.tabs[0];
-  $scope.selectedEnvs = [];
-  $scope.results = [];
-  $scope.appBtnText = 'Select App';
+  appsFactory.getEnvs(function(data) {
+    $scope.envs = data.Envs;
+  });
 
   $scope.resetWizard = function() {
-    $scope.selectedEnvs = [];
-    $scope.results = [];
-    $scope.appBtnText = 'Select App';
-    $scope.container_ram = '';
-    $scope.containers_per_zone = '';
-    $scope.cpu_shares = '';
-    $scope.shaToDeploy = '';
+    $scope.tabs = [
+      { index: 1, active: true, title: 'Step 1: App-Sha-Environments', template: template_base_path + 'release-step1.html', visited: false },
+      { index: 2, active: false, title:'Step 2: Container Settings', template: template_base_path + 'release-step2.html', visited: false },
+      { index: 3, active: false, title:'Step 3: Deploy Configuration', template: template_base_path + 'release-step3.html', visited: false },
+      { index: 4, active: false, title:'Step 4: Confirm', template: template_base_path + 'release-step4.html', visited: false },
+      { index: 5, active: false,title:'Step 5: Results', template: template_base_path + 'release-step5.html', visited: false }
+    ];
 
-    _.each($scope.tabs, function(tab) {
-      tab.active = false;
-      tab.visited = false;
-    });
+    $scope.currentTab = _.first($scope.tabs);
+    $scope.selectedEnvs = [];
+    $scope.data = {};
+    $scope.appBtnText = 'Select App';
+    $scope.container_ram = 256;
+    $scope.containers_per_zone = 1;
+    $scope.cpu_shares = 1;
+    $scope.shaToDeploy = '';
+    $scope.deployedApps = {};
   };
 
   $scope.nextStep = function() {
-    var record,
+    var record, deploy_messages = [],
         nextTab = $scope.tabs[$scope.currentTab.index];
 
     nextTab.active = true;
     $scope.currentTab.active = false;
     $scope.currentTab.visited = true;
     $scope.currentTab = nextTab;
+    $scope.post_deploy_message = "No Action"
 
+    if ($scope.deploy_success) {
+      deploy_messages.push("Route traffic to newly pool");
+    }
     if ($scope.notify_on_success) {
-      $scope.post_deploy_message = "Email Notification"
+      deploy_messages.push("Email Notification");
+    }
+    if(deploy_messages.length > 0 ) {
+      $scope.post_deploy_message = deploy_messages.join(', ');
     }
 
     if (nextTab.index == 5) {
       _.each($scope.selectedEnvs, function(env) {
         record = {
-          DeployID: $scope.randString(5),
+          DeployedRecord: {},
           Details: {
             App: $scope.selectedApp,
-            Environment: env.Name,
+            Environment: env,
             Sha: $scope.shaToDeploy,
             RAM: $scope.container_ram,
             CPUShares: $scope.cpu_shares,
@@ -76,9 +69,6 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
             PostDeployMessage: $scope.post_deploy_message
           },
           DeployingContainers: [
-            { Region: 'us-east-1a', isDeployed: true },
-            { Region: 'us-east-1b', isDeployed: true },
-            { Region: 'us-east-1d', isDeployed: true }
           ],
           SanityChecks: {
             DependenciesFulfilled: true,
@@ -89,7 +79,7 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
             isNotified: false
           }
         }
-        $scope.results.push(record);
+        $scope.data[env] = record;
       });
     }
   };
@@ -99,11 +89,11 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
     return Math.random().toString(36).substring(2, n+2);
   };
 
-  $scope.selectApp = function(app) {
-    $scope.appBtnText = $scope.selectedApp = app.Name;
+  $scope.selectApp = function(appName) {
+    $scope.appBtnText = $scope.selectedApp = appName;
   };
 
-  $scope.selectEnv = function(env, a) {
+  $scope.selectEnv = function(env) {
     $scope.selectedEnvs.push(env);
   };
 
@@ -111,9 +101,73 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', 'appsFactory',
     $state.go('root.dashboard');
   };
 
+  $scope.updateStatus = function(id, env) {
+    var pollDeployStatus = $interval(function() {
+      appsFactory.getTasks(id, function(data) {
+        $scope.data[env].Result.data = data;
+        if (data.Done) {
+          $scope.data[env].Result.status = 'Deployed Successfully.';
+          $scope.data[env].Result.class = 'text-success';
+          $interval.cancel(pollDeployStatus);
+        } else {
+          if(data.Error) {
+            $scope.data[env].Result.status = "Error: " + data.Error;
+            $scope.data[env].Result.class = 'text-danger';
+          } else {
+            $scope.data[env].Result.status = data.Status;
+            $scope.data[env].Result.class = 'text-info';
+          }
+        }
+      }, function(error) {
+        $scope.data[env].Result.status = "Error: " + error;
+        $scope.data[env].Result.class = 'text-danger';
+      });
+    }, 5000, 6);
+  };
+
+  $scope.deployApp = function() {
+    var options = {
+      appName: $scope.selectedApp, sha: $scope.shaToDeploy,
+      data: {
+        CPUShares: $scope.cpu_shares.toString(),
+        MemoryLimit: $scope.container_ram.toString(),
+        Instances: $scope.containers_per_zone.toString(),
+        Dev: false
+      }
+    };
+
+    // deploying each environment
+    _.each($scope.selectedEnvs, function(env) {
+      options.env = env;
+      appsFactory.deployApp(options, function(data) {
+        $scope.data[env].DeployedRecord = data;
+        $scope.data[env].Result = {
+          status: 'Still Deploying ...', class: 'text-warning'
+        };
+        $scope.updateStatus(data['ID'], env);
+      }, function(error) {
+        alert('error');
+      });
+      $scope.nextStep();
+    });
+  };
+
+  $scope.showDeployedAppInfo = function(app) {
+    console.log(app.Result);
+
+    var templateUrl = 'ngapp/release-wizard/templates/app-info.html';
+
+    modalInstance = appInfoModal.modalInstance(templateUrl);
+    modalInstance.result.then(function() {
+      alert('click ok');
+    });
+  };
+
   $scope.deployAnotherApp = function() {
     $scope.resetWizard();
     $scope.currentTab = $scope.tabs[0];
     $scope.currentTab.active = true;
   };
+
+  $scope.resetWizard();
 }]);
