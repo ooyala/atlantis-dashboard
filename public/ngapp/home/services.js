@@ -5,19 +5,41 @@ services.factory('appsFactory', ['$http', function($http){
     apps: []
   };
 
+  var callGet = function(url, callback) {
+    $http.get(url).success(callback);
+  };
+
+  var callPost = function(url, postData, success, error) {
+    $http.post(url, postData).success(success).error(error);
+  };
+
   var getApps = function(callback){
-    $http.get('/apps', { cache: true }).success(callback);
+    callGet('/apps', callback);
   }
 
   svc.list = getApps;
 
-  svc.findById = function(id, callback) {
-    getApps(function(apps) {
-      var app = apps.filter(function(app){
-        return app.Id === id;
-      })[0];
-      callback(app);
-    });
+  svc.findByName = function(name, callback) {
+    callGet('/apps/' + name, callback);
+  };
+
+  svc.getEnvs = function(callback) {
+    callGet('/envs', callback);
+  };
+
+  svc.getEnvsByApp = function(appName, callback) {
+  };
+
+  svc.deployApp = function(options, success, error) {
+    var buildUrl = '/instances/apps/' + options.appName + '/shas/' +
+                    options.sha + '/envs/' + options.env +
+                    '/containers?User=aa&Secret=dummysecret';
+
+    callPost(buildUrl, options.data, success, error);
+  };
+
+  svc.getTasks = function(id, success, error) {
+    callGet('/tasks/' + id, success, error);
   };
 
   svc.findEnv = function(id, envName, callback) {
@@ -31,11 +53,11 @@ services.factory('appsFactory', ['$http', function($http){
   };
 
   svc.getShaById = function(id, callback){
-    $http.get('/shas/'+id, { cache: true }).success(callback);
+    callGet('/shas/'+id, callback);
   };
 
   svc.getDeps = function(callback) {
-    $http.get('/deps', { cache: true }).success(callback);
+    callGet('/deps', callback);
   };
 
   return svc;
@@ -45,7 +67,7 @@ services.factory('deleteModal', ['$modal', function($modal){
   return {
     modalInstance:  function(templateUrl, name, type, itemType) {
       return $modal.open({
-        templateUrl: 'ngapp/templates/deleteModal.html',
+        templateUrl: templateUrl,
         controller: function ($scope, $modalInstance, name) {
           $scope.confirmName = '';
           $scope.type = type;
@@ -71,6 +93,23 @@ services.factory('deleteModal', ['$modal', function($modal){
           itemType: function() {
             return itemType;
           }
+        }
+      });
+    }
+  }
+}]);
+
+services.factory('appInfoModal', ['$modal', function($modal){
+  return {
+    modalInstance:  function(templateUrl) {
+      return $modal.open({
+        templateUrl: templateUrl,
+        controller: function ($scope, $modalInstance) {
+          $scope.ok = function () {
+            $modalInstance.close(name);
+          };
+        },
+        resolve: {
         }
       });
     }
