@@ -15,8 +15,8 @@
                   {{appBtnText}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li ng-repeat="app in apps">
-                    <a href="" ng-click="selectApp(app)">{{app.Name}}</a>
+                  <li ng-repeat="app in apps.Apps">
+                    <a href="" ng-click="selectApp(app)">{{app}}</a>
                   </li>
                 </ul>
               </div>
@@ -32,9 +32,9 @@
       <div class="panel box">
         <span class="box-header">Environments</span>
         <div class="panel-body">
-          <div ng-repeat="env in envs" class="checkbox">
-            <input id="{{env.Name}}" type="checkbox" ng-checked="false" ng-click="selectEnv(env)">
-            <label for="{{env.Name}}">{{env.Name}} (Current SHA: {{env.CurrentSha}})</label>
+          <div ng-repeat="envName in envs" class="checkbox">
+            <input id="{{envName}}" type="checkbox" ng-checked="false" ng-click="selectEnv(envName)">
+            <label for="{{envName}}">{{envName}} (Current SHA: ------)</label>
           </div>
         </div>
       </div>

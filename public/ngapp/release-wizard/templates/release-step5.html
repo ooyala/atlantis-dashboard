@@ -3,12 +3,12 @@
     <h4> Step 5: Results </h4>
   </div>
   <div class="col-md-12 release-wizard-body-content">
-    <div class="col-md-12 release-record-result element-bottom-margin" ng-repeat="record in results">
+    <div class="col-md-12 release-record-result element-bottom-margin" ng-repeat="(env, record) in data">
       <div class="col-md-4 nopadding-left">
         <div class="panel wizard-result-box release-record-result-panel">
           <span class="box-header">Deploy ID</span>
           <div class="panel-body">
-            {{record.DeployID}}
+            {{record.DeployedRecord.ID}}
           </div>
         </div>
         <div class="panel wizard-result-box nomargin-bottom">
@@ -66,8 +66,9 @@
         </div>
         <div class="panel wizard-result-box nomargin-bottom">
           <span class="box-header">Status</span>
-          <div class="panel-body">
-            Still deploying...
+          <div class="panel-body" ng-class="record.Result.class">
+            {{record.Result.status}}
+            <button class="btn btn-primary element-right-margin" ng-click="showDeployedAppInfo(record)" ng-show="record.Result.data.Done">Deploy Another App</button>
           </div>
         </div>
       </div>

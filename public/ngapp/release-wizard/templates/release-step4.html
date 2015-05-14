@@ -11,7 +11,7 @@
         <br>
         <div class="col-md-12 confirm_details_body">
           App - {{selectedApp}} <br>
-          Environment - {{env.Name}} <br>
+          Environment - {{env}} <br>
           SHA - {{shaToDeploy}} <br>
           RAM - {{container_ram}} MB <br>
           CPU Shares - {{cpu_shares}} <br>
@@ -25,6 +25,6 @@
     </div>
   </div>
   <div class="col-md-12">
-    <button class="btn btn-primary element-bottom-margin pull-right" ng-click="nextStep()">Deploy</button>
+    <button class="btn btn-primary element-bottom-margin pull-right" ng-click="deployApp()">Deploy</button>
   </div>
 </div>
