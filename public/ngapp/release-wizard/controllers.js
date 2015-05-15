@@ -122,7 +122,7 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', '$interval', 'a
         $scope.data[env].Result.status = "Error: " + error;
         $scope.data[env].Result.class = 'text-danger';
       });
-    }, 5000, 6);
+    }, 5000, 12);
   };
 
   $scope.deployApp = function() {
@@ -153,14 +153,8 @@ controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', '$interval', 'a
   };
 
   $scope.showDeployedAppInfo = function(app) {
-    console.log(app.Result);
-
-    var templateUrl = 'ngapp/release-wizard/templates/app-info.html';
-
-    modalInstance = appInfoModal.modalInstance(templateUrl);
-    modalInstance.result.then(function() {
-      alert('click ok');
-    });
+    var templateUrl = template_base_path + 'app-info.html';
+    appInfoModal.modalInstance(templateUrl, app.Result.data.Containers[0]);
   };
 
   $scope.deployAnotherApp = function() {
