@@ -4,7 +4,7 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.deployControllers', 'atlantisApp.manageControllers',
   'atlantisApp.usersControllers',
   'atlantisApp.homeDirectives',
-  'atlantisApp.homeServices',
+  'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
   'atlantisApp.filters'
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
