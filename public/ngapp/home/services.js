@@ -98,20 +98,3 @@ services.factory('deleteModal', ['$modal', function($modal){
     }
   }
 }]);
-
-services.factory('appInfoModal', ['$modal', function($modal){
-  return {
-    modalInstance:  function(templateUrl) {
-      return $modal.open({
-        templateUrl: templateUrl,
-        controller: function ($scope, $modalInstance) {
-          $scope.ok = function () {
-            $modalInstance.close(name);
-          };
-        },
-        resolve: {
-        }
-      });
-    }
-  }
-}]);
