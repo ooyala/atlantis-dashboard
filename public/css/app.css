@@ -265,3 +265,7 @@ body > .container {
 .deny-sign-color {
   color: red;
 }
+
+.pending-status {
+  color: orange;
+}

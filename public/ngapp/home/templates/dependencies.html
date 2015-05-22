@@ -6,7 +6,7 @@
       <p>
         {{dep.Name}}
       </p>
-      <p>
+      <p ng-class="{'pending-status' : dep.Status == 'Pending Request'}">
         {{dep.Status}}
       </p>
       <div ng-show="dep.Status != 'Pending Request'" popover="Unregister" popover-trigger="mouseenter">
