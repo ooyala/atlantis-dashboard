@@ -1,8 +1,9 @@
 var controllers = angular.module('atlantisApp.homeControllers', []);
 
-controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory',
-  function($scope, $timeout, appsFactory) {
+controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory','$rootScope', '$state',
+  function($scope, $timeout, appsFactory, $rootScope, $state) {
 
+  $rootScope.title = $state.current.title;
   $scope.alerts = [];
   $scope.envs = [];
   $scope.deps = [];
@@ -42,9 +43,10 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory',
 }]);
 
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
-  'appsFactory', 'deleteModal', function ($scope, $stateParams, $modal, appsFactory,
-  deleteModal) {
+  'appsFactory', 'deleteModal', '$rootScope', '$state', function ($scope, $stateParams, $modal, appsFactory,
+  deleteModal, $rootScope, $state) {
 
+  $rootScope.title = $state.current.title;
   $scope.isShowEnvPanel = false;
   $scope.$parent.isAppVisible = true;
   $scope.$parent.isEnvSelected = false;
