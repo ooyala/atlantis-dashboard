@@ -1,10 +1,12 @@
 var controllers = angular.module('atlantisApp.releaseWizardControllers', []);
 
-controllers.controller('ReleaseWizardCtrl', ['$scope', '$state', '$interval', 'appsFactory',
-  'appInfoModal', function($scope, $state, $interval, appsFactory, appInfoModal) {
+controllers.controller('ReleaseWizardCtrl', [
+  '$scope', '$state', 'appsFactory', '$rootScope', '$interval', 'appInfoModal',
+  function($scope, $state, appsFactory, $rootScope, $interval, appInfoModal) {
 
   var template_base_path = 'ngapp/release-wizard/templates/';
 
+  $rootScope.title = $state.current.title;
   $scope.isReleaseWizard = true;
 
   appsFactory.list(function(data) {

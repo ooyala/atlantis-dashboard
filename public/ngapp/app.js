@@ -52,9 +52,13 @@ var atlantisApp = angular.module('atlantisApp', [
   }];
 });
 
+atlantisApp.run(function ($rootScope, $state, $stateParams) {
+  $rootScope.title = $state.current.title;
+});
+
 atlantisApp.config(["$stateProvider", "$urlRouterProvider",
   function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('dashboard');
     $stateProvider
       .state('root', {
         url: '/',
@@ -73,7 +77,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             controller: 'DashboardCtrl',
             controllerAs: 'vm'
           }
-        }
+        },
+        title: 'Atlantis - Dashboard'
       })
       .state('root.dashboard.app', {
         url: '/:appName',
@@ -82,7 +87,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             templateUrl: 'ngapp/home/templates/dashboard-body.html',
             controller: 'DashboardBodyCtrl'
           }
-        }
+        },
+        title: 'Atlantis - Environment Configuration And Management'
       })
       .state('root.dashboard.app.env', {
         url: '/:envName',
@@ -91,7 +97,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             templateUrl: 'ngapp/home/templates/env-content.html',
             controller: 'EnvContentCtrl'
           }
-        }
+        },
+        title: 'Atlantis'
       })
       .state('root.release-wizard', {
         url: 'release-wizard',
@@ -101,7 +108,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             controller: 'ReleaseWizardCtrl',
             controllerAs: 'vm'
           }
-        }
+        },
+        title: 'Atlantis - Release Wizard'
       })
       .state('root.deploy', {
         url: 'deploy',
@@ -111,7 +119,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             controller: 'DeployCtrl',
             controllerAs: 'vm'
           }
-        }
+        },
+        title: 'Atlantis - Deploy'
       })
       .state('root.manage', {
         url: 'manage',
@@ -121,7 +130,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             controller: 'ManageCtrl',
             controllerAs: 'vm'
           }
-        }
+        },
+        title: 'Atlantis - Manage'
       })
       .state('root.users', {
         url: 'users',
@@ -131,7 +141,8 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
             controller: 'UsersCtrl',
             controllerAs: 'vm'
           }
-        }
+        },
+        title: 'Atlantis - User Administration'
       });
   }
 ]);

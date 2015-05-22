@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="atlantisApp">
   <head>
-    <title>Atlantis</title>
+    <title ng-bind-html="title"></title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
   </head>
-  <body ng-app="atlantisApp">
+  <body>
     <div class="container">
       <div class="row">
         <div ui-view="header"></div>

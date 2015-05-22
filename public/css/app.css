@@ -257,6 +257,15 @@ body > .container {
 .wizard-result-box .checkbox {
   margin-top: 0;
 }
-.deploy_status {
-  font-weight: bold;
+
+.accept-sign-color {
+  color: green;
+}
+
+.deny-sign-color {
+  color: red;
+}
+
+.pending-status {
+  color: orange;
 }
