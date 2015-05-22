@@ -13,10 +13,8 @@
         <button class="btn btn-xs btn-block" ng-click="unregisterDependency(dep)"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
       <div ng-show="dep.Status === 'Pending Request'">
-        <i class="glyphicon glyphicon-plus" popover="Accept the Dependency"
-          popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'accept')"></i>
-        <i class="glyphicon glyphicon-minus pull-right"
-          popover="Reject the Dependency" popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'reject')"></i>
+        <i class="glyphicon glyphicon-ok-circle accept-sign-color" popover="Accept the Dependency" popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'accept')"></i>
+        <i class="glyphicon glyphicon-remove-circle deny-sign-color pull-right" popover="Reject the Dependency" popover-trigger="mouseenter" ng-click="handleDependency(env, dep, 'reject')"></i>
       </div>
     </div>
   </div>
