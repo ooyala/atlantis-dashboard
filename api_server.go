@@ -15,11 +15,16 @@ const (
 	staticDir = "public"
 )
 
-type Dependency struct {
+type DependencyDetails struct {
 	Name   string
 	Status string
 	Host   string
 	Port   int
+}
+
+type Dependency struct {
+	Deps   []DependencyDetails
+	Status string
 }
 
 type AppManifest struct {
@@ -67,14 +72,33 @@ type Environment struct {
 	ContainersPerZone int32
 	CPUShares         int32
 	Memory            int32
-	Dependencies      []Dependency
-	Shas              []Sha
+	Dependencies      []DependencyDetails
 }
 
 type Application struct {
+	Apps   []string
+	Status string
+}
+
+type AppDetails struct {
 	Id   int
 	Name string
 	Envs []Environment
+}
+
+type AppInfo struct {
+	App    AppDetails
+	Status string
+}
+
+type EnvInfo struct {
+	Name string
+	Shas []Sha
+}
+
+type Envs struct {
+	Envs   []string
+	Status string
 }
 
 func staticServe(c *gin.Context) {
@@ -113,7 +137,7 @@ func main() {
 	r.GET("/apps", func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		var apps [2]Application
+		var apps Application
 
 		filename := "public/jsons/apps.json"
 		content := readJSON(filename)
@@ -142,15 +166,86 @@ func main() {
 		c.JSON(200, expectedSha)
 	})
 
+	r.GET("/instance_data/:instance_id", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var data []ShaInfo
+		var expectedContainer Container
+
+		filename := "public/jsons/shas.json"
+		instanceId := c.Params.ByName("instance_id")
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &data)
+
+		for _, sha := range data {
+			var regions = sha.Regions
+			for _, reg := range regions {
+				var containers = reg.Containers
+				for _, con := range containers {
+					if con.ID == instanceId {
+						expectedContainer = con
+						break
+					}
+				}
+			}
+		}
+		c.JSON(200, expectedContainer)
+	})
+
 	r.GET("/deps", func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		var deps []Dependency
+		var deps Dependency
 
 		filename := "public/jsons/deps.json"
 		content := readJSON(filename)
 		json.Unmarshal([]byte(content), &deps)
 		c.JSON(200, deps)
+	})
+
+	r.GET("/apps/:app_name", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var data [2]AppInfo
+		var expectedInfo AppInfo
+
+		filename := "public/jsons/app_info.json"
+		appName := c.Params.ByName("app_name")
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &data)
+
+		for _, app := range data {
+			if app.App.Name == appName {
+				expectedInfo = app
+				break
+			}
+		}
+		c.JSON(200, expectedInfo)
+	})
+
+	r.GET("/apps/:app_name/envs/:env_name", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var envInfo EnvInfo
+		appName := c.Params.ByName("app_name")
+		envName := c.Params.ByName("env_name")
+		filename := "public/jsons/" + appName + "_" + envName + ".json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &envInfo)
+
+		c.JSON(200, envInfo)
+	})
+
+	r.GET("/envs", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var envs Envs
+
+		filename := "public/jsons/envs.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &envs)
+
+		c.JSON(200, envs)
 	})
 
 	fmt.Println("Listening on port 5000")

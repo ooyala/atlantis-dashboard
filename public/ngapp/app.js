@@ -81,7 +81,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         title: 'Atlantis - Dashboard'
       })
       .state('root.dashboard.app', {
-        url: '/:appName',
+        url: '/apps/:appName',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/dashboard-body.html',
@@ -91,7 +91,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         title: 'Atlantis - Environment Configuration And Management'
       })
       .state('root.dashboard.app.env', {
-        url: '/:envName',
+        url: 'apps/:appName/envs/:envName',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/env-content.html',

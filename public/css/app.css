@@ -269,3 +269,13 @@ body > .container {
 .pending-status {
   color: orange;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-width {
+  width : 200px;
+}

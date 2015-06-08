@@ -42,14 +42,12 @@ services.factory('appsFactory', ['$http', function($http){
     callGet('/tasks/' + id, success, error);
   };
 
-  svc.findEnv = function(id, envName, callback) {
-    var env = {}
-    this.findById(id, function(app) {
-      var env = app.Envs.filter(function(env){
-        return env.Name === envName;
-      })[0];
-      callback(env, app);
-    })
+  svc.findEnv = function(appName, envName, callback) {
+    callGet('/apps/' + appName + '/envs/' + envName, callback);
+  };
+
+  svc.getContainer = function(containerID, callback){
+    callGet('/instance_data/' + containerID, callback)
   };
 
   svc.getShaById = function(id, callback){

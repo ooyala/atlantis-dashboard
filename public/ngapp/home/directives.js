@@ -5,7 +5,6 @@ directives.directive("envDependency", function() {
     templateUrl : 'ngapp/home/templates/dependencies.html',
     controller: ['$scope', '$modal', 'appsFactory', 'deleteModal',
       function($scope, $modal, appsFactory, deleteModal) {
-
       $scope.unregisterDependency = function(dep) {
         var modalInstance, templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'dependency name', name = dep.Name, itemType = 'dependency';
