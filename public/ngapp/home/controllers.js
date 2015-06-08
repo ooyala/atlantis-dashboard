@@ -233,6 +233,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.renderContainerInfo = function(container) {
+    $scope.animation_class = "";
     appsFactory.getContainer(container.ID, function(container){
       var info = {};
       var manifestInfo = {};
@@ -252,6 +253,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
       info["To SSH"] = "atlantis ssh " + container.ID;
       $scope.containerInfo = info;
       $scope.isContainerInfoVisible = true;
+      $scope.animation_class = "animated fadeInDown";
     });
   };
 
