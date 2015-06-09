@@ -101,6 +101,11 @@ type Envs struct {
 	Status string
 }
 
+type Supervisors struct {
+	Supervisors []string
+	Status      string
+}
+
 func staticServe(c *gin.Context) {
 	static, err := rice.FindBox("./public")
 	if err != nil {
@@ -246,6 +251,18 @@ func main() {
 		json.Unmarshal([]byte(content), &envs)
 
 		c.JSON(200, envs)
+	})
+
+	r.GET("/supervisors", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var supervisors Supervisors
+
+		filename := "public/jsons/supervisors.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &supervisors)
+
+		c.JSON(200, supervisors)
 	})
 
 	fmt.Println("Listening on port 5000")

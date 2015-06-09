@@ -279,3 +279,12 @@ body > .container {
 .btn-width {
   width : 200px;
 }
+
+.supervisor-panel {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.row-top-margin {
+  margin-top: 20px;
+}
