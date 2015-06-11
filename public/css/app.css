@@ -281,10 +281,18 @@ body > .container {
 }
 
 .supervisor-panel {
-  max-height: 250px;
+  max-height: 370px;
   overflow-y: scroll;
 }
 
 .row-top-margin {
   margin-top: 20px;
+}
+
+.odd-panel-bg-color {
+  background-color: #ECE9E9;
+
+}
+.even-panel-bg-color {
+  background-color: #f7f4f4;
 }

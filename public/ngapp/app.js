@@ -5,8 +5,8 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.usersControllers',
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
-  'atlantisApp.filters', 'atlantisApp.supervisorsControllers',
-  'atlantisApp.registerServices',
+  'atlantisApp.filters', 'atlantisApp.registerControllers',
+  'atlantisApp.registerServices', 'atlantisApp.commonServices',
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -144,6 +144,17 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         },
         title: 'Atlantis - Supervisors'
+      })
+      .state('root.managers', {
+        url: 'managers',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/managers.html',
+            controller: 'ManagersCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Managers'
       })
       .state('root.users', {
         url: 'users',

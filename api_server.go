@@ -106,6 +106,16 @@ type Supervisors struct {
 	Status      string
 }
 
+type managerRegion struct {
+	Dev  []string
+	Deva []string
+}
+
+type Managers struct {
+	Managers managerRegion
+	Status   string
+}
+
 func staticServe(c *gin.Context) {
 	static, err := rice.FindBox("./public")
 	if err != nil {
@@ -263,6 +273,18 @@ func main() {
 		json.Unmarshal([]byte(content), &supervisors)
 
 		c.JSON(200, supervisors)
+	})
+
+	r.GET("/managers", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var managers Managers
+
+		filename := "public/jsons/managers.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &managers)
+
+		c.JSON(200, managers)
 	})
 
 	fmt.Println("Listening on port 5000")
