@@ -1,0 +1,61 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="col-md-12">
+  <div class="content-header">Router Management</div>
+  <hr>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-2">
+        <div class="btn-group" dropdown >
+          <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+            {{zoneBtnText}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="(key,value) in data.Routers">
+              <a ng-click="$parent.zone = key; $parent.zoneBtnText = key">{{key}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control" ng-model="host" placeholder="Host..."></input>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control" placeholder="IP..."></input>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone,host);"> Register</button>
+      </div>
+    </div>
+  </div>
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body supervisor-panel">
+          <div ng-repeat="(key,value) in data.Routers">
+            <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
+              <div ng-repeat="val in value">
+                <div class="col-md-4">
+                  <div class="panel panel-default row-top-margin">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-8 col-md-offset-3"><h4>{{key}} : {{val}}</h4></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                          <button type="button" class="btn btn-primary btn-sm" ng-click="deleteRouter(key,val)"> Unregister</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>

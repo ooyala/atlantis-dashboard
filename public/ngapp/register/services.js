@@ -27,3 +27,17 @@ services.factory('managerFactory', ['$http', function($http){
 
   return managers;
 }]);
+
+services.factory('routerFactory', ['$http', function($http){
+  var routers = {};
+
+  var callGet = function(url, callback) {
+    $http.get(url).success(callback);
+  };
+
+  routers.getRouters = function(callback){
+    callGet("/routers",callback);
+  };
+
+  return routers;
+}]);

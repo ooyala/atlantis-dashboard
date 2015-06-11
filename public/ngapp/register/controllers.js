@@ -45,7 +45,7 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
               icon: 'glyphicon glyphicon-remove'
             });
           }
-
+          $scope.newSupervisor = "";
         }, function(result) {
         console.log(result);
       });
@@ -59,11 +59,12 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
       modalInstance.result.then(function(name) {
         $scope.supervisors = _.filter($scope.supervisors, function(supervisor) {
           return currentSup !== supervisor;
-        })
+        });
         $scope.addAlert({
             type: 'success', message: "Supervisor '" + name + "' deleted successfully.",
             icon: 'glyphicon glyphicon-ok'
-          });
+        });
+        $scope.newSupervisor = "";
         }, function(result) {
         console.log(result);
       });
@@ -123,6 +124,8 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
             }
           });
         }
+        $scope.region = "";
+        $scope.host = "";
       }, function(result) {
         console.log(result);
       });
@@ -147,6 +150,91 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
             type: 'success', message: "Manager '" + name + "' deleted successfully.",
             icon: 'glyphicon glyphicon-ok'
         });
+        $scope.region = "";
+        $scope.host = "";
+      }, function(result) {
+        console.log(result);
+      });
+    };
+}]);
+
+controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerFactory',
+  'deleteModal', 'addModal', '$timeout',
+   function($scope, $rootScope, $state, routerFactory, deleteModal, addModal, $timeout){
+
+    $rootScope.title = $state.current.title;
+    $scope.zone = "";
+    $scope.$parent.zoneBtnText = "Select Zone";
+    $scope.host = "";
+    $scope.alerts = [];
+    $scope.data = {};
+
+    $rootScope.title = $state.current.title;
+
+    routerFactory.getRouters(function(data){
+      $scope.data = data;
+    });
+
+    $scope.addAlert = function(alert) {
+      $scope.alerts.push(alert);
+      $scope.closeAlert($scope.alerts.length - 1);
+    };
+
+    $scope.closeAlert = function(index) {
+      $timeout(function(){
+        $scope.alerts.splice(index, 1);
+      }, 3000);
+    };
+
+    $scope.addRouter = function(currentZone, currentHost){
+      var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
+      itemType = "router";
+      modalInstance = addModal.modalInstance(templateUrl, name, itemType);
+      modalInstance.result.then(function(name) {
+        var zone = _.pick($scope.data.Routers, currentZone);
+          _.mapObject(zone, function(val,key){
+            if(_.contains(val,currentHost)){
+              $scope.addAlert({
+                type: 'danger', message: "Router '" + name + "' already exists.",
+                icon: 'glyphicon glyphicon-remove'
+              });
+            }else{
+              $scope.data.Routers[currentZone].push(currentHost);
+              $scope.addAlert({
+                type: 'success', message: "Router '" + name + "' added successfully.",
+                icon: 'glyphicon glyphicon-ok'
+              });
+            }
+          });
+          $scope.zone = "";
+          $scope.host = "";
+          $scope.zoneBtnText = "Select Zone";
+      }, function(result) {
+        console.log(result);
+      });
+    };
+
+    $scope.deleteRouter = function(currentZone, currentHost){
+      var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
+      type = 'Router', itemType = "router";
+
+      modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
+      modalInstance.result.then(function(name) {
+        var zone = _.pick($scope.data.Routers, currentZone);
+        var hosts = [];
+        zone = _.mapObject(zone, function(val, key){
+          hosts = _.filter(val, function(v){
+            return currentHost != v;
+          });
+        });
+        $scope.data.Routers[currentZone] = hosts;
+        $scope.addAlert({
+          type: 'success', message: "Router '" + name + "' deleted successfully.",
+          icon: 'glyphicon glyphicon-ok'
+        });
+        $scope.zone = "";
+        $scope.host = "";
+        $scope.zoneBtnText = "Select Zone";
       }, function(result) {
         console.log(result);
       });

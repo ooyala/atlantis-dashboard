@@ -116,6 +116,16 @@ type Managers struct {
 	Status   string
 }
 
+type routerZone struct {
+	Dev  []string
+	Deva []string
+}
+
+type Routers struct {
+	Routers routerZone
+	Status  string
+}
+
 func staticServe(c *gin.Context) {
 	static, err := rice.FindBox("./public")
 	if err != nil {
@@ -287,7 +297,19 @@ func main() {
 		c.JSON(200, managers)
 	})
 
+	r.GET("/routers", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var routers Routers
+
+		filename := "public/jsons/routers.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &routers)
+
+		c.JSON(200, routers)
+	})
+
 	fmt.Println("Listening on port 5000")
 	// this must be last line
-	r.Run(":5000")
+	r.Run(":5001")
 }

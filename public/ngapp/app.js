@@ -156,6 +156,17 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         },
         title: 'Atlantis - Managers'
       })
+      .state('root.routers', {
+        url: 'routers',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/routers.html',
+            controller: 'RoutersCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Routers'
+      })
       .state('root.users', {
         url: 'users',
         views: {

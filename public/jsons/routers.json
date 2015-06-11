@@ -1,5 +1,5 @@
 {
-  "Managers":
+  "Routers":
       {
         "Dev": [
           "aquarium-manager",
