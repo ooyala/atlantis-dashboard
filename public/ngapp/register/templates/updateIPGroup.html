@@ -1,0 +1,18 @@
+<div class="modal-body">
+  <div class="panel-title">
+    <div class="row">
+    <div class="col-md-6 modal-heading-left-margin">Update <i>'{{name}}'</i></div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <tags-input ng-model="IPs" allowed-tags-pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" placeholder="Add IPs..."></tags-input>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" ng-click="update()">Update</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

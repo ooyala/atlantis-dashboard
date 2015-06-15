@@ -240,3 +240,112 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
       });
     };
 }]);
+
+controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrpsFactory',
+ 'deleteModal', 'addModal', '$timeout', 'updateIPGroup',
+  function($scope, $rootScope, $state, ipgrpsFactory, deleteModal, addModal, $timeout, updateIPGroup) {
+
+    $rootScope.title = $state.current.title;
+    $scope.grpName = "";
+    $scope.IPs = [];
+    $scope.alerts = [];
+    $scope.data = {};
+
+    ipgrpsFactory.getIPInfo(function(data){
+      $scope.data = data;
+    });
+
+    $scope.addAlert = function(alert) {
+      $scope.alerts.push(alert);
+      $scope.closeAlert($scope.alerts.length - 1);
+    };
+
+    $scope.closeAlert = function(index) {
+      $timeout(function(){
+        $scope.alerts.splice(index, 1);
+      }, 3000);
+    };
+
+    $scope.addIPGroup = function(Name, ips){
+      var templateUrl = 'ngapp/templates/addModal.html',name = Name,
+      itemType = "IPGroup";
+      var grp = {};
+      modalInstance = addModal.modalInstance(templateUrl, name, itemType);
+      modalInstance.result.then(function(name) {
+        grp = _.filter($scope.data.IPGroups, function(ipgrp) {
+            return ipgrp.Name == Name;
+          });
+          if(_.isEmpty(grp)){
+            var IPs = [];
+            _.each(ips,function(val,key){
+              IPs.push(val.text);
+            })
+            $scope.data.IPGroups.push({Name ,IPs});
+            $scope.addAlert({
+              type: 'success', message: "Group Name '" + name + "' added successfully.",
+              icon: 'glyphicon glyphicon-ok'
+            });
+          }else{
+            $scope.addAlert({
+              type: 'danger', message: "Group Name '" + name + "' already registered.   Update if you want to add IP.",
+              icon: 'glyphicon glyphicon-remove'
+            });
+          }
+          $scope.grpName = "";
+          $scope.IPs = [];
+        }, function(result) {
+        console.log(result);
+      });
+    };
+
+    $scope.deleteIPGroup = function(Name){
+      var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
+      type = 'IP Group', itemType = "IPGroup";
+
+      modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
+      modalInstance.result.then(function(name) {
+        $scope.data.IPGroups = _.filter($scope.data.IPGroups, function(ipgrp) {
+          return ipgrp.Name != Name;
+        });
+        $scope.addAlert({
+            type: 'success', message: "Group '" + name + "' deleted successfully.",
+            icon: 'glyphicon glyphicon-ok'
+        });
+        $scope.grpName = "";
+        $scope.IPs = [];
+        }, function(result) {
+        console.log(result);
+      });
+    };
+
+    $scope.updateIPGroup = function(Name){
+      var templateUrl = 'ngapp/register/templates/updateIPGroup.html',name = Name,
+      itemType = "IPGroup";
+      var grp = {};
+      grp = _.filter($scope.data.IPGroups, function(ipgrp) {
+        return ipgrp.Name == Name;
+      });
+      _.each(grp,function(data){
+        _.each(data.IPs,function(ip){
+          $scope.IPs.push({'text': ip});
+        });
+      });
+      modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, $scope.IPs);
+      modalInstance.result.then(function() {
+        _.filter($scope.data.IPGroups, function(ipgrp) {
+         if (ipgrp.Name == Name){
+          ipgrp.IPs = [];
+          _.each($scope.IPs,function(val,key){
+            ipgrp.IPs.push(val.text);
+          });
+         }
+      });
+      $scope.grpName = "";
+      $scope.IPs = [];
+      }, function(result) {
+        $scope.grpName = "";
+        $scope.IPs = [];
+        console.log(result);
+      });
+    }
+}]);

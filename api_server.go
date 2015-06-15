@@ -126,6 +126,16 @@ type Routers struct {
 	Status  string
 }
 
+type IPGroupInfo struct {
+	Name string
+	IPs  []string
+}
+
+type IPGroups struct {
+	IPGroups []IPGroupInfo
+	Status   string
+}
+
 func staticServe(c *gin.Context) {
 	static, err := rice.FindBox("./public")
 	if err != nil {
@@ -307,6 +317,18 @@ func main() {
 		json.Unmarshal([]byte(content), &routers)
 
 		c.JSON(200, routers)
+	})
+
+	r.GET("/ipgroups", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var ipgroups IPGroups
+
+		filename := "public/jsons/ipgroups.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &ipgroups)
+
+		c.JSON(200, ipgroups)
 	})
 
 	fmt.Println("Listening on port 5000")
