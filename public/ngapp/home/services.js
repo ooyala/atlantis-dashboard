@@ -20,7 +20,7 @@ services.factory('appsFactory', ['$http', function($http){
   svc.list = getApps;
 
   svc.findByName = function(name, callback) {
-    callGet('/apps/' + name, callback);
+    callGet('/apps/' + name + '/envs', callback);
   };
 
   svc.getEnvs = function(callback) {

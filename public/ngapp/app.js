@@ -6,7 +6,8 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
   'atlantisApp.filters', 'atlantisApp.registerControllers',
-  'atlantisApp.registerServices', 'atlantisApp.commonServices','ngTagsInput',
+  'atlantisApp.registerServices', 'atlantisApp.commonServices',
+  'ngTagsInput','uiSwitch',
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -82,7 +83,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         title: 'Atlantis - Dashboard'
       })
       .state('root.dashboard.app', {
-        url: '/apps/:appName',
+        url: '/apps/:appName/envs',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/dashboard-body.html',
@@ -177,6 +178,17 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         },
         title: 'Atlantis - IP Groups'
+      })
+      .state('root.apps', {
+        url: 'apps',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/apps.html',
+            controller: 'AppsCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Apps'
       })
       .state('root.users', {
         url: 'users',

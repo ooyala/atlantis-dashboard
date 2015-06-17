@@ -338,7 +338,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
           _.each($scope.IPs,function(val,key){
             ipgrp.IPs.push(val.text);
           });
-         }
+        }
       });
       $scope.grpName = "";
       $scope.IPs = [];
@@ -347,5 +347,118 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
         $scope.IPs = [];
         console.log(result);
       });
-    }
+    };
+}]);
+
+controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoFactory',
+ 'deleteModal', 'addModal', '$timeout', 'updateApp',
+  function($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
+
+    $scope.apps = {};
+    $scope.name = "";
+    $scope.root = "";
+    $scope.repo = "";
+    $scope.email = "";
+    $scope.alerts = [];
+    $scope.internal = false;
+    $scope.non_atlantis = false;
+
+    $rootScope.title = $state.current.title;
+
+    appsInfoFactory.getAppInfo(function(data){
+      $scope.apps = data;
+    });
+
+    $scope.addAlert = function(alert) {
+      $scope.alerts.push(alert);
+      $scope.closeAlert($scope.alerts.length - 1);
+    };
+
+    $scope.closeAlert = function(index) {
+      $timeout(function(){
+        $scope.alerts.splice(index, 1);
+      }, 3000);
+    };
+
+    $scope.addApps = function(Name, Root, Repo, Email, Internal, NonAtlantis){
+      var templateUrl = 'ngapp/templates/addModal.html',name = Name,
+      itemType = "apps";
+      var app = {};
+      modalInstance = addModal.modalInstance(templateUrl, name, itemType);
+      modalInstance.result.then(function(name) {
+        app = _.filter($scope.apps, function(app) {
+          return app.App.Name == Name;
+        });
+        if(_.isEmpty(app)){
+          $scope.apps.push({"App":{Name ,Root, Repo, Email, Internal, NonAtlantis}});
+          $scope.addAlert({
+            type: 'success', message: "App '" + name + "' added successfully.",
+            icon: 'glyphicon glyphicon-ok'
+          });
+        }else{
+          $scope.addAlert({
+            type: 'danger', message: "App '" + name + "' already registered. Please update.",
+            icon: 'glyphicon glyphicon-remove'
+          });
+        }
+        $scope.name = "";
+        $scope.root = "";
+        $scope.repo = "";
+        $scope.email = "";
+        $scope.internal = false;
+        $scope.non_atlantis = false;
+      }, function(result) {
+        console.log(result);
+      });
+    };
+
+    $scope.deleteApp = function(Name){
+      var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
+      type = "App", itemType = "apps";
+
+      modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
+      modalInstance.result.then(function(name) {
+        $scope.apps = _.filter($scope.apps, function(app) {
+          return app.App.Name != Name;
+        });
+        $scope.addAlert({
+            type: 'success', message: "App '" + name + "' deleted successfully.",
+            icon: 'glyphicon glyphicon-ok'
+        });
+        $scope.name = "";
+        $scope.root = "";
+        $scope.repo = "";
+        $scope.email = "";
+        $scope.internal = false;
+        $scope.non_atlantis = false;
+        }, function(result) {
+        console.log(result);
+      });
+    };
+
+    $scope.updateApp = function(name, root, repo, email, internal, non_atlantis){
+      var templateUrl = 'ngapp/register/templates/updateApp.html',name = name,
+      itemType = "apps", root = root, repo = repo, email = email, internal = internal,
+      non_atlantis = non_atlantis;
+
+      modalInstance = updateApp.modalInstance(templateUrl, name, itemType, root, repo,
+                      email, internal, non_atlantis);
+      modalInstance.result.then(function(data) {
+        _.filter($scope.apps, function(app) {
+          if (app.App.Name == name){
+            app.App.Root = data.root;
+            app.App.Repo = data.repo;
+            app.App.Email = data.email;
+          }
+        });
+      }, function(result) {
+        $scope.name = "";
+        $scope.root = "";
+        $scope.repo = "";
+        $scope.email = "";
+        $scope.internal = false;
+        $scope.non_atlantis = false;
+        console.log(result);
+      });
+    };
 }]);

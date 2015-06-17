@@ -322,3 +322,37 @@ tags-input .tags .tag-item {
 .modal-heading-left-margin {
   margin-left: 10px;
 }
+
+.checkbox-display {
+  display: block !important;
+}
+
+.checkbox-bgcolor {
+  background-color: #FDFDFD !important;
+}
+
+.msg-color {
+  color: red;
+}
+
+.checkbox-lable {
+  font-size: 16px;
+  top: 5px;
+  width: 10%;
+}
+
+.checkbox-lable-internal {
+  width: 6.5%;
+}
+
+.checkbox-lable-nonatlantis {
+  width: 10%;
+}
+
+.box-header-color {
+  color: #337ab7;
+}
+
+.panel-footer-bgcolor {
+  background-color: #FFFFFF;
+}

@@ -90,3 +90,73 @@ services.factory('updateIPGroup', ['$modal', function($modal){
   }
 }]);
 
+services.factory('appsInfoFactory', ['$http', function($http){
+  var apps = {};
+
+  var callGet = function(url, callback) {
+    $http.get(url).success(callback);
+  };
+
+  apps.getApps = function(callback){
+    callGet("/apps",callback);
+  };
+
+  apps.getAppInfo = function(callback){
+    callGet("/allApps",callback);
+  };
+
+  return apps;
+}]);
+
+services.factory('updateApp', ['$modal', function($modal){
+  return {
+    modalInstance:  function(templateUrl, name, itemType, root, repo, email, internal, non_atlantis) {
+      return $modal.open({
+        templateUrl: templateUrl,
+        controller: function ($scope, $modalInstance, name, root, repo, email, internal, non_atlantis) {
+          $scope.name = name;
+          $scope.itemType = itemType;
+          $scope.root = root;
+          $scope.repo = repo;
+          $scope.email = email;
+          $scope.data = {};
+          $scope.internal = internal;
+          $scope.non_atlantis = non_atlantis;
+
+          $scope.update = function (root, repo, email) {
+            $scope.data = {root, repo, email};
+            $modalInstance.close($scope.data);
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        },
+        resolve: {
+          name: function() {
+            return name;
+          },
+          itemType: function() {
+            return itemType;
+          },
+          root: function() {
+            return root;
+          },
+          repo: function() {
+            return repo;
+          },
+          email: function() {
+            return email;
+          },
+          internal: function() {
+            return internal;
+          },
+          non_atlantis: function() {
+            return non_atlantis;
+          }
+        }
+      });
+    }
+  }
+}]);
+

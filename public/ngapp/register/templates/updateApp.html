@@ -1,0 +1,40 @@
+<div class="modal-body">
+  <div class="panel-title">
+    <div class="row">
+    <div class="col-md-6 modal-heading-left-margin">Update <i>'{{name}}'</i></div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="row" ng-hide="non_atlantis">
+      <div class="col-md-2">Internal : </div>
+      <div class="col-md-6">
+        <switch id="enabled" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
+      </div>
+    </div>
+    <div class="row"><div class="col-md-12"></div></div>
+    <div class="row" ng-hide="non_atlantis">
+      <div class="col-md-2">Repo : </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" ng-model="repo" placeholder="Repo: e.g. ssh://git@github.com/ooyala/atlantis"></input>
+      </div>
+    </div>
+    <div class="row"><div class="col-md-12"></div></div>
+    <div class="row" ng-hide="non_atlantis">
+      <div class="col-md-2">Root : </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" ng-model="root" placeholder="Root: e.g. /"></input>
+      </div>
+    </div>
+    <div class="row"><div class="col-md-12"></div></div>
+    <div class="row">
+      <div class="col-md-2">Email : </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" ng-model="email" placeholder="Owner Email"></input>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" ng-click="update(root, repo, email)">Update</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

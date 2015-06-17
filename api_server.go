@@ -86,7 +86,7 @@ type AppDetails struct {
 	Envs []Environment
 }
 
-type AppInfo struct {
+type AppEnvInfo struct {
 	App    AppDetails
 	Status string
 }
@@ -134,6 +134,45 @@ type IPGroupInfo struct {
 type IPGroups struct {
 	IPGroups []IPGroupInfo
 	Status   string
+}
+
+type SecurityGroupInfo struct {
+}
+
+type EnvDataInfo struct {
+	Name          string
+	SecurityGroup SecurityGroupInfo
+	EncryptedData string
+}
+
+type DependerEnvDataInfo struct {
+	Production EnvDataInfo
+	Staging    EnvDataInfo
+}
+
+type ToopasteInfo struct {
+	Name            string
+	DependerEnvData DependerEnvDataInfo
+}
+
+type DependerAppDataInfo struct {
+	Toopaste ToopasteInfo
+}
+
+type AppInfo struct {
+	NonAtlantis     bool
+	Internal        bool
+	Name            string
+	Email           string
+	Repo            string
+	Root            string
+	DependerEnvData DependerEnvDataInfo
+	DependerAppData DependerAppDataInfo
+}
+
+type App struct {
+	App    AppInfo
+	Status string
 }
 
 func staticServe(c *gin.Context) {
@@ -238,13 +277,45 @@ func main() {
 		c.JSON(200, deps)
 	})
 
+	r.GET("/allApps", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var apps [2]App
+
+		filename := "public/jsons/app_info.json"
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &apps)
+
+		c.JSON(200, apps)
+	})
+
 	r.GET("/apps/:app_name", func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		var data [2]AppInfo
-		var expectedInfo AppInfo
+		var data [2]App
+		var expectedInfo App
 
 		filename := "public/jsons/app_info.json"
+		appName := c.Params.ByName("app_name")
+		content := readJSON(filename)
+		json.Unmarshal([]byte(content), &data)
+
+		for _, app := range data {
+			if app.App.Name == appName {
+				expectedInfo = app
+				break
+			}
+		}
+		c.JSON(200, expectedInfo)
+	})
+
+	r.GET("/apps/:app_name/envs", func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
+		var data [2]AppEnvInfo
+		var expectedInfo AppEnvInfo
+
+		filename := "public/jsons/app_env_info.json"
 		appName := c.Params.ByName("app_name")
 		content := readJSON(filename)
 		json.Unmarshal([]byte(content), &data)
