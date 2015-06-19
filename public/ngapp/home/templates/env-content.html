@@ -33,15 +33,15 @@
       <div class="col-md-12 nopadding">
         <div class="col-md-9 nopadding">
           <div ng-repeat="container in containers" class="col-md-12">
-            <button  class="btn btn-default element-bottom-margin pull-left" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
-              {{container.Name}}
+            <button class="btn btn-default truncate element-bottom-margin pull-left btn-width" title="{{container.ID}}" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
+              {{container.ID}}
             </button>
             <i class="glyphicon glyphicon-remove container-remove-button" ng-click="deleteContainer(container)"></i>
           </div>
         </div>
       </div>
       <div class="col-md-12 container-panel well" ng-show="isContainerInfoVisible">
-        <div ng-repeat="(key, value) in containerInfo">
+        <div ng-repeat="(key, value) in containerInfo" ng-class="animation_class">
           <div class="col-md-4">{{key}}</div>
           <div class="col-md-8">{{value}}</div>
         </div>

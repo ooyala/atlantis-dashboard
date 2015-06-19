@@ -1,0 +1,82 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="col-md-12">
+  <div class="content-header">Apps Management</div>
+  <hr>
+  <form name="appInfoForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-sm-1 checkbox-lable checkbox-lable-internal" ng-hide="non_atlantis">
+          Internal
+        </div>
+        <div class="col-md-1">
+          <switch id="enabled" ng-hide="non_atlantis" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
+        </div>
+        <div class="col-sm-1 checkbox-lable checkbox-lable-nonatlantis">
+          Non Atlantis
+        </div>
+        <div class="col-md-1">
+          <switch id="enabled" name="enabled" ng-model="non_atlantis" on="Yes" off="No" class="green"></switch>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="appName" class="form-control" ng-model="name" placeholder="Name..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2" ng-hide="non_atlantis">
+          <input type="text" name="repo" popover="Repo: e.g. git@github.com/ooyala/atlantis" popover-trigger="mouseenter" class="form-control" ng-model="repo" placeholder="Repo: e.g. git@github.com/ooyala/atlantis" required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2" ng-hide="non_atlantis">
+          <input type="text" name="root" class="form-control" ng-model="root" placeholder="Root: e.g. /" required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2">
+          <input type="email" name="email" class="form-control" ng-model="email" placeholder="Owner Email" required></input>
+          <span class="required-mark">*</span>
+          <sapn class="error msg-color" ng-show="appInfoForm.email.$error.email">Invalid email!</span>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-1 col-md-offset-5">
+        <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addApps(name, repo, root, email, internal, non_atlantis)" ng-disabled="appInfoForm.$invalid"> Register</button>
+      </div>
+    </div>
+  </form>
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <div class="panel box supervisor-panel">
+        <div class="panel-body">
+          <div ng-repeat="app in apps" class="col-md-4 row-top-margin">
+            <div class="panel box">
+              <div class="row">
+                <div class="col-md-10">
+                  <b class="box-header box-header-color">{{app.App.Name}}</b>
+                </div>
+                <div class="col-md-2">
+                  <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteApp(app.App.Name)"></i>
+                </div>
+              </div>
+              <div class="panel-body">
+                Repo : {{app.App.Repo}}<br>
+                Root : {{app.App.Root}}<br>
+                Email : {{app.App.Email}}<br>
+                Internal : {{app.App.Internal}}<br>
+                Non Atlantis : {{app.App.NonAtlantis}}<br>
+              </div>
+              <div class="panel-footer panel-footer-bgcolor">
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4">
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="updateApp(app.App.Name, app.App.Root, app.App.Repo, app.App.Email, app.App.Internal, app.App.NonAtlantis)"> Update</button>
+                  </div>
+                </div>
+              <div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

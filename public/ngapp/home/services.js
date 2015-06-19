@@ -20,7 +20,7 @@ services.factory('appsFactory', ['$http', function($http){
   svc.list = getApps;
 
   svc.findByName = function(name, callback) {
-    callGet('/apps/' + name, callback);
+    callGet('/apps/' + name + '/envs', callback);
   };
 
   svc.getEnvs = function(callback) {
@@ -42,14 +42,12 @@ services.factory('appsFactory', ['$http', function($http){
     callGet('/tasks/' + id, success, error);
   };
 
-  svc.findEnv = function(id, envName, callback) {
-    var env = {}
-    this.findById(id, function(app) {
-      var env = app.Envs.filter(function(env){
-        return env.Name === envName;
-      })[0];
-      callback(env, app);
-    })
+  svc.findEnv = function(appName, envName, callback) {
+    callGet('/apps/' + appName + '/envs/' + envName, callback);
+  };
+
+  svc.getContainer = function(containerID, callback){
+    callGet('/instance_data/' + containerID, callback)
   };
 
   svc.getShaById = function(id, callback){
@@ -61,40 +59,4 @@ services.factory('appsFactory', ['$http', function($http){
   };
 
   return svc;
-}]);
-
-services.factory('deleteModal', ['$modal', function($modal){
-  return {
-    modalInstance:  function(templateUrl, name, type, itemType) {
-      return $modal.open({
-        templateUrl: templateUrl,
-        controller: function ($scope, $modalInstance, name) {
-          $scope.confirmName = '';
-          $scope.type = type;
-          $scope.name = name;
-          $scope.itemType = itemType;
-          $scope.headerText = "<h5>Please type in the "+type+" <b>"+name+"</b> to confirm.</h5>";
-
-          $scope.ok = function () {
-            $modalInstance.close(name);
-          };
-
-          $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-          };
-        },
-        resolve: {
-          name: function() {
-            return name;
-          },
-          type: function() {
-            return type;
-          },
-          itemType: function() {
-            return itemType;
-          }
-        }
-      });
-    }
-  }
 }]);

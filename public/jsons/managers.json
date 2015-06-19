@@ -1,0 +1,13 @@
+{
+  "Managers":
+      {
+        "Dev": [
+          "aquarium-manager",
+          "10.10.9.111"
+        ],
+        "Deva": [
+          "10.10.9.11"
+        ]
+      },
+  "Status": "Ok"
+}

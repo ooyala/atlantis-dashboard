@@ -5,7 +5,9 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.usersControllers',
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
-  'atlantisApp.filters'
+  'atlantisApp.filters', 'atlantisApp.registerControllers',
+  'atlantisApp.registerServices', 'atlantisApp.commonServices',
+  'ngTagsInput','uiSwitch',
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -81,7 +83,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         title: 'Atlantis - Dashboard'
       })
       .state('root.dashboard.app', {
-        url: '/:appName',
+        url: '/apps/:appName/envs',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/dashboard-body.html',
@@ -91,7 +93,7 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
         title: 'Atlantis - Environment Configuration And Management'
       })
       .state('root.dashboard.app.env', {
-        url: '/:envName',
+        url: 'apps/:appName/envs/:envName',
         views: {
           'body@root.dashboard' : {
             templateUrl: 'ngapp/home/templates/env-content.html',
@@ -132,6 +134,61 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         },
         title: 'Atlantis - Manage'
+      })
+      .state('root.supervisors', {
+        url: 'supervisors',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/supervisors.html',
+            controller: 'SupervisorsCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Supervisors'
+      })
+      .state('root.managers', {
+        url: 'managers',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/managers.html',
+            controller: 'ManagersCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Managers'
+      })
+      .state('root.routers', {
+        url: 'routers',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/routers.html',
+            controller: 'RoutersCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Routers'
+      })
+      .state('root.ipgroups', {
+        url: 'ipgroups',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/ipgroups.html',
+            controller: 'IPGroupsCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - IP Groups'
+      })
+      .state('root.apps', {
+        url: 'apps',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/register/templates/apps.html',
+            controller: 'AppsCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Apps'
       })
       .state('root.users', {
         url: 'users',

@@ -12,7 +12,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory','$r
   $scope.headerTitle = "Environment Configuration And Management";
 
   appsFactory.list(function(data) {
-    $scope.apps = data;
+    $scope.apps = data.Apps;
   });
 
   $scope.addAlert = function(alert) {
@@ -29,7 +29,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory','$r
   $scope.showRegisterDependency = function() {
     $scope.isRegisterDependency = true;
     appsFactory.getDeps(function(data) {
-      $scope.deps = data;
+      $scope.deps = data.Deps;
     });
   };
 
@@ -37,7 +37,7 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory','$r
     $scope.isEnvironment = true;
     $scope.isRegisterDependency = false;
     appsFactory.getDeps(function(data) {
-      $scope.deps = data;
+      $scope.deps = data.Deps;
     });
   };
 }]);
@@ -45,24 +45,29 @@ controllers.controller('DashboardCtrl', ['$scope', '$timeout', 'appsFactory','$r
 controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   'appsFactory', 'deleteModal', '$rootScope', '$state', function ($scope, $stateParams, $modal, appsFactory,
   deleteModal, $rootScope, $state) {
-
   $rootScope.title = $state.current.title;
   $scope.isShowEnvPanel = false;
   $scope.$parent.isAppVisible = true;
   $scope.$parent.isEnvSelected = false;
   $scope.$parent.isRegisterDependency = $scope.$parent.isEnvironment = false;
+  $scope.appName = $stateParams.appName;
+  $scope.deps = [];
 
-  appsFactory.findById($stateParams.id, function(app){
+  appsFactory.findByName($scope.appName, function(app){
     $scope.$parent.isEnvEnable = false;
-    $scope.app = app;
-    $scope.$parent.appBtnText = app.Name;
-    $scope.envs = app.Envs;
+    $scope.app = app.App;
+    $scope.$parent.appBtnText = app.App.Name;
+    $scope.envs = app.App.Envs;
     $scope.$parent.envBtnText = "Choose here";        // reset
-    $scope.$parent.envs = app.Envs;
+    $scope.$parent.envs = app.App.Envs;
+  });
+
+  appsFactory.getDeps(function(deps){
+    $scope.deps = deps.Deps;
   });
 
   $scope.deleteEnv = function(env) {
-    var templateUrl = 'ngapp/home/templates/deleteModal.html',
+    var templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'environment name', name = env.Name, itemType = 'env';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
@@ -171,17 +176,25 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     "Description", "CPUShares", "MemoryLimit", "AppType"
   ];
 
-  $scope.$parent.envBtnText = $stateParams.name;
+  $scope.$parent.envBtnText = $stateParams.envName;
   $scope.$parent.isEnvEnable = true;
   $scope.$parent.isEnvSelected = true;
   $scope.$parent.headerTitle = "Environment Detail / Container Management";
   $scope.isShaInfoEnabled = false;
+  $scope.env = [];
 
-  appsFactory.findEnv($stateParams.id, $stateParams.name, function(env, app) {
-    $scope.$parent.appBtnText = app.Name;
-    $scope.$parent.envs = app.Envs;
-    $scope.env = env;
+
+  appsFactory.findEnv($stateParams.appName, $stateParams.envName, function(env) {
+    $scope.$parent.appBtnText = $stateParams.appName;
     $scope.shas = env.Shas;
+  });
+
+  appsFactory.getDeps(function(deps){
+    $scope.env.Dependencies = deps.Deps;
+  });
+
+  appsFactory.getEnvs(function(envs){
+    $scope.$parent.envs = envs.Envs;
   });
 
   $scope.isActive = function(sha_id, region) {
@@ -209,30 +222,39 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     });
   };
 
-  $scope.renderContainerInfo = function(container) {
-    $scope.isContainerInfoVisible = true;
-    $scope.containerInfo = $scope.filterContainerInfo(container);
-  };
-
-  $scope.filterContainerInfo = function(container) {
+  $scope.filterManifestInfo = function(Manifest){
     var info = {};
-    _.each(container, function(value, key) {
+    _.each(Manifest, function(value, key){
       if($scope.visibleInfo.indexOf(key) !== -1) {
-        if(key === 'DockerID') {
-          // info[key] = value.slice(0, 20) + "...";
-          info[key] = value;
-        } else if(key === 'Manifest') {
-          _.each(value, function(v, k) {
-            info[k] = v;
-          });
-        } else {
-          info[key] = value;
-        }
+        info[key] = value;
       }
     });
-    info["Healthz"] = "http://" + info.Host + ":" + info.PrimaryPort + "/healthz";
-    info["To SSH"] = "atlantis ssh " + info.ID;
     return info;
+  };
+
+  $scope.renderContainerInfo = function(container) {
+    $scope.animation_class = "";
+    appsFactory.getContainer(container.ID, function(container){
+      var info = {};
+      var manifestInfo = {};
+      _.each(container, function(value, key){
+          if(key == "Manifest"){
+            manifestInfo = $scope.filterManifestInfo(container.Manifest);
+            _.each(manifestInfo, function(v,k){
+              info[k] = v;
+            });
+          }else{
+            if($scope.visibleInfo.indexOf(key) !== -1) {
+              info[key] = value;
+            }
+          }
+      });
+      info["Healthz"] = "http://" + container.Host + ":" + container.PrimaryPort + "/healthz";
+      info["To SSH"] = "atlantis ssh " + container.ID;
+      $scope.containerInfo = info;
+      $scope.isContainerInfoVisible = true;
+      $scope.animation_class = "animated fadeInDown";
+    });
   };
 
   $scope.deleteSha = function(sha) {

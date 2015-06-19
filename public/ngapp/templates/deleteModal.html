@@ -2,16 +2,16 @@
   <span class="panel-title">Are you ABSOLUTELY sure??</span>
 </div>
 <div class="modal-body">
-  <div ng-show="['env', 'dependency'].indexOf(itemType) != -1">
+  <div ng-show="['env', 'dependency', 'supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">
     <h5 ng-bind-html="headerText"></h5>
     <input ng-model="confirmName" type="text" class="form-control ng-pristine ng-valid ng-touched"></input>
   </div>
-  <div ng-show="['env', 'dependency'].indexOf(itemType) == -1">
+  <div ng-show="['env', 'dependency', 'supervisor', 'manager', 'router', 'IPGroup' ,'apps'].indexOf(itemType) == -1">
     <h4>Delete {{name}}?</h4>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger" ng-click="ok()" ng-disabled="confirmName != name" ng-show="['env', 'dependency'].indexOf(itemType) != -1">Yes</button>
-  <button class="btn btn-danger" ng-click="ok()" ng-show="['env', 'dependency'].indexOf(itemType) == -1">Yes</button>
+  <button class="btn btn-danger" ng-click="ok()" ng-disabled="confirmName != name" ng-show="['env', 'dependency', 'supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">Yes</button>
+  <button class="btn btn-danger" ng-click="ok()" ng-show="['env', 'dependency', 'supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) == -1">Yes</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
