@@ -67,7 +67,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
   });
 
   $scope.deleteEnv = function(env) {
-    var templateUrl = 'ngapp/home/templates/deleteModal.html',
+    var templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'environment name', name = env.Name, itemType = 'env';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);

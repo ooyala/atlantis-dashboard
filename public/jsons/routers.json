@@ -1,13 +1,25 @@
-{
-  "Routers":
+[
+  {
+    "Router":
       {
-        "Dev": [
+        "Name": "Dev",
+        "Host": [
           "aquarium-manager",
           "10.10.9.111"
         ],
-        "Deva": [
-          "10.10.9.11"
-        ]
+        "Internal": true
       },
-  "Status": "Ok"
-}
+    "Status": "Ok"
+  },
+  {
+    "Router":
+      {
+        "Name": "Deva",
+        "Host": [
+          "10.10.9.11"
+        ],
+        "Internal": false
+      },
+    "Status": "Ok"
+  }
+]

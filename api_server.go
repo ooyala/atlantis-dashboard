@@ -117,13 +117,14 @@ type Managers struct {
 }
 
 type routerZone struct {
-	Dev  []string
-	Deva []string
+	Name     string
+	Host     []string
+	Internal bool
 }
 
 type Routers struct {
-	Routers routerZone
-	Status  string
+	Router routerZone
+	Status string
 }
 
 type IPGroupInfo struct {
@@ -381,7 +382,7 @@ func main() {
 	r.GET("/routers", func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
-		var routers Routers
+		var routers [2]Routers
 
 		filename := "public/jsons/routers.json"
 		content := readJSON(filename)

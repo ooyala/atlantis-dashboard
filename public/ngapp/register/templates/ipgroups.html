@@ -5,38 +5,49 @@
 <div class="col-md-12">
   <div class="content-header">IP Group Management</div>
   <hr>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-2">
-      <div class="col-md-2">
-        <input type="text" class="form-control" ng-model="grpName" placeholder="Group Name..."></input>
-      </div>
-      <div class="col-md-6">
-        <tags-input ng-model="IPs" placeholder="Add IPs..." allowed-tags-pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"></tags-input>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addIPGroup(grpName,IPs);"> Register</button>
+  <form name="ipgroupsForm">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-2">
+          <input type="text" class="form-control" ng-model="grpName" placeholder="Group Name..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-6">
+          <tags-input ng-model="IPs" placeholder="Add IPs..." allowed-tags-pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" min-tags='1'></tags-input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addIPGroup(grpName,IPs);" ng-disabled="ipgroupsForm.$invalid"> Register</button>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
   <div class="row row-top-margin">
     <div class="col-md-12">
-      <div class="panel panel-default even-panel-bg-color">
-        <div class="panel-body supervisor-panel">
+      <div class="panel box supervisor-panel">
+        <div class="panel-body">
           <div ng-repeat="data in data.IPGroups">
             <div class="col-md-4">
-              <div class="panel panel-default row-top-margin">
+              <div class="panel box row-top-margin">
+                <div class="row">
+                  <div class="col-md-10">
+                    <b class="box-header box-header-color">{{data.Name}}</b>
+                  </div>
+                  <div class="col-md-2">
+                    <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteIPGroup(data.Name)"></i>
+                  </div>
+                </div>
                 <div class="panel-body">
                   <div class="row">
-                    <div class="col-md-8 col-md-offset-1"><h4>{{data.Name}} : </h4>
-                      <div><h5><span ng-repeat="ip in data.IPs">{{ip}} {{$last ? '' : ', '}}</span></h5></div>
-                    </div>
+                    <center>
+                      <h4><span ng-repeat="ip in data.IPs">{{ip}} {{$last ? '' : ', '}}</span></h4>
+                    </center>
                   </div>
+                </div>
+                <div class="panel-footer panel-footer-bgcolor">
                   <div class="row">
-                    <div class="col-md-4 col-md-offset-1">
+                    <div class="col-md-4 col-md-offset-4">
                       <button type="button" class="btn btn-primary btn-sm" ng-click="updateIPGroup(data.Name)"> Update</button>
-                    </div>
-                    <div class="col-md-4 col-md-offset-2">
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="deleteIPGroup(data.Name)"> Unregister</button>
                     </div>
                   </div>
                 </div>

@@ -47,7 +47,8 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
           }
           $scope.newSupervisor = "";
         }, function(result) {
-        console.log(result);
+          $scope.newSupervisor = "";
+          console.log(result);
       });
     };
 
@@ -66,7 +67,8 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
         });
         $scope.newSupervisor = "";
         }, function(result) {
-        console.log(result);
+          $scope.newSupervisor = "";
+          console.log(result);
       });
     };
 }]);
@@ -77,6 +79,8 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $scope.region = "";
     $scope.host = "";
+    $scope.managerCName = "";
+    $scope.registyCName = "";
     $scope.alerts = [];
     $scope.data = {};
 
@@ -126,7 +130,13 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
         }
         $scope.region = "";
         $scope.host = "";
+        $scope.managerCName = "";
+        $scope.registyCName = "";
       }, function(result) {
+        $scope.region = "";
+        $scope.host = "";
+        $scope.managerCName = "";
+        $scope.registyCName = "";
         console.log(result);
       });
     };
@@ -152,7 +162,13 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
         });
         $scope.region = "";
         $scope.host = "";
+        $scope.managerCName = "";
+        $scope.registyCName = "";
       }, function(result) {
+        $scope.region = "";
+        $scope.host = "";
+        $scope.managerCName = "";
+        $scope.registyCName = "";
         console.log(result);
       });
     };
@@ -166,8 +182,10 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
     $scope.zone = "";
     $scope.$parent.zoneBtnText = "Select Zone";
     $scope.host = "";
+    $scope.ip = "";
     $scope.alerts = [];
     $scope.data = {};
+    $scope.internal = false;
 
     $rootScope.title = $state.current.title;
 
@@ -186,30 +204,45 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
       }, 3000);
     };
 
-    $scope.addRouter = function(currentZone, currentHost){
+    $scope.addRouter = function(currentZone, currentHost, Internal){
       var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
       itemType = "router";
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
-        var zone = _.pick($scope.data.Routers, currentZone);
-          _.mapObject(zone, function(val,key){
-            if(_.contains(val,currentHost)){
-              $scope.addAlert({
-                type: 'danger', message: "Router '" + name + "' already exists.",
-                icon: 'glyphicon glyphicon-remove'
-              });
-            }else{
-              $scope.data.Routers[currentZone].push(currentHost);
-              $scope.addAlert({
-                type: 'success', message: "Router '" + name + "' added successfully.",
-                icon: 'glyphicon glyphicon-ok'
-              });
+        var router = _.filter($scope.data, function(data){
+          return data.Router.Name == currentZone;
+        });
+        var Host = _.filter(router[0].Router.Host, function(Host){
+          return Host == currentHost;
+        });
+        if(_.isEmpty(Host)){
+          _.each($scope.data, function(data){
+            if(data.Router.Name == currentZone){
+              data.Router["Host"].push(currentHost);
+              return;
             }
           });
-          $scope.zone = "";
-          $scope.host = "";
-          $scope.zoneBtnText = "Select Zone";
+          $scope.addAlert({
+            type: 'success', message: "Router '" + name + "' added successfully.",
+            icon: 'glyphicon glyphicon-ok'
+          });
+        }else{
+          $scope.addAlert({
+            type: 'danger', message: "Router '" + name + "' already exists.",
+            icon: 'glyphicon glyphicon-remove'
+          });
+        }
+        $scope.zone = "";
+        $scope.host = "";
+        $scope.ip = "";
+        $scope.zoneBtnText = "Select Zone";
+        $scope.internal = false;
       }, function(result) {
+        $scope.zone = "";
+        $scope.host = "";
+        $scope.ip = "";
+        $scope.zoneBtnText = "Select Zone";
+        $scope.internal = false;
         console.log(result);
       });
     };
@@ -220,22 +253,34 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
-        var zone = _.pick($scope.data.Routers, currentZone);
-        var hosts = [];
-        zone = _.mapObject(zone, function(val, key){
-          hosts = _.filter(val, function(v){
-            return currentHost != v;
-          });
+        // var zone = _.pick($scope.data.Routers, currentZone);
+        var router = _.filter($scope.data, function(data){
+          return data.Router.Name == currentZone;
         });
-        $scope.data.Routers[currentZone] = hosts;
+        var hosts = _.filter(router[0].Router.Host, function(Host){
+          return Host != currentHost;
+        });
+        _.each($scope.data, function(data){
+            if(data.Router.Name == currentZone){
+              data.Router["Host"] = hosts;
+              return;
+            }
+          });
         $scope.addAlert({
           type: 'success', message: "Router '" + name + "' deleted successfully.",
           icon: 'glyphicon glyphicon-ok'
         });
         $scope.zone = "";
         $scope.host = "";
+        $scope.ip = "";
         $scope.zoneBtnText = "Select Zone";
+        $scope.internal = false;
       }, function(result) {
+        $scope.zone = "";
+        $scope.host = "";
+        $scope.ip = "";
+        $scope.zoneBtnText = "Select Zone";
+        $scope.internal = false;
         console.log(result);
       });
     };
@@ -294,7 +339,9 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
           $scope.grpName = "";
           $scope.IPs = [];
         }, function(result) {
-        console.log(result);
+          $scope.grpName = "";
+          $scope.IPs = [];
+          console.log(result);
       });
     };
 
@@ -314,7 +361,9 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
         $scope.grpName = "";
         $scope.IPs = [];
         }, function(result) {
-        console.log(result);
+          $scope.grpName = "";
+          $scope.IPs = [];
+          console.log(result);
       });
     };
 
@@ -408,6 +457,12 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         $scope.internal = false;
         $scope.non_atlantis = false;
       }, function(result) {
+        $scope.name = "";
+        $scope.root = "";
+        $scope.repo = "";
+        $scope.email = "";
+        $scope.internal = false;
+        $scope.non_atlantis = false;
         console.log(result);
       });
     };
@@ -432,6 +487,12 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         $scope.internal = false;
         $scope.non_atlantis = false;
         }, function(result) {
+          $scope.name = "";
+          $scope.root = "";
+          $scope.repo = "";
+          $scope.email = "";
+          $scope.internal = false;
+          $scope.non_atlantis = false;
         console.log(result);
       });
     };
