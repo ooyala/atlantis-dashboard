@@ -293,6 +293,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
     $rootScope.title = $state.current.title;
     $scope.grpName = "";
     $scope.IPs = [];
+    $scope.updateIPs = [];
     $scope.alerts = [];
     $scope.data = {};
 
@@ -376,24 +377,25 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
       });
       _.each(grp,function(data){
         _.each(data.IPs,function(ip){
-          $scope.IPs.push({'text': ip});
+          $scope.updateIPs.push({'text': ip});
         });
       });
-      modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, $scope.IPs);
+      modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, $scope.updateIPs);
       modalInstance.result.then(function() {
         _.filter($scope.data.IPGroups, function(ipgrp) {
          if (ipgrp.Name == Name){
           ipgrp.IPs = [];
-          _.each($scope.IPs,function(val,key){
+
+          _.each($scope.updateIPs, function(val, key){
             ipgrp.IPs.push(val.text);
           });
         }
       });
       $scope.grpName = "";
-      $scope.IPs = [];
+      $scope.updateIPs = [];
       }, function(result) {
         $scope.grpName = "";
-        $scope.IPs = [];
+        $scope.updateIPs = [];
         console.log(result);
       });
     };

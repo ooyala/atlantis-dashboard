@@ -60,8 +60,10 @@
                 </div>
               </div>
               <div class="panel-body">
-                Repo : {{app.App.Repo}}<br>
-                Root : {{app.App.Root}}<br>
+                <div ng-hide="app.App.NonAtlantis">
+                  Repo : {{app.App.Repo}}<br>
+                  Root : {{app.App.Root}}<br>
+                </div>
                 Email : {{app.App.Email}}<br>
                 Internal : {{app.App.Internal}}<br>
                 Non Atlantis : {{app.App.NonAtlantis}}<br>
