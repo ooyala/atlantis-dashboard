@@ -15,9 +15,11 @@
         <li ui-sref-active="active"> <a ui-sref=".release-wizard"> <i class="glyphicon glyphicon-random" ></i> Release Wizard</a> </li>
         <li ui-sref-active="active"> <a ui-sref=".deploy"> <i class="glyphicon glyphicon-forward"> </i> Deploy</a> </li>
         <li ui-sref-active="active"> <a ui-sref=".manage"> <i class="glyphicon glyphicon-tasks"> </i> Manage</a> </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-registration-mark"></i> Register<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+        <li ui-sref-active="active" class="btn-group" dropdown>
+          <a type="button" class="btn btn-default register-dropdown" dropdown-toggle>
+            <i class="glyphicon glyphicon-registration-mark"></i> Register <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu register-dropdown-width" role="menu">
             <li><a ui-sref=".apps"> Apps</a></li>
             <li><a ui-sref=".ipgroups"> IP Groups</a></li>
             <li><a ui-sref=".supervisors"> Supervisors</a></li>

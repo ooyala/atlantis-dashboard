@@ -378,3 +378,14 @@ tags-input .tags .tag-item {
   top: -26px;
   right: 5px;
 }
+
+.register-dropdown {
+  background-color: #F8F8F8;
+  border: none;
+  height: 50px;
+  color: #777777;
+}
+
+.register-dropdown-width {
+  min-width: 115px;
+}

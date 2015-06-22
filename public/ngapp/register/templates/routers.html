@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-2 checkbox-lable checkbox-lable-internal">Internal</div>
         <div class="col-md-1">
-          <switch id="enabled" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
+          <switch id="enabled" name="enabled" ng-change="filterData(internal)" ng-model="internal" on="Yes" off="No" class="green"></switch>
         </div>
         <div class="col-md-2">
           <input type="text" class="form-control" ng-model="host" placeholder="Host..." required></input>
@@ -33,7 +33,7 @@
           <span class="required-mark">*</span>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone,host,internal);" ng-disabled="routersForm.$invalid"> Register</button>
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone, host, internal);" ng-disabled="routersForm.$invalid"> Register</button>
         </div>
       </div>
     </div>
@@ -42,22 +42,22 @@
     <div class="col-md-12">
       <div class="panel box supervisor-panel">
         <div class="panel-body"><br>
-          <div ng-repeat="routers in data">
+          <div ng-repeat="routers in currentData">
             <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
               <div ng-repeat="router in routers">
-                <div ng-repeat="val in router.Host  ">
+                <div ng-repeat="val in router.Host">
                   <div class="col-md-4">
                     <div class="panel box row-top-margin">
                       <div class="row">
                         <div class="col-md-10">&nbsp;</div>
                         <div class="col-md-2">
-                          <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(router.Name,val)"></i>
+                          <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(router.Name, val.Name)"></i>
                         </div>
                       </div>
                       <div class="panel-body">
                         <div class="row">
-                          <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{router.Name}} : {{val}}" popover-trigger="mouseenter">{{router.Name}} : {{val}}</h4></div>
-                          <div class="col-md-8 col-md-offset-2"><h4>Internal : {{router.Internal}}</h4></div>
+                          <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{router.Name}} : {{val.Name}}" popover-trigger="mouseenter">{{router.Name}} : {{val.Name}}</h4></div>
+                          <div class="col-md-8 col-md-offset-2"><h4>Internal : {{val.Internal}}</h4></div>
                         </div>
                       </div>
                     </div>

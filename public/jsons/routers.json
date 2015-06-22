@@ -4,10 +4,15 @@
       {
         "Name": "Dev",
         "Host": [
-          "aquarium-manager",
-          "10.10.9.111"
-        ],
-        "Internal": true
+          {
+            "Name": "aquarium-manager",
+            "Internal": true
+          },
+          {
+            "Name": "10.10.9.111",
+            "Internal": false
+          }
+        ]
       },
     "Status": "Ok"
   },
@@ -16,9 +21,11 @@
       {
         "Name": "Deva",
         "Host": [
-          "10.10.9.11"
-        ],
-        "Internal": false
+          {
+            "Name":"10.10.9.11",
+            "Internal": false
+          }
+        ]
       },
     "Status": "Ok"
   }

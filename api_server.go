@@ -116,10 +116,14 @@ type Managers struct {
 	Status   string
 }
 
-type routerZone struct {
+type HostInfo struct {
 	Name     string
-	Host     []string
 	Internal bool
+}
+
+type routerZone struct {
+	Name string
+	Host []HostInfo
 }
 
 type Routers struct {
