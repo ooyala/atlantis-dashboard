@@ -27,7 +27,7 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
     $scope.addSupervisor = function(currentSup){
       $scope.newSupervisor = "";
       var templateUrl = 'ngapp/templates/addModal.html',name = currentSup,
-      itemType = "supervisor";
+          itemType = "supervisor";
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
@@ -55,7 +55,7 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
 
     $scope.deleteSupervisor = function(currentSup){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = currentSup,
-      type = 'Supervisor', itemType = "supervisor";
+          type = 'Supervisor', itemType = "supervisor";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
@@ -104,7 +104,8 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $scope.addManager = function(currentRegion, currentHost){
       var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
-      itemType = "manager", region, hosts = [];
+          itemType = "manager", region, hosts = [];
+
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         region = _.pick($scope.data.Managers, currentRegion);
@@ -142,7 +143,7 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $scope.deleteManager = function(currentRegion, currentHost){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-      type = 'Manager', itemType = "manager", region, hosts = [];
+          type = 'Manager', itemType = "manager", region, hosts = [];
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
@@ -219,7 +220,8 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
 
     $scope.addRouter = function(currentZone, currentHost, Internal){
       var templateUrl = 'ngapp/templates/addModal.html', name = currentHost,
-      itemType = "router", router, host;
+          itemType = "router", router, host;
+
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         router = _.filter($scope.currentData, function(data){
@@ -262,7 +264,7 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
 
     $scope.deleteRouter = function(currentZone, currentHost){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-      type = 'Router', itemType = "router", router, hosts;
+          type = 'Router', itemType = "router", router, hosts;
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(nam, hostse) {
@@ -325,7 +327,8 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
     $scope.addIPGroup = function(Name, ips){
       var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-      itemType = "IPGroup", grp = {}, IPs = [];
+          itemType = "IPGroup", grp = {}, IPs = [];
+
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         grp = _.filter($scope.data.IPGroups, function(ipgrp) {
@@ -357,7 +360,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
     $scope.deleteIPGroup = function(Name){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
-      type = 'IP Group', itemType = "IPGroup";
+          type = 'IP Group', itemType = "IPGroup";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
@@ -379,7 +382,8 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
     $scope.updateIPGroup = function(Name){
       var templateUrl = 'ngapp/register/templates/updateIPGroup.html',name = Name,
-      itemType = "IPGroup", grp = {};
+          itemType = "IPGroup", grp = {};
+
       grp = _.filter($scope.data.IPGroups, function(ipgrp) {
         return ipgrp.Name == Name;
       });
@@ -440,7 +444,8 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
     $scope.addApps = function(Name, Root, Repo, Email, Internal, NonAtlantis){
       var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-      itemType = "apps", app = {};
+          itemType = "apps", app = {};
+
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         app = _.filter($scope.apps, function(app) {
@@ -477,7 +482,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
     $scope.deleteApp = function(Name){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
-      type = "App", itemType = "apps";
+          type = "App", itemType = "apps";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
@@ -507,8 +512,8 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
     $scope.updateApp = function(name, root, repo, email, internal, non_atlantis){
       var templateUrl = 'ngapp/register/templates/updateApp.html',name = name,
-      itemType = "apps", root = root, repo = repo, email = email, internal = internal,
-      non_atlantis = non_atlantis;
+          itemType = "apps", root = root, repo = repo, email = email, internal = internal,
+          non_atlantis = non_atlantis;
 
       modalInstance = updateApp.modalInstance(templateUrl, name, itemType, root, repo,
                       email, internal, non_atlantis);
