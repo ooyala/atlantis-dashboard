@@ -185,12 +185,16 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
     $scope.ip = "";
     $scope.alerts = [];
     $scope.data = {};
+    $scope.filteredData = {};
     $scope.internal = false;
+    $scope.currentZones = [];
+    $scope.currentData = {};
 
     $rootScope.title = $state.current.title;
 
     routerFactory.getRouters(function(data){
       $scope.data = data;
+      $scope.currentData = data;
     });
 
     $scope.addAlert = function(alert) {
@@ -204,6 +208,18 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
       }, 3000);
     };
 
+    $scope.filterData = function(internal){
+      var filteredHost = [];
+      $scope.filteredData = angular.copy($scope.data);
+      _.each($scope.filteredData, function(data){
+        filteredHost = _.filter(data.Router.Host, function(host){
+          return host.Internal == internal;
+        });
+        data.Router.Host = filteredHost;
+      });
+      $scope.currentData = $scope.filteredData;
+    };
+
     $scope.addRouter = function(currentZone, currentHost, Internal){
       var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
       itemType = "router";
@@ -212,13 +228,13 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
         var router = _.filter($scope.data, function(data){
           return data.Router.Name == currentZone;
         });
-        var Host = _.filter(router[0].Router.Host, function(Host){
-          return Host == currentHost;
+        var host = _.filter(router[0].Router.Host, function(Host){
+          return Host.Name == currentHost;
         });
-        if(_.isEmpty(Host)){
+        if(_.isEmpty(host)){
           _.each($scope.data, function(data){
             if(data.Router.Name == currentZone){
-              data.Router["Host"].push(currentHost);
+              data.Router.Host.push({"Name": currentHost, "Internal": Internal});
               return;
             }
           });
@@ -258,7 +274,7 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
           return data.Router.Name == currentZone;
         });
         var hosts = _.filter(router[0].Router.Host, function(Host){
-          return Host != currentHost;
+          return Host.Name != currentHost;
         });
         _.each($scope.data, function(data){
             if(data.Router.Name == currentZone){
