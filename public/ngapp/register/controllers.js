@@ -8,6 +8,7 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
     $scope.supervisors = [];
     $scope.newSupervisor = "";
     $scope.alerts = [];
+
     supervisorFactory.getSupervisors(function(data){
       $scope.supervisors = data.Supervisors;
     });
@@ -103,16 +104,14 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $scope.addManager = function(currentRegion, currentHost){
       var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
-      itemType = "manager";
+      itemType = "manager", region, hosts = [];
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
-        var region = _.pick($scope.data.Managers, currentRegion);
+        region = _.pick($scope.data.Managers, currentRegion);
         if(_.isEmpty(region)){
-          var hosts = [];
           hosts.push(currentHost);
           $scope.data.Managers[currentRegion] = hosts;
         }else{
-          var mananger = {};
           _.mapObject(region, function(val,key){
             if(_.contains(val,currentHost)){
               $scope.addAlert({
@@ -143,14 +142,12 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $scope.deleteManager = function(currentRegion, currentHost){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-      type = 'Manager', itemType = "manager";
+      type = 'Manager', itemType = "manager", region, hosts = [];
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function(name) {
-        var region = _.pick($scope.data.Managers, currentRegion);
-        var hosts = [];
-        var mananger = {};
-        region = _.mapObject(region, function(val, key){
+        region = _.pick($scope.data.Managers, currentRegion);
+        _.mapObject(region, function(val, key){
           hosts = _.filter(val, function(v){
               return currentHost != v;
           });
@@ -221,18 +218,18 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
     };
 
     $scope.addRouter = function(currentZone, currentHost, Internal){
-      var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
-      itemType = "router";
+      var templateUrl = 'ngapp/templates/addModal.html', name = currentHost,
+      itemType = "router", router, host;
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
-        var router = _.filter($scope.data, function(data){
+        router = _.filter($scope.currentData, function(data){
           return data.Router.Name == currentZone;
         });
-        var host = _.filter(router[0].Router.Host, function(Host){
+        host = _.filter(router[0].Router.Host, function(Host){
           return Host.Name == currentHost;
         });
         if(_.isEmpty(host)){
-          _.each($scope.data, function(data){
+          _.each($scope.currentData, function(data){
             if(data.Router.Name == currentZone){
               data.Router.Host.push({"Name": currentHost, "Internal": Internal});
               return;
@@ -265,18 +262,17 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
 
     $scope.deleteRouter = function(currentZone, currentHost){
       var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-      type = 'Router', itemType = "router";
+      type = 'Router', itemType = "router", router, hosts;
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(name) {
-        // var zone = _.pick($scope.data.Routers, currentZone);
-        var router = _.filter($scope.data, function(data){
+      modalInstance.result.then(function(nam, hostse) {
+        router = _.filter($scope.currentData, function(data){
           return data.Router.Name == currentZone;
         });
-        var hosts = _.filter(router[0].Router.Host, function(Host){
+        hosts = _.filter(router[0].Router.Host, function(Host){
           return Host.Name != currentHost;
         });
-        _.each($scope.data, function(data){
+        _.each($scope.currentData, function(data){
             if(data.Router.Name == currentZone){
               data.Router["Host"] = hosts;
               return;
@@ -329,15 +325,13 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
     $scope.addIPGroup = function(Name, ips){
       var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-      itemType = "IPGroup";
-      var grp = {};
+      itemType = "IPGroup", grp = {}, IPs = [];
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         grp = _.filter($scope.data.IPGroups, function(ipgrp) {
             return ipgrp.Name == Name;
           });
           if(_.isEmpty(grp)){
-            var IPs = [];
             _.each(ips,function(val,key){
               IPs.push(val.text);
             })
@@ -385,8 +379,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
     $scope.updateIPGroup = function(Name){
       var templateUrl = 'ngapp/register/templates/updateIPGroup.html',name = Name,
-      itemType = "IPGroup";
-      var grp = {};
+      itemType = "IPGroup", grp = {};
       grp = _.filter($scope.data.IPGroups, function(ipgrp) {
         return ipgrp.Name == Name;
       });
@@ -447,8 +440,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
     $scope.addApps = function(Name, Root, Repo, Email, Internal, NonAtlantis){
       var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-      itemType = "apps";
-      var app = {};
+      itemType = "apps", app = {};
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function(name) {
         app = _.filter($scope.apps, function(app) {
