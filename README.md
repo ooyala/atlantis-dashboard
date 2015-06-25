@@ -13,7 +13,7 @@
 
 3. Open following url in browser:
 
-    http://localhost:5001/public/#/dashboard
+        http://localhost:5001/public/#/dashboard
 
 ### Run with nginx:
 1. Git clone repo:
@@ -28,8 +28,8 @@
 
 3. Run command:
 
-    sudo nginx -c __PATH_TO_DIRECTORY__/nginx.conf
+        sudo nginx -c __PATH_TO_DIRECTORY__/nginx.conf
 
 4. Open following url in browser:
 
-    http://localhost:5001/public/#/dashboard
+        http://localhost:5001/public/#/dashboard
