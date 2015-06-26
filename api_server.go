@@ -23,11 +23,14 @@ var (
 )
 
 func readJSON(filepath string) []byte {
-	_, err := os.Stat(filepath)
+	jsonDir := strings.Trim(staticDir, "/") + "/jsons/"
+	jsonPath := jsonDir + filepath
+
+	_, err := os.Stat(jsonPath)
 	if err != nil {
 		panic("file doesn't exists")
 	}
-	content, err := ioutil.ReadFile(filepath)
+	content, err := ioutil.ReadFile(jsonPath)
 	if err != nil {
 		panic("error reading file")
 	}
