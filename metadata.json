@@ -13,5 +13,11 @@
   "/shas/pa23131a": "public/jsons/shas/pa23131a.json",
   "/shas/madsfdf2": "public/jsons/shas/madsfdf2.json",
   "/shas/qerwerfs": "public/jsons/shas/qerwerfs.json",
-  "/shas/kasdf131": "public/jsons/shas/kasdf131.json"
+  "/shas/kasdf131": "public/jsons/shas/kasdf131.json",
+  "/supervisors": "public/jsons/supervisors.json",
+  "/deps": "public/jsons/supervisors.json",
+  "/managers": "public/jsons/managers.json",
+  "/envs": "public/jsons/envs.json",
+  "/routers": "public/jsons/routers.json",
+  "/ipgroups": "public/jsons/ipgroups.json"
 }
