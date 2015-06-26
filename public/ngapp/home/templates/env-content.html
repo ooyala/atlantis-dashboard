@@ -3,7 +3,7 @@
     <div class="panel box">
       <div class="row">
         <div class="col-md-10">
-          <span class="box-header">SHA: {{sha.ShaId}}</span>
+          <span class="box-header">SHA: {{sha.ShaID}}</span>
         </div>
         <div class="col-md-2">
           <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(sha)"></i>
@@ -11,7 +11,7 @@
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-          <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block" ng-click="renderShaInfo(sha.ShaId, region)" ng-class="{active:isActive(sha.ShaId, region)}">
+          <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block" ng-click="renderShaInfo(sha.ShaID, region)" ng-class="{active:isActive(sha.ShaID, region)}">
             {{region}}
           </button>
         </div>
@@ -23,7 +23,7 @@
   <div class="panel box sha-panel" ng-show="isShaInfoEnabled">
     <div class="row">
       <div class="col-md-10">
-        <span class="box-header">SHA: {{selectedSha.ShaId}}</span>
+        <span class="box-header">SHA: {{selectedSha.ShaID}}</span>
       </div>
       <div class="col-md-2">
         <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(selectedSha)"></i>
