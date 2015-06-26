@@ -3,194 +3,24 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/GeertJohan/go.rice"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 const (
-	staticDir = "public"
+	staticDir = "/public/"
 )
 
-type DependencyDetails struct {
-	Name   string
-	Status string
-	Host   string
-	Port   int
-}
-
-type Dependency struct {
-	Deps   []DependencyDetails
-	Status string
-}
-
-type AppManifest struct {
-	AppType     string
-	CPUShares   int
-	Deps        []Dependency
-	Description string
-	Instances   int
-	JavaType    string
-	MemoryLimit int
-	Name        string
-	RunCommands []string
-}
-
-type Container struct {
-	Name           string
-	ID             string
-	Description    string
-	Host           string
-	Env            string
-	PrimaryPort    int
-	SecondaryPorts []int
-	SSHPort        int
-	DockerID       string
-	Manifest       AppManifest
-}
-
-type Region struct {
-	Name       string
-	Containers []Container
-}
-
-type ShaInfo struct {
-	ShaId   string
-	Regions []Region
-}
-
-type Sha struct {
-	ShaId   string
-	Regions []string
-}
-
-type Environment struct {
-	Name              string
-	ContainersPerZone int32
-	CPUShares         int32
-	Memory            int32
-	Dependencies      []DependencyDetails
-}
-
-type Application struct {
-	Apps   []string
-	Status string
-}
-
-type AppDetails struct {
-	Id   int
-	Name string
-	Envs []Environment
-}
-
-type AppEnvInfo struct {
-	App    AppDetails
-	Status string
-}
-
-type EnvInfo struct {
-	Name string
-	Shas []Sha
-}
-
-type Envs struct {
-	Envs   []string
-	Status string
-}
-
-type Supervisors struct {
-	Supervisors []string
-	Status      string
-}
-
-type managerRegion struct {
-	Dev  []string
-	Deva []string
-}
-
-type Managers struct {
-	Managers managerRegion
-	Status   string
-}
-
-type HostInfo struct {
-	Name     string
-	Internal bool
-}
-
-type routerZone struct {
-	Name string
-	Host []HostInfo
-}
-
-type Routers struct {
-	Router routerZone
-	Status string
-}
-
-type IPGroupInfo struct {
-	Name string
-	IPs  []string
-}
-
-type IPGroups struct {
-	IPGroups []IPGroupInfo
-	Status   string
-}
-
-type SecurityGroupInfo struct {
-}
-
-type EnvDataInfo struct {
-	Name          string
-	SecurityGroup SecurityGroupInfo
-	EncryptedData string
-}
-
-type DependerEnvDataInfo struct {
-	Production EnvDataInfo
-	Staging    EnvDataInfo
-}
-
-type ToopasteInfo struct {
-	Name            string
-	DependerEnvData DependerEnvDataInfo
-}
-
-type DependerAppDataInfo struct {
-	Toopaste ToopasteInfo
-}
-
-type AppInfo struct {
-	NonAtlantis     bool
-	Internal        bool
-	Name            string
-	Email           string
-	Repo            string
-	Root            string
-	DependerEnvData DependerEnvDataInfo
-	DependerAppData DependerAppDataInfo
-}
-
-type App struct {
-	App    AppInfo
-	Status string
-}
-
-func staticServe(c *gin.Context) {
-	static, err := rice.FindBox("./public")
-	if err != nil {
-		log.Fatal("Unable to get filepath")
-	}
-	original := c.Request.URL.Path
-	c.Request.URL.Path = c.Params.ByName("filepath")
-	fmt.Println("filepath is " + c.Params.ByName("filepath"))
-	http.FileServer(static.HTTPBox()).ServeHTTP(c.Writer, c.Request)
-	c.Request.URL.Path = original
-}
+var (
+	port           = 3000
+	metadataFile   = "metadata.json"
+	urlJSONMapping map[string]interface{}
+	filename       string
+	content        []byte
+)
 
 func readJSON(filepath string) []byte {
 	_, err := os.Stat(filepath)
@@ -204,210 +34,49 @@ func readJSON(filepath string) []byte {
 	return []byte(content)
 }
 
+func createMetadata(fn string) {
+	var data interface{}
+
+	content, err := ioutil.ReadFile(fn)
+	if err != nil {
+		panic(err)
+	}
+	if err := json.Unmarshal(content, &data); err != nil {
+		panic(err)
+	}
+	var ok bool
+	urlJSONMapping, ok = data.(map[string]interface{})
+	if !ok {
+		panic(err)
+	}
+}
+
+// New ServerMux to serve static content
+var staticHTTP = http.NewServeMux()
+
 func main() {
-	r := gin.Default()
+	if len(os.Args) == 2 {
+		metadataFile = os.Args[1]
+	}
+	createMetadata(metadataFile)
 
-	r.GET("/public/*filepath", staticServe)
-
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.html", nil)
+	log.Printf("Listening to port %d ...", port)
+	http.HandleFunc("/", handler)
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("favicon"))
 	})
+	staticHTTP.Handle(staticDir, http.StripPrefix(staticDir, http.FileServer(http.Dir(strings.Trim(staticDir, "/")))))
+	http.ListenAndServe(fmt.Sprint(":", port), nil)
+}
 
-	r.GET("/apps", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var apps Application
-
-		filename := "public/jsons/apps.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &apps)
-
-		c.JSON(200, apps)
-	})
-
-	r.GET("/shas/:id", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var data []ShaInfo
-		var expectedSha ShaInfo
-
-		filename := "public/jsons/shas.json"
-		shaID := c.Params.ByName("id")
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &data)
-
-		for _, sha := range data {
-			if sha.ShaId == shaID {
-				expectedSha = sha
-				break
-			}
-		}
-		c.JSON(200, expectedSha)
-	})
-
-	r.GET("/instance_data/:instance_id", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var data []ShaInfo
-		var expectedContainer Container
-
-		filename := "public/jsons/shas.json"
-		instanceId := c.Params.ByName("instance_id")
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &data)
-
-		for _, sha := range data {
-			var regions = sha.Regions
-			for _, reg := range regions {
-				var containers = reg.Containers
-				for _, con := range containers {
-					if con.ID == instanceId {
-						expectedContainer = con
-						break
-					}
-				}
-			}
-		}
-		c.JSON(200, expectedContainer)
-	})
-
-	r.GET("/deps", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var deps Dependency
-
-		filename := "public/jsons/deps.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &deps)
-		c.JSON(200, deps)
-	})
-
-	r.GET("/allApps", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var apps [2]App
-
-		filename := "public/jsons/app_info.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &apps)
-
-		c.JSON(200, apps)
-	})
-
-	r.GET("/apps/:app_name", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var data [2]App
-		var expectedInfo App
-
-		filename := "public/jsons/app_info.json"
-		appName := c.Params.ByName("app_name")
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &data)
-
-		for _, app := range data {
-			if app.App.Name == appName {
-				expectedInfo = app
-				break
-			}
-		}
-		c.JSON(200, expectedInfo)
-	})
-
-	r.GET("/apps/:app_name/envs", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var data [2]AppEnvInfo
-		var expectedInfo AppEnvInfo
-
-		filename := "public/jsons/app_env_info.json"
-		appName := c.Params.ByName("app_name")
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &data)
-
-		for _, app := range data {
-			if app.App.Name == appName {
-				expectedInfo = app
-				break
-			}
-		}
-		c.JSON(200, expectedInfo)
-	})
-
-	r.GET("/apps/:app_name/envs/:env_name", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var envInfo EnvInfo
-		appName := c.Params.ByName("app_name")
-		envName := c.Params.ByName("env_name")
-		filename := "public/jsons/" + appName + "_" + envName + ".json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &envInfo)
-
-		c.JSON(200, envInfo)
-	})
-
-	r.GET("/envs", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var envs Envs
-
-		filename := "public/jsons/envs.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &envs)
-
-		c.JSON(200, envs)
-	})
-
-	r.GET("/supervisors", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var supervisors Supervisors
-
-		filename := "public/jsons/supervisors.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &supervisors)
-
-		c.JSON(200, supervisors)
-	})
-
-	r.GET("/managers", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var managers Managers
-
-		filename := "public/jsons/managers.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &managers)
-
-		c.JSON(200, managers)
-	})
-
-	r.GET("/routers", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var routers [2]Routers
-
-		filename := "public/jsons/routers.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &routers)
-
-		c.JSON(200, routers)
-	})
-
-	r.GET("/ipgroups", func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		var ipgroups IPGroups
-
-		filename := "public/jsons/ipgroups.json"
-		content := readJSON(filename)
-		json.Unmarshal([]byte(content), &ipgroups)
-
-		c.JSON(200, ipgroups)
-	})
-
-	fmt.Println("Listening on port 5000")
-	// this must be last line
-	r.Run(":5001")
+// Handler
+func handler(w http.ResponseWriter, r *http.Request) {
+	if strings.Contains(r.URL.Path, staticDir) {
+		staticHTTP.ServeHTTP(w, r)
+	} else {
+		r.Header.Set("Content-Type", "application/json")
+		filename = (urlJSONMapping[r.URL.Path]).(string)
+		content = readJSON(filename)
+		w.Write(content)
+	}
 }

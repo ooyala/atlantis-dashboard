@@ -1,0 +1,23 @@
+{
+  "/apps": "public/jsons/apps.json",
+  "/shas": "public/jsons/shas.json",
+  "/shas/adf56a4d": "public/jsons/shas/adf56a4d.json",
+  "/shas/bad2313a": "public/jsons/shas/bad2313a.json",
+  "/shas/basd313a": "public/jsons/shas/basd313a.json",
+  "/shas/n2326a4d": "public/jsons/shas/n2326a4d.json",
+  "/shas/k4543313": "public/jsons/shas/k4543313.json",
+  "/shas/osgf313a": "public/jsons/shas/osgf313a.json",
+  "/shas/pasdfa4d": "public/jsons/shas/pasdfa4d.json",
+  "/shas/abasdf23": "public/jsons/shas/abasdf23.json",
+  "/shas/l242afsf": "public/jsons/shas/l242afsf.json",
+  "/shas/pa23131a": "public/jsons/shas/pa23131a.json",
+  "/shas/madsfdf2": "public/jsons/shas/madsfdf2.json",
+  "/shas/qerwerfs": "public/jsons/shas/qerwerfs.json",
+  "/shas/kasdf131": "public/jsons/shas/kasdf131.json",
+  "/supervisors": "public/jsons/supervisors.json",
+  "/deps": "public/jsons/supervisors.json",
+  "/managers": "public/jsons/managers.json",
+  "/envs": "public/jsons/envs.json",
+  "/routers": "public/jsons/routers.json",
+  "/ipgroups": "public/jsons/ipgroups.json"
+}
