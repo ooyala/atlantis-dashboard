@@ -14,7 +14,6 @@ const (
 	staticDir = "/public/"
 )
 
-// Server Port
 var (
 	port           = 3000
 	metadataFile   = "metadata.json"
@@ -52,6 +51,7 @@ func createMetadata(fn string) {
 	}
 }
 
+// New ServerMux to serve static content
 var staticHTTP = http.NewServeMux()
 
 func main() {
