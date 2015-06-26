@@ -15,7 +15,7 @@ const (
 )
 
 var (
-	port           = 3000
+	port           = 5001
 	metadataFile   = "metadata.json"
 	urlJSONMapping map[string]interface{}
 	filename       string
