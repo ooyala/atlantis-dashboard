@@ -1,0 +1,14 @@
+{
+  "App":
+    {
+      "NonAtlantis": false,
+      "Internal": true,
+      "Name": "hello-ruby1.9.3",
+      "Email": "me@example.com",
+      "Repo": "file:///root/repos/hello-ruby1.9.3",
+      "Root": "/",
+      "DependerEnvData":{},
+      "DependerAppData":{}
+    },
+  "Status": "Ok"
+}

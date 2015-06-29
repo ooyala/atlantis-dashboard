@@ -1,0 +1,54 @@
+<div class="col-md-3">
+  <div class="col-md-12" ng-repeat="sha in shas">
+    <div class="panel box">
+      <div class="row">
+        <div class="col-md-10">
+          <span class="box-header">SHA: {{sha.ShaId}}</span>
+        </div>
+        <div class="col-md-2">
+          <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(sha)"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-12">
+          <button ng-repeat="region in sha.Regions" class="btn btn-default btn-block" ng-click="renderShaInfo(sha.ShaId, region)" ng-class="{active:isActive(sha.ShaId, region)}">
+            {{region}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-5">
+  <div class="panel box sha-panel" ng-show="isShaInfoEnabled">
+    <div class="row">
+      <div class="col-md-10">
+        <span class="box-header">SHA: {{selectedSha.ShaId}}</span>
+      </div>
+      <div class="col-md-2">
+        <i class="glyphicon glyphicon-remove pull-right" ng-click="deleteSha(selectedSha)"></i>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-12 nopadding">
+        <div class="col-md-9 nopadding">
+          <div ng-repeat="container in containers" class="col-md-12">
+            <button class="btn btn-default truncate element-bottom-margin pull-left btn-width" title="{{container.ID}}" ng-click="renderContainerInfo(container)" ng-class="{active:isContainerActive(container)}">
+              {{container.ID}}
+            </button>
+            <i class="glyphicon glyphicon-remove container-remove-button" ng-click="deleteContainer(container)"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 container-panel well" ng-show="isContainerInfoVisible">
+        <div ng-repeat="(key, value) in containerInfo" ng-class="animation_class">
+          <div class="col-md-4">{{key}}</div>
+          <div class="col-md-8">{{value}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div env-dependency env="{{env}}"></div>
+</div>

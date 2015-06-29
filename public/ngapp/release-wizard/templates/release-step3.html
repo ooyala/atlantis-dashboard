@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12 release-wizard-body-header">
+    <h4> Step 3: Deploy Configuration </h4>
+  </div>
+  <div class="col-md-12 release-wizard-body-content">
+    <div class="col-md-10 nopadding">
+      <div class="col-md-12 nopadding">
+        <h5>The followings are optional.</h5>
+      </div>
+      <div class="col-md-12">
+        <div class="checkbox">
+          <input id="deploy_success" type="checkbox" ng-checked="false" ng-model="$parent.deploy_success">
+          <label for="deploy_success">If deploy successful, route traffic to newly deployed pool.</label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="checkbox">
+          <input id="notify_on_success" type="checkbox" ng-checked="false" ng-model="$parent.notify_on_success">
+          <label for="notify_on_success">Notify me when my container(s) are deployed.</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary release-next-btn" ng-click="nextStep()">Next</button>
+    </div>
+  </div>
+</div>

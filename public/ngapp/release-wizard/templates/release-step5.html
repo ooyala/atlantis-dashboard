@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-md-12 release-wizard-body-header">
+    <h4> Step 5: Results </h4>
+  </div>
+  <div class="col-md-12 release-wizard-body-content">
+    <div class="col-md-12 release-record-result element-bottom-margin" ng-repeat="(env, record) in data">
+      <div class="col-md-4 nopadding-left">
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Deploy ID</span>
+          <div class="panel-body">
+            {{record.DeployedRecord.ID}}
+          </div>
+        </div>
+        <div class="panel wizard-result-box nomargin-bottom">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12 confirm_details_header">
+                <b>Details:</b>
+              </div>
+              <br>
+              <div class="col-md-12 confirm_details_body">
+                App - {{record.Details.App}} <br>
+                Environment - {{record.Details.Environment}} <br>
+                SHA - {{record.Details.Sha}} <br>
+                RAM - {{record.Details.RAM}} MB <br>
+                CPU Shares - {{record.Details.CPUShares}} <br>
+                Containers / Zone - {{record.Details.ContainerPerZone}}
+              </div>
+              <br><br>
+              <div class="col-md-12 confirm_details_footer">
+                Post-Deploy - {{record.Details.PostDeployMessage}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 nopadding">
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Sanity Checks</span>
+          <div class="panel-body">
+            <div class="col-md-12 checkbox" ng-repeat="(check, value) in record.SanityChecks">
+              <input id="{{record.DeployID + '_' + check}}" type="checkbox" ng-checked="{{value}}">
+              <label for="{{record.DeployID + '_' + check}}">{{check}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="panel wizard-result-box nomargin-bottom">
+          <span class="box-header">Container Deploy</span>
+          <div class="panel-body">
+            <div ng-repeat="container in record.DeployingContainers" class="col-md-12 checkbox">
+              <input id="{{record.DeployID + '_' + container.Region}}" type="checkbox" ng-checked="{{container.isDeployed}}">
+              <label for="{{record.DeployID + '_' + container.Region}}">{{container.Region}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 nopadding-right">
+        <div class="panel wizard-result-box release-record-result-panel">
+          <span class="box-header">Post Deploy</span>
+          <div class="panel-body">
+            <div class="col-md-12 checkbox">
+              <input id="notify_{{record.DeployID}}" type="checkbox" ng-checked="{{record.PostDeploy.isNotified}}">
+              <label for="notify_{{record.DeployID}}">{{record.PostDeploy.Type}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="panel wizard-result-box nomargin-bottom">
+          <span class="box-header">Status</span>
+          <div class="panel-body" ng-class="record.Result.class">
+            {{record.Result.status}}
+            <button class="btn btn-primary element-right-margin" ng-click="showDeployedAppInfo(record)" ng-show="record.Result.data.Done">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 element-bottom-margin">
+    <button class="btn btn-default pull-right" ng-click="goToDashboard()">Go to Dashboard</button>
+    <button class="btn btn-primary element-right-margin pull-right" ng-click="deployAnotherApp()">Deploy Another App</button>
+  </div>
+</div>

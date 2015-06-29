@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="atlantisApp">
+  <head>
+    <title ng-bind-html="title"></title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ng-tags-input.min.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-ui-switch.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div ui-view="header"></div>
+      </div>
+      <div class="row">
+        <div ui-view="content" class="content animatedFast"></div>
+      </div>
+    </div>
+
+    <!-- Javascript files -->
+
+    <script type="text/javascript" src="js/underscore.min.js"></script>
+    <script type="text/javascript" src ="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/ng-tags-input.min.js"></script>
+    <script type="text/javascript" src="js/angular-ui-switch.js"></script>
+    <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="js/draganddrop.js"></script>
+    <script type="text/javascript" src="ngapp/home/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/home/directives.js"></script>
+    <script type="text/javascript" src="ngapp/home/services.js"></script>
+    <script type="text/javascript" src="ngapp/release-wizard/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/release-wizard/services.js"></script>
+    <script type="text/javascript" src="ngapp/deploy/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/manage/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/register/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/register/services.js"></script>
+    <script type="text/javascript" src="ngapp/users/controllers.js"></script>
+    <script type="text/javascript" src="ngapp/filters.js"></script>
+    <script type="text/javascript" src="ngapp/app.js"></script>
+    <script type="text/javascript" src="ngapp/services.js"></script>
+  </body>
+</html>

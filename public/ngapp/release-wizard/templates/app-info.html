@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <span class="panel-title">Application Info</span>
+</div>
+<div class="modal-body">
+  <b>Host</b>            : {{app.Host}} <br>
+  <b>Primary Port</b>    : {{app.PrimaryPort}} <br>
+  <b>Secondary Ports</b> : {{app.SecondaryPorts.join(', ')}} <br>
+  <b>SSH Port</b>        : {{app.SSHPort}} <br>
+  <b>Docker ID</b>       : {{app.DockerID}} <br>
+  <b>ID</b>              : {{app.ID}}hello-ruby1.9.3-dc7550-staging-Qb1lKK <br>
+  <b>Description</b>     : {{app.Manifest.Description}} <br>
+  <b>App Type</b>        : {{app.Manifest.AppType}} <br>
+  <b>Healthz</b>         : http://{{app.Host}}:{{app.PrimaryPort}}/healthz <br>
+  <b>To SSH</b>          : atlantis ssh {{app.ID}} <br>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">Ok</button>
+</div>

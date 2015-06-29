@@ -1,0 +1,56 @@
+[
+  {
+    "App":
+      {
+        "NonAtlantis": false,
+        "Internal": true,
+        "Name": "hello-ruby1.9.3",
+        "Email": "me@example.com",
+        "Repo": "file:///root/repos/hello-ruby1.9.3",
+        "Root": "/",
+        "DependerEnvData":{},
+        "DependerAppData":{}
+      },
+    "Status": "Ok"
+  },
+  {
+    "App":{
+      "NonAtlantis":true,
+      "Internal":false,
+      "Name":"mysql-db",
+      "Email":"budhram@vertisinfotech.com",
+      "Repo":"",
+      "Root":"",
+      "DependerEnvData":{
+        "Production":{
+          "Name":"production",
+          "SecurityGroup":{},
+          "EncryptedData":"9oD3/SwAZmCZbafLGHhMuWsW56BES8i7esR/5QdMam5Fi76yejaRKXyLnxG/2SOLc9rO4jclQEBFALMzBdKmUGsXXZQu8muLMLIRx9Vvhz8="
+        },
+        "Staging":{
+          "Name":"staging",
+          "SecurityGroup":{},
+          "EncryptedData":"9oD3/SwAZmCZbafLGHhMuWsW56BES8i7esR/5QdMam5Fi76yejaRKXyLnxG/2SOLc9rO4jclQEBFALMzBdKmUGsXXZQu8muLMLIRx9Vvhz8="
+        }
+      },
+      "DependerAppData":{
+        "Toopaste":{
+          "Name":"toopaste",
+          "DependerEnvData":{
+            "Production":{
+              "Name":"production",
+              "SecurityGroup":{},
+              "EncryptedData":"nj7tevMm40Y//SsN4513Sw=="
+            },
+            "Staging":{
+              "Name":"staging",
+              "SecurityGroup":{},
+              "EncryptedData":"nj7tevMm40Y//SsN4513Sw=="
+            }
+          }
+        }
+      }
+    },
+    "Status":"OK"
+  }
+]
