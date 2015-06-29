@@ -6,7 +6,7 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1a)",
-          "ID": "App1-d37f05-next-staging-0a6fFG",
+          "ID": "app1-d37f05-next-staging-0a6fFG",
           "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
           "Env": "test",
@@ -41,7 +41,7 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1d)",
-          "ID": "App1-d37f05-next-staging-0a6fFG",
+          "ID": "app1-d37f05-next-staging-0a6fFG",
           "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
           "Env": "test",
@@ -76,7 +76,7 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1e)",
-          "ID": "App1-d37f05-next-staging-0a6fFG",
+          "ID": "app1-d37f05-next-staging-0a6fFG",
           "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
           "Env": "test",

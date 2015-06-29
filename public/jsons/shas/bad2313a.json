@@ -41,7 +41,7 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1d)",
-          "ID": "App1-l45njb-staging-PG2vbe",
+          "ID": "app1-l45njb-staging-PG2vbe",
           "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-224.compute-1.amazonaws.com",
           "Env": "test",
