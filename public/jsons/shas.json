@@ -7,8 +7,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-adf56a4d-staging-0a6fFG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-adf56a4d-staging-0a6fFG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -37,8 +37,8 @@
           },
           {
             "Name": "Container 2(us-east-1a)",
-            "ID": "delphi-ui-av342b-staging-93428b",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-av342b-staging-93428b",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-299.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61001,
@@ -67,8 +67,8 @@
           },
           {
             "Name": "Container 3(us-east-1a)",
-            "ID": "delphi-ui-pa131v-staging-ma93AG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-pa131v-staging-ma93AG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-199.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61002,
@@ -107,8 +107,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-ned42a-staging-9gaEBC",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-ned42a-staging-9gaEBC",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-201.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61003,
@@ -142,8 +142,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1d)",
-            "ID": "delphi-ui-l45njb-staging-PG2vbe",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-l45njb-staging-PG2vbe",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-224.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61004,
@@ -182,8 +182,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-d37f05-staging-0a6fFGqw",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-staging-0a6fFGqw",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -217,8 +217,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1d)",
-            "ID": "delphi-ui-d37f05-staging-0a6fFGa1ac",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-staging-0a6fFGa1ac",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -252,8 +252,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1e)",
-            "ID": "delphi-ui-d37f05-staging-0a6fFGlpa",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-staging-0a6fFGlpa",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -292,8 +292,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-d37f05-production-0a6fFG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-production-0a6fFG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -327,8 +327,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1c)",
-            "ID": "delphi-ui-d37f05-production-0a6fFGl",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-production-0a6fFGl",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -367,8 +367,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1e)",
-            "ID": "delphi-ui-d37f05-production-0a6fFGp",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-production-0a6fFGp",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -407,8 +407,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-d37f05-production-0a6fFGq",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-production-0a6fFGq",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -442,8 +442,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1e)",
-            "ID": "delphi-ui-d37f05-production-0a6fFGn",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-production-0a6fFGn",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -482,8 +482,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1a)",
-            "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-next-staging-0a6fFG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -517,8 +517,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1d)",
-            "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-next-staging-0a6fFG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -552,8 +552,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-east-1e)",
-            "ID": "delphi-ui-d37f05-next-staging-0a6fFG",
-            "Description": "UI Server for Delphi",
+            "ID": "app1-d37f05-next-staging-0a6fFG",
+            "Description": "UI Server for App1",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -592,8 +592,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1c)",
-            "ID": "ooyala-live-d37f05-staging-0a6fFG",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-staging-0a6fFG",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -627,8 +627,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1e)",
-            "ID": "ooyala-live-d37f05-staging-0a6fFGa",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-staging-0a6fFGa",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -667,8 +667,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1b)",
-            "ID": "ooyala-live-d37f05-staging-0a6fFGb",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-staging-0a6fFGb",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -707,8 +707,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1a)",
-            "ID": "ooyala-live-d37f05-staging-0a6fFGc",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-staging-0a6fFGc",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -747,8 +747,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1c)",
-            "ID": "ooyala-live-d37f05-production-0a6fFG",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-production-0a6fFG",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -782,8 +782,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1d)",
-            "ID": "ooyala-live-d37f05-production-0a6fFGa",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-production-0a6fFGa",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -817,8 +817,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1e)",
-            "ID": "ooyala-live-d37f05-production-0a6fFGb",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-production-0a6fFGb",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -857,8 +857,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1b)",
-            "ID": "ooyala-live-d37f05-production-0a6fFGc",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-production-0a6fFGc",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,
@@ -897,8 +897,8 @@
         "Containers": [
           {
             "Name": "Container 1(us-west-1a)",
-            "ID": "ooyala-live-d37f05-production-0a6fFGd",
-            "Description": "UI Server for Ooyala-Live",
+            "ID": "app2-d37f05-production-0a6fFGd",
+            "Description": "UI Server for App2",
             "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
             "Env": "test",
             "PrimaryPort": 61000,

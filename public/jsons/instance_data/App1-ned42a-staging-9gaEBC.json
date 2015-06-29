@@ -1,0 +1,31 @@
+{
+  "Name": "Container 1(us-east-1a)",
+  "ID": "app1-ned42a-staging-9gaEBC",
+  "Description": "UI Server for App1",
+  "Host": "ec2-54-198-101-201.compute-1.amazonaws.com",
+  "Env": "test",
+  "PrimaryPort": 61003,
+  "SecondaryPorts": [
+    61203,
+    61303,
+    61403,
+    61503,
+    61603
+  ],
+  "SSHPort": 61103,
+  "DockerID": "dasfjoeilkki237d7071c70732bb54d37f538e20284dasfef23221vb",
+  "Manifest": {
+    "AppType": "ruby1.9.3",
+    "CPUShares": 1,
+    "Deps": {
+    },
+    "Description": "Hello World Ruby Server",
+    "Instances": 1,
+    "JavaType": "",
+    "MemoryLimit": 16,
+    "Name": "hello-ruby1.9.3",
+    "RunCommands": [
+      "./app.rb"
+    ]
+  }
+}

@@ -6,8 +6,8 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1a)",
-          "ID": "delphi-ui-d37f05-staging-0a6fFG",
-          "Description": "UI Server for Delphi",
+          "ID": "App1-d37f05-staging-0a6fFG",
+          "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
           "Env": "test",
           "PrimaryPort": 61000,
@@ -36,8 +36,8 @@
         },
         {
           "Name": "Container 2(us-east-1a)",
-          "ID": "delphi-ui-av342b-staging-93428b",
-          "Description": "UI Server for Delphi",
+          "ID": "App1-av342b-staging-93428b",
+          "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-299.compute-1.amazonaws.com",
           "Env": "test",
           "PrimaryPort": 61001,
@@ -66,8 +66,8 @@
         },
         {
           "Name": "Container 3(us-east-1a)",
-          "ID": "delphi-ui-pa131v-staging-ma93AG",
-          "Description": "UI Server for Delphi",
+          "ID": "App1-pa131v-staging-ma93AG",
+          "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-199.compute-1.amazonaws.com",
           "Env": "test",
           "PrimaryPort": 61002,

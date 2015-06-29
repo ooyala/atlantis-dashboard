@@ -2,7 +2,7 @@
     {
         "App": {
             "Id": 1,
-            "Name": "Delphi-UI",
+            "Name": "App1",
             "Envs": [
                 {
                     "Name": "staging",
@@ -13,19 +13,19 @@
                         {
                             "Name": "Minerva",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45933
                         },
                         {
                             "Name": "Helios",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45934
                         },
                         {
                             "Name": "CMK",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45935
                         }
                     ]
@@ -39,19 +39,19 @@
                         {
                             "Name": "Minerva",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45933
                         },
                         {
                             "Name": "Helios",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45934
                         },
                         {
                             "Name": "CMK",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45935
                         }
                     ]
@@ -65,19 +65,19 @@
                         {
                             "Name": "Minerva",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45933
                         },
                         {
                             "Name": "Helios",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45934
                         },
                         {
                             "Name": "CMK",
                             "Status": "Pending Request",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 45935
                         }
                     ]
@@ -89,7 +89,7 @@
     {
         "App": {
             "Id": 2,
-            "Name": "Ooyala-Live",
+            "Name": "App2",
             "Envs": [
                 {
                     "Name": "staging",
@@ -100,19 +100,19 @@
                         {
                             "Name": "Redis",
                             "Status": "Pending Request",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46033
                         },
                         {
                             "Name": "Helios",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46034
                         },
                         {
                             "Name": "CMK",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46035
                         }
                     ]
@@ -126,19 +126,19 @@
                         {
                             "Name": "Redis",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46033
                         },
                         {
                             "Name": "Helios",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46034
                         },
                         {
                             "Name": "CMK",
                             "Status": "OK",
-                            "Host": "internal-router.services.ooyala.com",
+                            "Host": "internal-router.services.app2.com",
                             "Port": 46035
                         }
                     ]

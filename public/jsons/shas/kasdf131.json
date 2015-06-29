@@ -6,8 +6,8 @@
       "Containers": [
         {
           "Name": "Container 1(us-west-1a)",
-          "ID": "ooyala-live-d37f05-production-0a6fFG",
-          "Description": "UI Server for Ooyala-Live",
+          "ID": "App2-d37f05-production-0a6fFG",
+          "Description": "UI Server for App2",
           "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
           "Env": "test",
           "PrimaryPort": 61000,
