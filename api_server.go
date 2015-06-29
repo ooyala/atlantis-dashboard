@@ -65,9 +65,6 @@ func main() {
 
 	log.Printf("Listening to port %d ...", port)
 	http.HandleFunc("/", handler)
-	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("favicon"))
-	})
 	staticHTTP.Handle(staticDir, http.StripPrefix(staticDir, http.FileServer(http.Dir(strings.Trim(staticDir, "/")))))
 	http.ListenAndServe(fmt.Sprint(":", port), nil)
 }
@@ -78,8 +75,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		staticHTTP.ServeHTTP(w, r)
 	} else {
 		r.Header.Set("Content-Type", "application/json")
-		filename = (urlJSONMapping[r.URL.Path]).(string)
-		content = readJSON(filename)
-		w.Write(content)
+		filePATH := urlJSONMapping[r.URL.Path]
+		if filePATH != nil {
+			content = readJSON(filePATH.(string))
+			w.Write(content)
+		} else {
+			http.NotFound(w, r)
+		}
 	}
 }
