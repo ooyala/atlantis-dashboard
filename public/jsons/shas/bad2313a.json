@@ -6,7 +6,7 @@
       "Containers": [
         {
           "Name": "Container 1(us-east-1a)",
-          "ID": "App1-ned42a-staging-9gaEBC",
+          "ID": "app1-ned42a-staging-9gaEBC",
           "Description": "UI Server for App1",
           "Host": "ec2-54-198-101-201.compute-1.amazonaws.com",
           "Env": "test",
