@@ -1,0 +1,391 @@
+.animatedFast {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.content {
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.content.animatedFast.ng-enter {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+.content.animatedFast.ng-leave {
+  -webkit-animation-name: fadeOutLeft;
+  animation-name: fadeOutLeft;
+}
+
+/*Checkbox CSS*/
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+.rendering-view {
+  margin-top: 7px;
+}
+.content-header {
+  font-size: 22px;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+.container-panel {
+  margin-top: 10px;
+}
+.container-panel div {
+  word-wrap: break-word;
+}
+.sha-panel, .container-panel {
+  transition: 0.5s linear all;
+  font-size: 12px;
+}
+.sha-panel.ng-hide, .container-panel.ng-hide {
+  opacity: 0;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-size: 14px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 70px;
+  background-color: #f5f5f5;
+}
+
+body > .container {
+  padding: 60px 0 0;
+}
+
+.nopadding {
+  padding: 0;
+}
+.nopadding-left {
+  padding-left: 0;
+}
+.nopadding-right {
+  padding-right: 0;
+}
+.nopadding-bottom {
+  padding-bottom: 0;
+}
+.nopadding-top {
+  padding-top: 0;
+}
+.nomargin {
+  margin: 0;
+}
+.nomargin-left {
+  margin-left: 0;
+}
+.nomargin-right {
+  margin-right: 0;
+}
+.nomargin-bottom {
+  margin-bottom: 0;
+}
+.nomargin-top {
+  margin-top: 0;
+}
+
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.glyphicon-remove, .glyphicon-plus, .glyphicon-minus {
+  cursor: pointer;
+}
+
+.element-top-margin {
+  margin-top: 5px;
+}
+.element-right-margin {
+  margin-right: 5px;
+}
+.element-bottom-margin {
+  margin-bottom: 5px;
+}
+.element-left-margin {
+  margin-left: 5px;
+}
+
+.panel-header-style {
+  padding: 5px 40px 0 15px;
+}
+
+.panel-body {
+  padding: 10px;
+}
+
+.deps-panel {
+  margin: 0;
+}
+.deps-section {
+  margin-top: 10px;
+}
+.deps-panel .dep-panel {
+  margin: 10px 10px 0 0;
+  background-color: #F7F7F7;
+}
+.deps-panel .popover {
+  margin-top: 5px;
+}
+
+.modal-header, .modal-footer {
+  background-color: #f5f5f5;
+}
+.modal-header {
+  border-radius: 6px 6px 0 0;
+}
+.modal-footer {
+  border-radius: 0 0 6px 6px;
+}
+
+.container-remove-button {
+  line-height: 39px;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.glyphicon.glyphicon-remove {
+  font-size: 12px;
+  color: #716E6E;
+}
+.glyphicon.glyphicon-remove-circle {
+  color: #716E6E;
+}
+.glyphicon.glyphicon-remove:hover {
+  color: rgb(229, 66, 66);
+}
+.glyphicon.glyphicon-remove-circle:hover {
+  color: rgb(229, 66, 66);
+}
+
+/*Release-wizard tabs CSS*/
+.release-wizard .release-item {
+  float: left;
+  background-color: rgb(200,200,200);
+  padding: 5px 19px;
+  margin: 5px 2px 0 0;
+  color: white;
+  list-style: none;
+  font-size: 13px;
+  border-top-right-radius: 7px;
+}
+.release-wizard .release-item:hover {
+  background-color: #337ab7;
+  color:white;
+}
+.release-wizard .release-item.active {
+  background-color: #337ab7;
+}
+.release-wizard .release-item.visited {
+  background-color: #286090;
+}
+
+.release-wizard-body {
+  border: 1px solid #ccc;
+  min-height: 350px;
+}
+.release-wizard-body-header {
+  margin-top: 1%;
+  padding: 0 50px;
+}
+.release-wizard-body-content {
+  padding: 0 50px;
+}
+.wizard-input {
+  height: 40px;
+  font-size: 20px;
+  padding: 6px;
+  text-align: right;
+}
+.release-next-btn {
+  width: 80%;
+}
+.container-settings {
+  margin-top: 20px;
+}
+.confirm_details_body, .confirm_details_footer {
+  margin-top: 10px;
+}
+.release-record-result {
+  padding: 20px 20px 10px 20px;
+  box-shadow: 0px 0px 10px 4px #ccc;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.release-record-result-panel {
+  margin-bottom: 22px;
+}
+
+.box, .wizard-result-box {
+  padding: 5px;
+  box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.26);
+}
+.box .box-header, .wizard-result-box .box-header {
+  position: relative;
+  top: -20px;
+  left: 10px;
+  background: #FFF;
+  padding: 5px;
+  font-size: 18px;
+}
+.box .panel-body, .wizard-result-box .panel-body {
+  position: relative;
+  top: -10px;
+}
+.wizard-result-box .panel-body {
+  padding: 0 15px;
+}
+.wizard-result-box .checkbox {
+  margin-top: 0;
+}
+
+.accept-sign-color {
+  color: green;
+}
+
+.deny-sign-color {
+  color: red;
+}
+
+.pending-status {
+  color: orange;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-width {
+  width : 200px;
+}
+
+.supervisor-panel {
+  min-height: 380px;
+  overflow-y: scroll;
+}
+
+.row-top-margin {
+  margin-top: 20px;
+}
+
+.odd-panel-bg-color {
+  background-color: #ECE9E9;
+
+}
+.even-panel-bg-color {
+  background-color: #f7f4f4;
+}
+
+tags-input .tags {
+  border: 1px solid #ccc !important;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+}
+
+tags-input .host {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+tags-input .tags .tag-item .remove-button {
+  color: white !important;
+}
+
+tags-input .tags .tag-item {
+  background: #2e6da4 !important;
+  border-color: #2e6da4;
+  color: white;
+  font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.modal-heading-left-margin {
+  margin-left: 10px;
+}
+
+.checkbox-display {
+  display: block !important;
+}
+
+.checkbox-bgcolor {
+  background-color: #FDFDFD !important;
+}
+
+.msg-color {
+  color: red;
+}
+
+.checkbox-lable {
+  font-size: 16px;
+  top: 5px;
+  width: 10%;
+}
+
+.checkbox-lable-internal {
+  width: 6.5%;
+}
+
+.checkbox-lable-nonatlantis {
+  width: 10%;
+}
+
+.box-header-color {
+  color: #337ab7;
+}
+
+.panel-footer-bgcolor {
+  background-color: #FFFFFF;
+}
+
+.zone-dropdown-left-padding {
+  left: 50px;
+}
+
+.remove-btn-right-margin {
+  margin-right: 20px !important;
+}
+
+.required-mark {
+  position: relative;
+  float: right;
+  top: -26px;
+  right: 5px;
+}
+
+.register-dropdown {
+  background-color: #F8F8F8;
+  border: none;
+  height: 50px;
+  color: #777777;
+}
+
+.register-dropdown-width {
+  min-width: 115px;
+}

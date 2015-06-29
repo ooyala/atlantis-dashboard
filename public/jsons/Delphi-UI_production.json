@@ -1,0 +1,26 @@
+{
+    "Name": "production",
+    "Shas": [
+        {
+            "ShaId": "n2326a4d",
+            "Regions": [
+                "us-east-1a",
+                "us-east-1c"
+            ]
+        },
+        {
+            "ShaId": "k4543313",
+            "Regions": [
+                "us-east-1e"
+            ]
+        },
+        {
+            "ShaId": "osgf313a",
+            "Regions": [
+                "us-east-1a",
+                "us-east-1e"
+            ]
+        }
+    ]
+}
+

@@ -1,0 +1,25 @@
+{
+    "Name": "production",
+    "Shas": [
+        {
+            "ShaId": "madsfdf2",
+            "Regions": [
+                "us-west-1c",
+                "us-west-1d",
+                "us-west-1e"
+            ]
+        },
+        {
+            "ShaId": "qerwerfs",
+            "Regions": [
+                "us-west-1b"
+            ]
+        },
+        {
+            "ShaId": "kasdf131",
+            "Regions": [
+                "us-west-1a"
+            ]
+        }
+    ]
+}

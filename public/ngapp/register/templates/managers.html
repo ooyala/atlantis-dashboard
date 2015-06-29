@@ -1,0 +1,60 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="col-md-12">
+  <div class="content-header">Manager Management</div>
+  <hr>
+  <form name="managersForm">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-2">
+          <input type="text" class="form-control" ng-model="region" placeholder="Region..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" ng-model="host" placeholder="Host..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" ng-model="managerCName" placeholder="Manager CName..."></input>
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" ng-model="registyCName" placeholder="Registry CName..."></input>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addManager(region,host)" ng-disabled="managersForm.$invalid"> Register</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <div class="panel box supervisor-panel">
+        <div class="panel-body"><br>
+          <div ng-repeat="(key,value) in data.Managers">
+            <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
+              <div ng-repeat="val in value">
+                <div class="col-md-4">
+                  <div class="panel box row-top-margin">
+                    <div class="row">
+                      <div class="col-md-10">&nbsp;</div>
+                      <div class="col-md-2">
+                        <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteManager(key,val)"></i>
+                      </div>
+                    </div>
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{key}} : {{val}}" popover-trigger="mouseenter">{{key}} : {{val}}</h4></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>

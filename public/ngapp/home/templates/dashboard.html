@@ -1,0 +1,52 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="col-md-12">
+  <div class="content-header">{{headerTitle}}</div>
+  <hr>
+  <div class="panel">
+    <div class="panel-header panel-header-style">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="col-md-5">
+            <!-- Choose Application -->
+            <span class="text">Application : </span>
+            <div class="btn-group" dropdown>
+              <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                {{appBtnText}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="app in apps">
+                  <a ui-sref=".app({appName: app})">{{app}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-5" ng-show="isEnvEnable">
+           <!-- Choose Environment -->
+            <span class="text">Environment : </span>
+            <div class="btn-group" dropdown>
+              <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                {{envBtnText}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="env in envs">
+                  <a ui-sref=".app.env({envName: env})">{{env}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" ng-show="isAppVisible">
+          <button ng-hide="isEnvSelected" type="button" class="btn btn-info pull-right btn-sm" ng-click="showRegisterDependency()">Register Dependencies</button>
+          <button ng-hide="isEnvSelected" type="button" class="btn btn-primary element-right-margin pull-right btn-sm"  ng-click="showNewEnvironment()">New Environment</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div ui-view="body" class="row content rendering-view animatedFast"></div>
+    </div>
+  </div>
+</div>

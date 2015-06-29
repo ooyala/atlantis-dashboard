@@ -1,0 +1,65 @@
+<div class="col-md-8">
+  <div class="row">
+    <div ng-repeat="env in envs track by $index"
+      drag="env" drag-channel="dependencies" drop-channel="dependencies"
+      ui-on-drop="onDrop($event,$data, envs, $index)"
+      drop-validate="dropValidateHandler($drop, $event, $data)">
+      <div class="col-md-6">
+        <div class="panel box">
+          <div class="row">
+            <div class="col-md-10">
+              <a ui-sref=".env({appName: appName, envName: env.Name})" class="box-header"><b>{{env.Name}}</b></a>
+            </div>
+            <div class="col-md-2">
+              <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" ng-click="deleteEnv(env)"></i>
+            </div>
+          </div>
+          <div class="panel-body">
+            {{env.ContainersPerZone}} Containers per zone <br>
+            {{env.CPUShares}} CPU Shares Each<br>
+            {{env.Memory}}MB of RAM Each<br>
+            <div env-dependency env="{{env}}" class="deps-section"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <!-- Dependencies List -->
+  <div class="deps-panel panel box" ng-show="$parent.isRegisterDependency">
+    <span class="box-header">Dependencies</span>
+    <div class="panel-body">
+      <div class="col-md-12 nopadding">
+        <div class="col-md-3 well well-sm dep-panel" ng-repeat="dep in deps track by $index"
+          ui-draggable="true" drag="dep" drag-channel="dependencies"
+          ui-on-drop="onDrop($event, $data, deps, $index)" drop-channel="dependencies"
+          drop-validate="dropValidateHandler($drop, $event, $data)">
+          <p>
+            {{dep.Name}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Environment -->
+  <div class="deps-panel panel box" ng-show="$parent.isEnvironment"
+    ng-mouseenter="handleEnvPanelVisibility()" ng-mouseleave="handleEnvPanelVisibility()">
+    <div class="row">
+      <div class="col-md-9">
+        <span class="box-header">New Environment</span>
+      </div>
+      <div class="col-md-3" ng-show="isShowEnvPanel">
+        <i class="glyphicon glyphicon-remove pull-right" ng-click="closeEnvPanel()"></i>
+      </div>
+    </div>
+    <div class="panel-body">
+      <form class="form-inline">
+        <div class="form-group">
+          <input ng-model="newEnvName" type="text" class="form-control" placeholder="Name here...">
+        </div>
+        <button class="btn btn-success" ng-click="createEnv()">OK</button>
+      </form>
+    </div>
+  </div>
+</div>
