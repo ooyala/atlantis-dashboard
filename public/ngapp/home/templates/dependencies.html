@@ -3,7 +3,7 @@
   <div class="panel-body">
     <div popover="{{dep.Host ? dep.Name+' @ http://'+dep.Host+':'+dep.Port+'/' : ''}}" popover-trigger="mouseenter"
         class="col-md-3 well well-sm dep-panel" ng-repeat="dep in env.Dependencies">
-      <p>
+      <p class="truncate">
         {{dep.Name}}
       </p>
       <p ng-class="{'pending-status' : dep.Status == 'Pending Request'}">

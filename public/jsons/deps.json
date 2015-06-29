@@ -1,7 +1,7 @@
 {
   "Deps": [
     {
-      "Name": "Minerva",
+      "Name": "Dependency1",
       "Host": "",
       "Port": 0
     },
@@ -11,12 +11,12 @@
       "Port": 0
     },
     {
-      "Name": "Helios",
+      "Name": "Dependency2",
       "Host": "",
       "Port": 0
     },
     {
-      "Name": "CMK",
+      "Name": "Dependency3",
       "Host": "",
       "Port": 0
     }

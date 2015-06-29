@@ -11,21 +11,21 @@
                     "Memory": 512,
                     "Dependencies": [
                         {
-                            "Name": "Minerva",
+                            "Name": "Dependency1",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45933
                         },
                         {
-                            "Name": "Helios",
+                            "Name": "Dependency2",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45934
                         },
                         {
-                            "Name": "CMK",
+                            "Name": "Dependency3",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45935
                         }
                     ]
@@ -37,21 +37,21 @@
                     "Memory": 256,
                     "Dependencies": [
                         {
-                            "Name": "Minerva",
+                            "Name": "Dependency1",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45933
                         },
                         {
-                            "Name": "Helios",
+                            "Name": "Dependency2",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45934
                         },
                         {
-                            "Name": "CMK",
+                            "Name": "Dependency3",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45935
                         }
                     ]
@@ -63,21 +63,21 @@
                     "Memory": 256,
                     "Dependencies": [
                         {
-                            "Name": "Minerva",
+                            "Name": "Dependency1",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45933
                         },
                         {
-                            "Name": "Helios",
+                            "Name": "Dependency2",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45934
                         },
                         {
-                            "Name": "CMK",
+                            "Name": "Dependency3",
                             "Status": "Pending Request",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 45935
                         }
                     ]
@@ -100,19 +100,19 @@
                         {
                             "Name": "Redis",
                             "Status": "Pending Request",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46033
                         },
                         {
-                            "Name": "Helios",
+                            "Name": "Dependency2",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46034
                         },
                         {
-                            "Name": "CMK",
+                            "Name": "Dependency3",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46035
                         }
                     ]
@@ -126,19 +126,19 @@
                         {
                             "Name": "Redis",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46033
                         },
                         {
-                            "Name": "Helios",
+                            "Name": "Dependency2",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46034
                         },
                         {
-                            "Name": "CMK",
+                            "Name": "Dependency3",
                             "Status": "OK",
-                            "Host": "internal-router.services.app2.com",
+                            "Host": "internal-router.services.abc.com",
                             "Port": 46035
                         }
                     ]

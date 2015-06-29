@@ -34,8 +34,9 @@
         <div class="col-md-3 well well-sm dep-panel" ng-repeat="dep in deps track by $index"
           ui-draggable="true" drag="dep" drag-channel="dependencies"
           ui-on-drop="onDrop($event, $data, deps, $index)" drop-channel="dependencies"
-          drop-validate="dropValidateHandler($drop, $event, $data)">
-          <p>
+          drop-validate="dropValidateHandler($drop, $event, $data)" popover="{{dep.Name}}"
+          popover-trigger="mouseenter">
+          <p class="truncate">
             {{dep.Name}}
           </p>
         </div>

@@ -144,7 +144,7 @@ controllers.controller('DashboardBodyCtrl', ['$scope', '$stateParams', '$modal',
     var index;
     if(action === 'accept') {
       dep.Status = 'OK';
-      dep.Host = 'internal-router.services.app2.com';
+      dep.Host = 'internal-router.services.abc.com';
       dep.Port = 45935;
       $scope.addAlert({
         type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
@@ -299,7 +299,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
     var index;
     if(action === 'accept') {
       dep.Status = 'OK';
-      dep.Host = 'internal-router.services.app2.com';
+      dep.Host = 'internal-router.services.abc.com';
       dep.Port = 45935;
       $scope.addAlert({
         type: 'success', message: "Dependency '" + dep.Name + "' registered successfully.",
