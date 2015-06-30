@@ -12,19 +12,19 @@
                     {
                         "Name": "Redis",
                         "Status": "Pending Request",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46033
                     },
                     {
                         "Name": "Dependency2",
                         "Status": "OK",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46034
                     },
                     {
                         "Name": "Dependency3",
                         "Status": "OK",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46035
                     }
                 ]
@@ -38,19 +38,19 @@
                     {
                         "Name": "Redis",
                         "Status": "OK",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46033
                     },
                     {
                         "Name": "Dependency2",
                         "Status": "OK",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46034
                     },
                     {
                         "Name": "Dependency3",
                         "Status": "OK",
-                        "Host": "internal-router.services.abc.com",
+                        "Host": "internal-router.services.example.com",
                         "Port": 46035
                     }
                 ]

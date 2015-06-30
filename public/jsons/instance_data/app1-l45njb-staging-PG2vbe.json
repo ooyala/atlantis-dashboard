@@ -2,7 +2,7 @@
   "Name": "Container 1(us-east-1d)",
   "ID": "app1-l45njb-staging-PG2vbe",
   "Description": "UI Server for App1",
-  "Host": "ec2-54-198-101-224.compute-1.amazonaws.com",
+  "Host": "host14.example.com",
   "Env": "test",
   "PrimaryPort": 61004,
   "SecondaryPorts": [

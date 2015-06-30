@@ -2,7 +2,7 @@
   "Name": "Container 3(us-east-1a)",
   "ID": "app1-pa131v-staging-ma93AG",
   "Description": "UI Server for App1",
-  "Host": "ec2-54-198-101-199.compute-1.amazonaws.com",
+  "Host": "host16.example.com",
   "Env": "test",
   "PrimaryPort": 61002,
   "SecondaryPorts": [

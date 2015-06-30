@@ -1,15 +1,15 @@
 {
-  "ShaId": "n2326a4d",
+  "ShaId": "6f4f150",
   "Regions": [
     {
       "Name": "us-east-1a",
       "Containers": [
         {
           "Name": "Container 1(us-east-1a)",
-          "ID": "app1-d37f05-production-0a6fFG",
-          "Description": "UI Server for App1",
-          "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
-          "Env": "test",
+          "ID": "app2-d37f05-staging-0a6fFG",
+          "Description": "UI Server for App2",
+          "Host": "host1.example.com",
+          "Env": "Staging",
           "PrimaryPort": 61000,
           "SecondaryPorts": [
             61200,
@@ -37,14 +37,14 @@
       ]
     },
     {
-      "Name": "us-east-1c",
+      "Name": "us-west-1b",
       "Containers": [
         {
-          "Name": "Container 1(us-east-1c)",
-          "ID": "app1-d37f05-production-0a6fFG",
-          "Description": "UI Server for App1",
-          "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
-          "Env": "test",
+          "Name": "Container 1(us-west-1b)",
+          "ID": "app2-d37f05-staging-0a6fFG",
+          "Description": "UI Server for App2",
+          "Host": "host2.example.com",
+          "Env": "Staging",
           "PrimaryPort": 61000,
           "SecondaryPorts": [
             61200,

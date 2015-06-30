@@ -2,20 +2,20 @@
     "Name": "production",
     "Shas": [
         {
-            "ShaId": "n2326a4d",
+            "ShaId": "186fef8",
             "Regions": [
                 "us-east-1a",
                 "us-east-1c"
             ]
         },
         {
-            "ShaId": "k4543313",
+            "ShaId": "d43ba56",
             "Regions": [
                 "us-east-1e"
             ]
         },
         {
-            "ShaId": "osgf313a",
+            "ShaId": "7d8858c",
             "Regions": [
                 "us-east-1a",
                 "us-east-1e"

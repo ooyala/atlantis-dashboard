@@ -1,14 +1,14 @@
 {
-  "ShaId": "kasdf131",
+  "ShaId": "58382c6",
   "Regions": [
     {
       "Name": "us-west-1a",
       "Containers": [
         {
           "Name": "Container 1(us-west-1a)",
-          "ID": "app2-d37f05-production-0a6fFG",
+          "ID": "app2-d37f05-staging-0a6fFG",
           "Description": "UI Server for App2",
-          "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
+          "Host": "host1.example.com",
           "Env": "test",
           "PrimaryPort": 61000,
           "SecondaryPorts": [

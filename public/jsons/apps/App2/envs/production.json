@@ -2,7 +2,7 @@
     "Name": "production",
     "Shas": [
         {
-            "ShaId": "madsfdf2",
+            "ShaId": "4784300",
             "Regions": [
                 "us-west-1c",
                 "us-west-1d",
@@ -10,13 +10,13 @@
             ]
         },
         {
-            "ShaId": "qerwerfs",
+            "ShaId": "1dddd11",
             "Regions": [
                 "us-west-1b"
             ]
         },
         {
-            "ShaId": "kasdf131",
+            "ShaId": "becdf25",
             "Regions": [
                 "us-west-1a"
             ]

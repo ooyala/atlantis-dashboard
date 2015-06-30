@@ -2,7 +2,7 @@
     "Name": "next-staging",
     "Shas": [
         {
-            "ShaId": "pasdfa4d",
+            "ShaId": "40da023",
             "Regions": [
                 "us-east-1a",
                 "us-east-1d",
@@ -10,13 +10,13 @@
             ]
         },
         {
-            "ShaId": "t232fd31",
+            "ShaId": "7846f58",
             "Regions": [
                 "us-east-1e"
             ]
         },
         {
-            "ShaId": "basd313a",
+            "ShaId": "b1fc386",
             "Regions": [
                 "us-east-1a"
             ]

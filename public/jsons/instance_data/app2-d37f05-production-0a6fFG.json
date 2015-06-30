@@ -2,7 +2,7 @@
   "Name": "Container 1(us-west-1c)",
   "ID": "app2-d37f05-production-0a6fFG",
   "Description": "UI Server for App2",
-  "Host": "ec2-54-198-101-197.compute-1.amazonaws.com",
+  "Host": "host17.example.com",
   "Env": "test",
   "PrimaryPort": 61000,
   "SecondaryPorts": [

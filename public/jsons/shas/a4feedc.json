@@ -1,5 +1,5 @@
 {
-  "ShaId": "bad2313a",
+  "ShaId": "a4feedc",
   "Regions": [
     {
       "Name": "us-east-1a",
@@ -8,7 +8,7 @@
           "Name": "Container 1(us-east-1a)",
           "ID": "app1-ned42a-staging-9gaEBC",
           "Description": "UI Server for App1",
-          "Host": "ec2-54-198-101-201.compute-1.amazonaws.com",
+          "Host": "host1.example.com",
           "Env": "test",
           "PrimaryPort": 61003,
           "SecondaryPorts": [
@@ -43,7 +43,7 @@
           "Name": "Container 1(us-east-1d)",
           "ID": "app1-l45njb-staging-PG2vbe",
           "Description": "UI Server for App1",
-          "Host": "ec2-54-198-101-224.compute-1.amazonaws.com",
+          "Host": "host2.example.com",
           "Env": "test",
           "PrimaryPort": 61004,
           "SecondaryPorts": [

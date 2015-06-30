@@ -2,21 +2,21 @@
     "Name": "App2",
     "Shas": [
         {
-            "ShaId": "abasdf23",
+            "ShaId": "a92a756",
             "Regions": [
                 "us-west-1c",
                 "us-west-1e"
             ]
         },
         {
-            "ShaId": "l242afsf",
+            "ShaId": "6f4f150",
             "Regions": [
                 "us-east-1a",
                 "us-west-1b"
             ]
         },
         {
-            "ShaId": "pa23131a",
+            "ShaId": "58382c6",
             "Regions": [
                 "us-west-1a"
             ]
