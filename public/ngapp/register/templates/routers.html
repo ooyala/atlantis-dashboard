@@ -1,0 +1,73 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="col-md-12">
+  <div class="content-header">Router Management</div>
+  <hr>
+  <form name="routersForm">
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1">
+        <div class="col-md-2">
+          <div class="btn-group zone-dropdown-left-padding" dropdown >
+            <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+              {{zoneBtnText}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="routers in data">
+                  <a ng-click="$parent.zone = routers.Router.Name; $parent.zoneBtnText = routers.Router.Name">{{routers.Router.Name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2 checkbox-lable checkbox-lable-internal">Internal</div>
+        <div class="col-md-1">
+          <switch id="enabled" name="enabled" ng-change="filterData(internal)" ng-model="internal" on="Yes" off="No" class="green"></switch>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" ng-model="host" placeholder="Host..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" ng-model="ip" placeholder="IP..." required></input>
+          <span class="required-mark">*</span>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone, host, internal);" ng-disabled="routersForm.$invalid"> Register</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <div class="panel box supervisor-panel">
+        <div class="panel-body"><br>
+          <div ng-repeat="routers in currentData">
+            <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
+              <div ng-repeat="router in routers">
+                <div ng-repeat="val in router.Host">
+                  <div class="col-md-4">
+                    <div class="panel box row-top-margin">
+                      <div class="row">
+                        <div class="col-md-10">&nbsp;</div>
+                        <div class="col-md-2">
+                          <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(router.Name, val.Name)"></i>
+                        </div>
+                      </div>
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{router.Name}} : {{val.Name}}" popover-trigger="mouseenter">{{router.Name}} : {{val.Name}}</h4></div>
+                          <div class="col-md-8 col-md-offset-2"><h4>Internal : {{val.Internal}}</h4></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>

@@ -1,0 +1,26 @@
+{
+    "Name": "staging",
+    "Shas": [
+        {
+            "ShaId": "600bcd1",
+            "Regions": [
+                "us-east-1a"
+            ]
+        },
+        {
+            "ShaId": "a4feedc",
+            "Regions": [
+                "us-east-1a",
+                "us-east-1d"
+            ]
+        },
+        {
+            "ShaId": "b1fc386",
+            "Regions": [
+                "us-east-1a",
+                "us-east-1d",
+                "us-east-1e"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <i class="{{alert.icon}}"></i>  {{alert.message}}
+</alert>
+
+<div class="container release-wizard">
+  <div class="col-md-12">
+    <div class="content-header">Release Wizard</div>
+    <hr>
+    <div class="col-md-12">
+      <div class="release-item" ng-repeat="tab in tabs" ng-class="{active:tab.active, visited:tab.visited}">
+      {{tab.title}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 release-wizard-body">
+    <div ng-include="currentTab.template"></div>
+  </div>
+</div>

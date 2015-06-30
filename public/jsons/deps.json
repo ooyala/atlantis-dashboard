@@ -1,0 +1,25 @@
+{
+  "Deps": [
+    {
+      "Name": "Dependency1",
+      "Host": "",
+      "Port": 0
+    },
+    {
+      "Name": "Redis",
+      "Host": "",
+      "Port": 0
+    },
+    {
+      "Name": "Dependency2",
+      "Host": "",
+      "Port": 0
+    },
+    {
+      "Name": "Dependency3",
+      "Host": "",
+      "Port": 0
+    }
+  ],
+  "Status": "Ok"
+}

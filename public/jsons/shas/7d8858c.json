@@ -1,0 +1,75 @@
+{
+  "ShaId": "7d8858c",
+  "Regions": [
+    {
+      "Name": "us-east-1a",
+      "Containers": [
+        {
+          "Name": "Container 1(us-east-1a)",
+          "ID": "app1-d37f05-production-0a6fFG",
+          "Description": "UI Server for App1",
+          "Host": "host1.example.com",
+          "Env": "test",
+          "PrimaryPort": 61000,
+          "SecondaryPorts": [
+            61200,
+            61300,
+            61400,
+            61500,
+            61600
+          ],
+          "SSHPort": 61100,
+          "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
+          "Manifest": {
+            "AppType": "ruby1.9.3",
+            "CPUShares": 1,
+            "Deps": {},
+            "Description": "Hello World Ruby Server",
+            "Instances": 1,
+            "JavaType": "",
+            "MemoryLimit": 16,
+            "Name": "hello-ruby1.9.3",
+            "RunCommands": [
+                "./app.rb"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Name": "us-east-1e",
+      "Containers": [
+        {
+          "Name": "Container 1(us-east-1e)",
+          "ID": "app1-d37f05-production-0a6fFG",
+          "Description": "UI Server for App1",
+          "Host": "host2.example.com",
+          "Env": "test",
+          "PrimaryPort": 61000,
+          "SecondaryPorts": [
+            61200,
+            61300,
+            61400,
+            61500,
+            61600
+          ],
+          "SSHPort": 61100,
+          "DockerID": "d60420a7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec720990a7",
+          "Manifest": {
+            "AppType": "ruby1.9.3",
+            "CPUShares": 1,
+            "Deps": {},
+            "Description": "Hello World Ruby Server",
+            "Instances": 1,
+            "JavaType": "",
+            "MemoryLimit": 16,
+            "Name": "hello-ruby1.9.3",
+            "RunCommands": [
+                "./app.rb"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

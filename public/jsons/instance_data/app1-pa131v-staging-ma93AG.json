@@ -1,0 +1,31 @@
+{
+  "Name": "Container 3(us-east-1a)",
+  "ID": "app1-pa131v-staging-ma93AG",
+  "Description": "UI Server for App1",
+  "Host": "host16.example.com",
+  "Env": "test",
+  "PrimaryPort": 61002,
+  "SecondaryPorts": [
+    61202,
+    61302,
+    61402,
+    61502,
+    61602
+  ],
+  "SSHPort": 61102,
+  "DockerID": "bbbbbba7b0223fe352e9b787d7071c70732bb54d37f538e2028441ec7209g343lk",
+  "Manifest": {
+    "AppType": "ruby1.9.3",
+    "CPUShares": 1,
+    "Deps": {
+    },
+    "Description": "Hello World Ruby Server",
+    "Instances": 1,
+    "JavaType": "",
+    "MemoryLimit": 16,
+    "Name": "hello-ruby1.9.3",
+    "RunCommands": [
+      "./app.rb"
+    ]
+  }
+}

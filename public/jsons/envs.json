@@ -1,0 +1,8 @@
+{
+  "Envs": [
+    "staging",
+    "production",
+    "next-staging"
+  ],
+  "Status" : "Ok"
+}
