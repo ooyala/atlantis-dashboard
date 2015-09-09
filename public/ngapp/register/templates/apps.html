@@ -8,11 +8,13 @@
   <form name="appInfoForm">
     <div class="row">
       <div class="col-md-12">
-        <div class="col-sm-1 checkbox-lable checkbox-lable-internal" ng-hide="non_atlantis">
-          Internal
+        <div class="col-sm-1 checkbox-lable checkbox-lable-internal">
+          <div ng-hide="non_atlantis"> Internal </div>
         </div>
         <div class="col-md-1">
-          <switch id="enabled" ng-hide="non_atlantis" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
+          <div ng-hide="non_atlantis">
+            <switch id="enabled" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
+          </div>
         </div>
         <div class="col-sm-1 checkbox-lable checkbox-lable-nonatlantis">
           Non Atlantis
@@ -67,6 +69,9 @@
                 Email : {{app.App.Email}}<br>
                 Internal : {{app.App.Internal}}<br>
                 Non Atlantis : {{app.App.NonAtlantis}}<br>
+
+                <!-- consisten box height for non atlatnis-->
+                <div ng-show="app.App.NonAtlantis"><br><br></div>
               </div>
               <div class="panel-footer panel-footer-bgcolor">
                 <div class="row">
