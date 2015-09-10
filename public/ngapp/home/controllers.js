@@ -183,7 +183,6 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   $scope.isShaInfoEnabled = false;
   $scope.env = [];
 
-
   appsFactory.findEnv($stateParams.appName, $stateParams.envName, function(env) {
     $scope.$parent.appBtnText = $stateParams.appName;
     $scope.shas = env.Shas;
@@ -258,7 +257,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteSha = function(sha) {
-    var templateUrl = 'ngapp/home/templates/deleteModal.html',
+    var templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'sha ID', name = sha.ShaId, itemType = 'sha';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
@@ -277,7 +276,7 @@ controllers.controller('EnvContentCtrl', ['$scope', '$modal', '$stateParams', 'a
   };
 
   $scope.deleteContainer = function(container) {
-    var templateUrl = 'ngapp/home/templates/deleteModal.html',
+    var templateUrl = 'ngapp/templates/deleteModal.html',
         type = 'container name', name = container.Name, itemType = 'container';
 
     modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
