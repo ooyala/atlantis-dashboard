@@ -38,7 +38,7 @@
             </select>
           </th>
         </tr>
-        <tr ng-repeat="containerInfo in filtered_results">
+        <tr ng-repeat="containerInfo in filteredResults">
           <td class="col-sm-2"><span class="glyphicon glyphicon-ok container-status-color" ng-show="containerInfo.Status == 'OK'"></span></td>
           <td>{{containerInfo.Container.ID}}</td>
           <td>{{containerInfo.Container.Env}}</td>

@@ -7,7 +7,7 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
   'atlantisApp.filters', 'atlantisApp.registerControllers',
   'atlantisApp.registerServices', 'atlantisApp.commonServices',
-  'atlantisApp.statusServices',
+  'atlantisApp.statusServices', 'atlantisApp.statusFilters',
   'ngTagsInput','uiSwitch',
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
