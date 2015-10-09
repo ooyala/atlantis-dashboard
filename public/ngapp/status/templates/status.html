@@ -8,31 +8,31 @@
       <!-- Table -->
       <table class="table">
         <tr>
-          <th>Health <select ng-model="filterForm.status" ng-options="value as value for value in status" ng-init="filterForm.status=status[0]"></select></th>
+          <th>Health <select ng-model="filterForm.Status" ng-options="value as value for value in status" ng-init="filterForm.Status=status[0]"></select></th>
           <th>ID
             <span class="glyphicon glyphicon-chevron-up" ng-model="containerOrder" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-show="containerOrder" ng-click="order(containerOrder)"></span>
             <span class="glyphicon glyphicon-chevron-down" ng-model="containerOrder" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-show="!containerOrder" ng-click="order(containerOrder)"></span>
           </th>
           <th>Environment
-            <select ng-model="filterForm.env">
+            <select ng-model="filterForm.Env">
               <option>All</option>
               <option ng-repeat="value in container | unique : 'Env'">{{value.Env}}</option>
             </select>
           </th>
           <th>App
-            <select ng-model="filterForm.app">
+            <select ng-model="filterForm.App">
               <option>All</option>
               <option ng-repeat="value in container | unique : 'App'">{{value.App}}</option>
             </select>
           </th>
           <th>SHA
-            <select ng-model="filterForm.sha">
+            <select ng-model="filterForm.Sha">
               <option>All</option>
               <option ng-repeat="value in container | unique : 'Sha' | limitedSha">{{value}}</option>
             </select>
           </th>
           <th>Host
-            <select ng-model="filterForm.host">
+            <select ng-model="filterForm.Host">
               <option>All</option>
               <option ng-repeat="value in container | unique : 'Host'">{{value.Host}}</option>
             </select>

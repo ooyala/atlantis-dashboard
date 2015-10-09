@@ -6,32 +6,40 @@ controllers.controller('StatusCtrl', ['$scope', '$rootScope', '$state', 'statusF
     $scope.data = [];
     $scope.status = ['All'];
     $scope.container = [];
+    $scope.filteredResults = [];
     $scope.filterForm = {
-      status : '',
-      env : 'All',
-      app : 'All',
-      sha : 'All',
-      host : 'All'
+      Status : 'All',
+      Env : 'All',
+      App : 'All',
+      Sha : 'All',
+      Host : 'All'
     };
 
     $scope.$watchCollection('filterForm', function (newVal, oldVal) {
-      if ($scope.data) {
-        $scope.filteredResults = $scope.getFilteredResult($scope.data);
+      var filterValues;
+
+      $scope.filteredResults = $scope.data;
+      filterValues = _.pick(newVal, function(val, key) {
+        return val !== 'All' }
+      );
+
+      if (!_.isEmpty(filterValues)) {
+        $scope.filteredResults = $scope.getFilteredResult(filterValues);
       }
     });
 
-    $scope.getFilteredResult = function (result) {
+    $scope.getFilteredResult = function (filterValues) {
       var currentResult = [];
-      angular.forEach(result, function (value, key) {
-        if (statusFactory.isFiltered($scope.filterForm, value)) {
-          if (currentResult.indexOf(value) === -1) {
-            currentResult.push(value);
+
+      angular.forEach($scope.data, function (record) {
+        if (statusFactory.isFiltered(filterValues, record)) {
+          if (currentResult.indexOf(record) === -1) {
+            currentResult.push(record);
           }
         }
       });
       return currentResult;
     };
-
 
     // This function will decide the orderby sequence for container id.
     $scope.order = function (order) {
@@ -48,6 +56,7 @@ controllers.controller('StatusCtrl', ['$scope', '$rootScope', '$state', 'statusF
 
     statusFactory.getContainers(function (data) {
       $scope.containerIDs = data.ContainerIDs;
+
       angular.forEach($scope.containerIDs, function (containerID) {
         statusFactory.getContainersInfo(containerID, function (data) {
           $scope.container.push(data.Container);
@@ -57,6 +66,7 @@ controllers.controller('StatusCtrl', ['$scope', '$rootScope', '$state', 'statusF
           $scope.data.push(data);
         });
       });
+
       $scope.filteredResults = $scope.data;
     });
   }]);

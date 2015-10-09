@@ -15,28 +15,17 @@ containerStatus.factory('statusFactory', ['$http', function ($http) {
     callGet('/instances/' + cont, callback);
   };
 
-  data.isFiltered = function (filterForm, item) {
+  data.isFiltered = function (filterValues, item) {
     var validItem = true;
-    validItem = checkFilter(filterForm.status, item.Status, validItem);
-    validItem = checkFilter(filterForm.status, item.Status, validItem);
-    validItem = checkFilter(filterForm.env, item.Container.Env, validItem);
-    validItem = checkFilter(filterForm.app, item.Container.App, validItem);
-    validItem = checkFilter(filterForm.sha, item.Container.Sha, validItem);
-    validItem = checkFilter(filterForm.host, item.Container.Host, validItem);
+
+    angular.forEach(filterValues, function(value, key){
+      if(key === 'Status' && value !== item.Status) {
+        validItem = false;
+      } else if(key !== 'Status' && value !== item.Container[key]) {
+        validItem = false;
+      }
+    });
     return validItem;
   }
   return data;
 }]);
-
-function checkFilter (formFilterItem, itemFilter, validItem) {
-  if (formFilterItem && formFilterItem !== 'All') {
-    if (itemFilter !== formFilterItem) {
-      return false;
-    }
-  }
-  if (validItem) {
-    return true;
-  } else {
-    return false;
-  }
-}
