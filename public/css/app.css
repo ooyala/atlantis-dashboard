@@ -389,3 +389,7 @@ tags-input .tags .tag-item {
 .register-dropdown-width {
   min-width: 115px;
 }
+
+.container-status-color {
+  color: green;
+}

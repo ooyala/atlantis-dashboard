@@ -2,11 +2,12 @@ var atlantisApp = angular.module('atlantisApp', [
   'ngAnimate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'ang-drag-drop',
   'atlantisApp.homeControllers', 'atlantisApp.releaseWizardControllers',
   'atlantisApp.deployControllers', 'atlantisApp.manageControllers',
-  'atlantisApp.usersControllers',
+  'atlantisApp.usersControllers', 'atlantisApp.statusControllers',
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
   'atlantisApp.filters', 'atlantisApp.registerControllers',
   'atlantisApp.registerServices', 'atlantisApp.commonServices',
+  'atlantisApp.statusServices',
   'ngTagsInput','uiSwitch',
 ], function($httpProvider) {
   // Use x-www-form-urlencoded Content-Type
@@ -200,6 +201,17 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         },
         title: 'Atlantis - User Administration'
+      })
+      .state('root.status', {
+        url: 'status',
+        views: {
+          'content@' : {
+            templateUrl: 'ngapp/status/templates/status.html',
+            controller: 'StatusCtrl',
+            controllerAs: 'vm'
+          }
+        },
+        title: 'Atlantis - Status'
       });
   }
 ]);

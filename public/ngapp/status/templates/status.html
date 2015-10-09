@@ -1,0 +1,71 @@
+<div class="col-md-12">
+  <div class="content-header">Status</div>
+  <hr>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><h4>Container Status</h4></div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Health <select ng-model="filterForm.status" ng-options="value as value for value in status" ng-init="filterForm.status=status[0]"></select></th>
+          <th>ID
+            <span class="glyphicon glyphicon-chevron-up" ng-model="containerOrder" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-show="containerOrder" ng-click="order(containerOrder)"></span>
+            <span class="glyphicon glyphicon-chevron-down" ng-model="containerOrder" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-show="!containerOrder" ng-click="order(containerOrder)"></span>
+          </th>
+          <th>Environment
+            <select ng-model="filterForm.env">
+              <option>All</option>
+              <option ng-repeat="value in container | unique : 'Env'">{{value.Env}}</option>
+            </select>
+          </th>
+          <th>App
+            <select ng-model="filterForm.app">
+              <option>All</option>
+              <option ng-repeat="value in container | unique : 'App'">{{value.App}}</option>
+            </select>
+          </th>
+          <th>SHA
+            <select ng-model="filterForm.sha">
+              <option>All</option>
+              <option ng-repeat="value in container | unique : 'Sha' | limitedSha">{{value}}</option>
+            </select>
+          </th>
+          <th>Host
+            <select ng-model="filterForm.host">
+              <option>All</option>
+              <option ng-repeat="value in container | unique : 'Host'">{{value.Host}}</option>
+            </select>
+          </th>
+        </tr>
+        <tr ng-repeat="containerInfo in filtered_results">
+          <td class="col-sm-2"><span class="glyphicon glyphicon-ok container-status-color" ng-show="containerInfo.Status == 'OK'"></span></td>
+          <td>{{containerInfo.Container.ID}}</td>
+          <td>{{containerInfo.Container.Env}}</td>
+          <td>{{containerInfo.Container.App}}</td>
+          <td>{{containerInfo.Container.Sha}}</td>
+          <td>{{containerInfo.Container.Host}}:{{containerInfo.Container.PrimaryPort}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><h4>Task Status</h4></div>
+
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
