@@ -1,82 +1,88 @@
 var controllers = angular.module('atlantisApp.registerControllers', []);
 
 controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'supervisorFactory',
- 'deleteModal', 'addModal', '$timeout',
-  function($scope, $rootScope, $state, supervisorFactory, deleteModal, addModal, $timeout) {
+  'deleteModal', 'addModal', '$timeout',
+  function ($scope, $rootScope, $state, supervisorFactory, deleteModal, addModal, $timeout) {
 
     $rootScope.title = $state.current.title;
     $scope.supervisors = [];
     $scope.newSupervisor = "";
     $scope.alerts = [];
 
-    supervisorFactory.getSupervisors(function(data){
+    supervisorFactory.getSupervisors(function (data) {
       $scope.supervisors = data.Supervisors;
     });
 
-    $scope.addAlert = function(alert) {
+    $scope.addAlert = function (alert) {
       $scope.alerts.push(alert);
       $scope.closeAlert($scope.alerts.length - 1);
     };
 
-    $scope.closeAlert = function(index) {
-      $timeout(function(){
+    $scope.closeAlert = function (index) {
+      $timeout(function () {
         $scope.alerts.splice(index, 1);
       }, 3000);
     };
 
-    $scope.addSupervisor = function(currentSup){
+    $scope.addSupervisor = function (currentSup) {
       $scope.newSupervisor = "";
-      var templateUrl = 'ngapp/templates/addModal.html',name = currentSup,
-          itemType = "supervisor";
+      var templateUrl = 'ngapp/templates/addModal.html',
+        name = currentSup,
+        itemType = "supervisor";
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
-      modalInstance.result.then(function(name) {
-        $scope.sup = _.filter($scope.supervisors, function(supervisor) {
-            return currentSup == supervisor;
-          })
-          if(_.isEmpty($scope.sup)){
-            $scope.supervisors.push(currentSup);
-            $scope.addAlert({
-              type: 'success', message: "Supervisor '" + name + "' added successfully.",
-              icon: 'glyphicon glyphicon-ok'
-            });
-          }else{
-            $scope.addAlert({
-              type: 'danger', message: "Supervisor '" + name + "' already exists.",
-              icon: 'glyphicon glyphicon-remove'
-            });
-          }
-          $scope.newSupervisor = "";
-        }, function(result) {
-          $scope.newSupervisor = "";
-          console.log(result);
+      modalInstance.result.then(function (name) {
+        $scope.sup = _.filter($scope.supervisors, function (supervisor) {
+          return currentSup === supervisor;
+        });
+        if (_.isEmpty($scope.sup)) {
+          $scope.supervisors.push(currentSup);
+          $scope.addAlert({
+            type: 'success',
+            message: "Supervisor '" + name + "' added successfully.",
+            icon: 'glyphicon glyphicon-ok'
+          });
+        } else {
+          $scope.addAlert({
+            type: 'danger',
+            message: "Supervisor '" + name + "' already exists.",
+            icon: 'glyphicon glyphicon-remove'
+          });
+        }
+        $scope.newSupervisor = "";
+      }, function (result) {
+        $scope.newSupervisor = "";
+        console.log(result);
       });
     };
 
-    $scope.deleteSupervisor = function(currentSup){
-      var templateUrl = 'ngapp/templates/deleteModal.html',name = currentSup,
-          type = 'Supervisor', itemType = "supervisor";
+    $scope.deleteSupervisor = function (currentSup) {
+      var templateUrl = 'ngapp/templates/deleteModal.html',
+        name = currentSup,
+        type = 'Supervisor',
+        itemType = "supervisor";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(name) {
-        $scope.supervisors = _.filter($scope.supervisors, function(supervisor) {
+      modalInstance.result.then(function (name) {
+        $scope.supervisors = _.filter($scope.supervisors, function (supervisor) {
           return currentSup !== supervisor;
         });
         $scope.addAlert({
-            type: 'success', message: "Supervisor '" + name + "' deleted successfully.",
-            icon: 'glyphicon glyphicon-ok'
+          type: 'success',
+          message: "Supervisor '" + name + "' deleted successfully.",
+          icon: 'glyphicon glyphicon-ok'
         });
         $scope.newSupervisor = "";
-        }, function(result) {
-          $scope.newSupervisor = "";
-          console.log(result);
+      }, function (result) {
+        $scope.newSupervisor = "";
+        console.log(result);
       });
     };
-}]);
+  }]);
 
-controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'managerFactory',
+controllers.controller("ManagersCtrl", ["$scope", '$rootScope', '$state', 'managerFactory',
   'deleteModal', 'addModal', '$timeout',
-  function($scope, $rootScope, $state, managerFactory, deleteModal, addModal, $timeout){
+  function ($scope, $rootScope, $state, managerFactory, deleteModal, addModal, $timeout) {
 
     $scope.region = "";
     $scope.host = "";
@@ -87,42 +93,47 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
 
     $rootScope.title = $state.current.title;
 
-    managerFactory.getManagers(function(data){
+    managerFactory.getManagers(function (data) {
       $scope.data = data;
     });
 
-    $scope.addAlert = function(alert) {
+    $scope.addAlert = function (alert) {
       $scope.alerts.push(alert);
       $scope.closeAlert($scope.alerts.length - 1);
     };
 
-    $scope.closeAlert = function(index) {
-      $timeout(function(){
+    $scope.closeAlert = function (index) {
+      $timeout(function () {
         $scope.alerts.splice(index, 1);
       }, 3000);
     };
 
-    $scope.addManager = function(currentRegion, currentHost){
-      var templateUrl = 'ngapp/templates/addModal.html',name = currentHost,
-          itemType = "manager", region, hosts = [];
+    $scope.addManager = function (currentRegion, currentHost) {
+      var templateUrl = 'ngapp/templates/addModal.html',
+        name = currentHost,
+        itemType = "manager",
+        region,
+        hosts = [];
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
-      modalInstance.result.then(function(name) {
+      modalInstance.result.then(function (name) {
         region = _.pick($scope.data.Managers, currentRegion);
-        if(_.isEmpty(region)){
+        if (_.isEmpty(region)) {
           hosts.push(currentHost);
           $scope.data.Managers[currentRegion] = hosts;
-        }else{
-          _.mapObject(region, function(val,key){
-            if(_.contains(val,currentHost)){
+        } else {
+          _.mapObject(region, function (val, key) {
+            if (_.contains(val, currentHost)) {
               $scope.addAlert({
-                type: 'danger', message: "Manager '" + name + "' already exists.",
+                type: 'danger',
+                message: "Manager '" + name + "' already exists.",
                 icon: 'glyphicon glyphicon-remove'
               });
-            }else{
+            } else {
               $scope.data.Managers[currentRegion].push(currentHost);
               $scope.addAlert({
-                type: 'success', message: "Manager '" + name + "' added successfully.",
+                type: 'success',
+                message: "Manager '" + name + "' added successfully.",
                 icon: 'glyphicon glyphicon-ok'
               });
             }
@@ -132,7 +143,7 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
         $scope.host = "";
         $scope.managerCName = "";
         $scope.registyCName = "";
-      }, function(result) {
+      }, function (result) {
         $scope.region = "";
         $scope.host = "";
         $scope.managerCName = "";
@@ -141,28 +152,33 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
       });
     };
 
-    $scope.deleteManager = function(currentRegion, currentHost){
-      var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-          type = 'Manager', itemType = "manager", region, hosts = [];
+    $scope.deleteManager = function (currentRegion, currentHost) {
+      var templateUrl = 'ngapp/templates/deleteModal.html',
+        name = currentHost,
+        type = 'Manager',
+        itemType = "manager",
+        region,
+        hosts = [];
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(name) {
+      modalInstance.result.then(function (name) {
         region = _.pick($scope.data.Managers, currentRegion);
-        _.mapObject(region, function(val, key){
-          hosts = _.filter(val, function(v){
-              return currentHost != v;
+        _.mapObject(region, function (val, key) {
+          hosts = _.filter(val, function (v) {
+            return currentHost !== v;
           });
         });
         $scope.data.Managers[currentRegion] = hosts;
         $scope.addAlert({
-            type: 'success', message: "Manager '" + name + "' deleted successfully.",
-            icon: 'glyphicon glyphicon-ok'
+          type: 'success',
+          message: "Manager '" + name + "' deleted successfully.",
+          icon: 'glyphicon glyphicon-ok'
         });
         $scope.region = "";
         $scope.host = "";
         $scope.managerCName = "";
         $scope.registyCName = "";
-      }, function(result) {
+      }, function (result) {
         $scope.region = "";
         $scope.host = "";
         $scope.managerCName = "";
@@ -170,11 +186,11 @@ controllers.controller("ManagersCtrl",["$scope", '$rootScope', '$state', 'manage
         console.log(result);
       });
     };
-}]);
+  }]);
 
-controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerFactory',
+controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'routerFactory',
   'deleteModal', 'addModal', '$timeout',
-   function($scope, $rootScope, $state, routerFactory, deleteModal, addModal, $timeout){
+   function ($scope, $rootScope, $state, routerFactory, deleteModal, addModal, $timeout) {
 
     $rootScope.title = $state.current.title;
     $scope.zone = "";
@@ -190,60 +206,65 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
 
     $rootScope.title = $state.current.title;
 
-    routerFactory.getRouters(function(data){
+    routerFactory.getRouters(function (data) {
       $scope.data = data;
       $scope.currentData = data;
     });
 
-    $scope.addAlert = function(alert) {
+    $scope.addAlert = function (alert) {
       $scope.alerts.push(alert);
       $scope.closeAlert($scope.alerts.length - 1);
     };
 
-    $scope.closeAlert = function(index) {
-      $timeout(function(){
+    $scope.closeAlert = function (index) {
+      $timeout(function () {
         $scope.alerts.splice(index, 1);
       }, 3000);
     };
 
-    $scope.filterData = function(internal){
+    $scope.filterData = function (internal) {
       var filteredHost = [];
       $scope.filteredData = angular.copy($scope.data);
-      _.each($scope.filteredData, function(data){
-        filteredHost = _.filter(data.Router.Host, function(host){
-          return host.Internal == internal;
+      _.each($scope.filteredData, function (data) {
+        filteredHost = _.filter(data.Router.Host, function (host) {
+          return host.Internal === internal;
         });
         data.Router.Host = filteredHost;
       });
       $scope.currentData = $scope.filteredData;
     };
 
-    $scope.addRouter = function(currentZone, currentHost, Internal){
-      var templateUrl = 'ngapp/templates/addModal.html', name = currentHost,
-          itemType = "router", router, host;
+    $scope.addRouter = function (currentZone, currentHost, Internal) {
+      var templateUrl = 'ngapp/templates/addModal.html',
+        name = currentHost,
+        itemType = "router",
+        router,
+        host;
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
-      modalInstance.result.then(function(name) {
-        router = _.filter($scope.currentData, function(data){
-          return data.Router.Name == currentZone;
+      modalInstance.result.then(function (name) {
+        router = _.filter($scope.currentData, function (data) {
+          return data.Router.Name === currentZone;
         });
-        host = _.filter(router[0].Router.Host, function(Host){
-          return Host.Name == currentHost;
+        host = _.filter(router[0].Router.Host, function (Host) {
+          return Host.Name === currentHost;
         });
-        if(_.isEmpty(host)){
-          _.each($scope.currentData, function(data){
-            if(data.Router.Name == currentZone){
+        if (_.isEmpty(host)) {
+          _.each($scope.currentData, function (data) {
+            if (data.Router.Name === currentZone) {
               data.Router.Host.push({"Name": currentHost, "Internal": Internal});
               return;
             }
           });
           $scope.addAlert({
-            type: 'success', message: "Router '" + name + "' added successfully.",
+            type: 'success',
+            message: "Router '" + name + "' added successfully.",
             icon: 'glyphicon glyphicon-ok'
           });
-        }else{
+        } else {
           $scope.addAlert({
-            type: 'danger', message: "Router '" + name + "' already exists.",
+            type: 'danger',
+            message: "Router '" + name + "' already exists.",
             icon: 'glyphicon glyphicon-remove'
           });
         }
@@ -252,7 +273,7 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
         $scope.ip = "";
         $scope.zoneBtnText = "Select Zone";
         $scope.internal = false;
-      }, function(result) {
+      }, function (result) {
         $scope.zone = "";
         $scope.host = "";
         $scope.ip = "";
@@ -262,26 +283,31 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
       });
     };
 
-    $scope.deleteRouter = function(currentZone, currentHost){
-      var templateUrl = 'ngapp/templates/deleteModal.html',name = currentHost,
-          type = 'Router', itemType = "router", router, hosts;
+    $scope.deleteRouter = function (currentZone, currentHost) {
+      var templateUrl = 'ngapp/templates/deleteModal.html',
+        name = currentHost,
+        type = 'Router',
+        itemType = "router",
+        router,
+        hosts;
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(nam, hostse) {
-        router = _.filter($scope.currentData, function(data){
-          return data.Router.Name == currentZone;
+      modalInstance.result.then(function (nam, hostse) {
+        router = _.filter($scope.currentData, function (data) {
+          return data.Router.Name === currentZone;
         });
-        hosts = _.filter(router[0].Router.Host, function(Host){
-          return Host.Name != currentHost;
+        hosts = _.filter(router[0].Router.Host, function (Host) {
+          return Host.Name !== currentHost;
         });
-        _.each($scope.currentData, function(data){
-            if(data.Router.Name == currentZone){
-              data.Router["Host"] = hosts;
-              return;
-            }
-          });
+        _.each($scope.currentData, function (data) {
+          if (data.Router.Name === currentZone) {
+            data.Router["Host"] = hosts;
+            return;
+          }
+        });
         $scope.addAlert({
-          type: 'success', message: "Router '" + name + "' deleted successfully.",
+          type: 'success',
+          message: "Router '" + name + "' deleted successfully.",
           icon: 'glyphicon glyphicon-ok'
         });
         $scope.zone = "";
@@ -289,7 +315,7 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
         $scope.ip = "";
         $scope.zoneBtnText = "Select Zone";
         $scope.internal = false;
-      }, function(result) {
+      }, function (result) {
         $scope.zone = "";
         $scope.host = "";
         $scope.ip = "";
@@ -298,11 +324,11 @@ controllers.controller("RoutersCtrl",["$scope", '$rootScope', '$state', 'routerF
         console.log(result);
       });
     };
-}]);
+  }]);
 
 controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrpsFactory',
- 'deleteModal', 'addModal', '$timeout', 'updateIPGroup',
-  function($scope, $rootScope, $state, ipgrpsFactory, deleteModal, addModal, $timeout, updateIPGroup) {
+  'deleteModal', 'addModal', '$timeout', 'updateIPGroup',
+  function ($scope, $rootScope, $state, ipgrpsFactory, deleteModal, addModal, $timeout, updateIPGroup) {
 
     $rootScope.title = $state.current.title;
     $scope.grpName = "";
@@ -311,112 +337,122 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
     $scope.alerts = [];
     $scope.data = {};
 
-    ipgrpsFactory.getIPInfo(function(data){
+    ipgrpsFactory.getIPInfo(function (data) {
       $scope.data = data;
     });
 
-    $scope.addAlert = function(alert) {
+    $scope.addAlert = function (alert) {
       $scope.alerts.push(alert);
       $scope.closeAlert($scope.alerts.length - 1);
     };
 
-    $scope.closeAlert = function(index) {
-      $timeout(function(){
+    $scope.closeAlert = function (index) {
+      $timeout(function () {
         $scope.alerts.splice(index, 1);
       }, 3000);
     };
 
-    $scope.addIPGroup = function(Name, ips){
-      var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-          itemType = "IPGroup", grp = {}, IPs = [];
+    $scope.addIPGroup = function (Name, ips) {
+      var templateUrl = 'ngapp/templates/addModal.html',
+        name = Name,
+        itemType = "IPGroup",
+        grp = {},
+        IPs = [];
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
-      modalInstance.result.then(function(name) {
-        grp = _.filter($scope.data.IPGroups, function(ipgrp) {
-            return ipgrp.Name == Name;
+      modalInstance.result.then(function (name) {
+        grp = _.filter($scope.data.IPGroups, function (ipgrp) {
+          return ipgrp.Name === Name;
+        });
+        if (_.isEmpty(grp)) {
+          _.each(ips, function (val, key) {
+            IPs.push(val.text);
           });
-          if(_.isEmpty(grp)){
-            _.each(ips,function(val,key){
-              IPs.push(val.text);
-            })
-            $scope.data.IPGroups.push({Name ,IPs});
-            $scope.addAlert({
-              type: 'success', message: "Group Name '" + name + "' added successfully.",
-              icon: 'glyphicon glyphicon-ok'
-            });
-          }else{
-            $scope.addAlert({
-              type: 'danger', message: "Group Name '" + name + "' already registered.   Update if you want to add IP.",
-              icon: 'glyphicon glyphicon-remove'
-            });
-          }
-          $scope.grpName = "";
-          $scope.IPs = [];
-        }, function(result) {
-          $scope.grpName = "";
-          $scope.IPs = [];
-          console.log(result);
+          $scope.data.IPGroups.push({Name, IPs});
+          $scope.addAlert({
+            type: 'success',
+            message: "Group Name '" + name + "' added successfully.",
+            icon: 'glyphicon glyphicon-ok'
+          });
+        } else {
+          $scope.addAlert({
+            type: 'danger',
+            message: "Group Name '" + name + "' already registered.   Update if you want to add IP.",
+            icon: 'glyphicon glyphicon-remove'
+          });
+        }
+        $scope.grpName = "";
+        $scope.IPs = [];
+      }, function (result) {
+        $scope.grpName = "";
+        $scope.IPs = [];
+        console.log(result);
       });
     };
 
-    $scope.deleteIPGroup = function(Name){
-      var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
-          type = 'IP Group', itemType = "IPGroup";
+    $scope.deleteIPGroup = function (Name) {
+      var templateUrl = 'ngapp/templates/deleteModal.html',
+        name = Name,
+        type = 'IP Group',
+        itemType = "IPGroup";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(name) {
-        $scope.data.IPGroups = _.filter($scope.data.IPGroups, function(ipgrp) {
+      modalInstance.result.then(function (name) {
+        $scope.data.IPGroups = _.filter($scope.data.IPGroups, function (ipgrp) {
           return ipgrp.Name != Name;
         });
         $scope.addAlert({
-            type: 'success', message: "Group '" + name + "' deleted successfully.",
+            type: 'success',
+            message: "Group '" + name + "' deleted successfully.",
             icon: 'glyphicon glyphicon-ok'
         });
         $scope.grpName = "";
         $scope.IPs = [];
-        }, function(result) {
+        }, function (result) {
           $scope.grpName = "";
           $scope.IPs = [];
           console.log(result);
       });
     };
 
-    $scope.updateIPGroup = function(Name){
-      var templateUrl = 'ngapp/register/templates/updateIPGroup.html',name = Name,
-          itemType = "IPGroup", grp = {};
+    $scope.updateIPGroup = function (Name) {
+      var templateUrl = 'ngapp/register/templates/updateIPGroup.html',
+        name = Name,
+        itemType = "IPGroup",
+        grp = {};
 
-      grp = _.filter($scope.data.IPGroups, function(ipgrp) {
+      grp = _.filter($scope.data.IPGroups, function (ipgrp) {
         return ipgrp.Name == Name;
       });
-      _.each(grp,function(data){
-        _.each(data.IPs,function(ip){
+      _.each(grp,function (data) {
+        _.each(data.IPs, function (ip) {
           $scope.updateIPs.push({'text': ip});
         });
       });
       modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, $scope.updateIPs);
-      modalInstance.result.then(function() {
-        _.filter($scope.data.IPGroups, function(ipgrp) {
-         if (ipgrp.Name == Name){
+      modalInstance.result.then(function () {
+        _.filter($scope.data.IPGroups, function (ipgrp) {
+         if (ipgrp.Name == Name) {
           ipgrp.IPs = [];
 
-          _.each($scope.updateIPs, function(val, key){
+          _.each($scope.updateIPs, function (val, key) {
             ipgrp.IPs.push(val.text);
           });
         }
       });
       $scope.grpName = "";
       $scope.updateIPs = [];
-      }, function(result) {
+      }, function (result) {
         $scope.grpName = "";
         $scope.updateIPs = [];
         console.log(result);
       });
     };
-}]);
+  }]);
 
 controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoFactory',
  'deleteModal', 'addModal', '$timeout', 'updateApp',
-  function($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
+  function ($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
 
     $scope.apps = {};
     $scope.name = "";
@@ -429,39 +465,43 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
     $rootScope.title = $state.current.title;
 
-    appsInfoFactory.getAppInfo(function(data){
+    appsInfoFactory.getAppInfo(function (data) {
       $scope.apps = data;
     });
 
-    $scope.addAlert = function(alert) {
+    $scope.addAlert = function (alert) {
       $scope.alerts.push(alert);
       $scope.closeAlert($scope.alerts.length - 1);
     };
 
-    $scope.closeAlert = function(index) {
-      $timeout(function(){
+    $scope.closeAlert = function (index) {
+      $timeout(function () {
         $scope.alerts.splice(index, 1);
       }, 3000);
     };
 
-    $scope.addApps = function(Name, Root, Repo, Email, Internal, NonAtlantis){
-      var templateUrl = 'ngapp/templates/addModal.html',name = Name,
-          itemType = "apps", app = {};
+    $scope.addApps = function (Name, Root, Repo, Email, Internal, NonAtlantis) {
+      var templateUrl = 'ngapp/templates/addModal.html',
+        name = Name,
+        itemType = "apps",
+        app = {};
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
-      modalInstance.result.then(function(name) {
-        app = _.filter($scope.apps, function(app) {
+      modalInstance.result.then(function (name) {
+        app = _.filter($scope.apps, function (app) {
           return app.App.Name == Name;
         });
-        if(_.isEmpty(app)){
+        if (_.isEmpty(app)) {
           $scope.apps.push({"App":{Name ,Root, Repo, Email, Internal, NonAtlantis}});
           $scope.addAlert({
-            type: 'success', message: "App '" + name + "' added successfully.",
+            type: 'success',
+            message: "App '" + name + "' added successfully.",
             icon: 'glyphicon glyphicon-ok'
           });
-        }else{
+        } else {
           $scope.addAlert({
-            type: 'danger', message: "App '" + name + "' already registered. Please update.",
+            type: 'danger',
+            message: "App '" + name + "' already registered. Please update.",
             icon: 'glyphicon glyphicon-remove'
           });
         }
@@ -471,7 +511,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         $scope.email = "";
         $scope.internal = false;
         $scope.non_atlantis = false;
-      }, function(result) {
+      }, function (result) {
         $scope.name = "";
         $scope.root = "";
         $scope.repo = "";
@@ -482,17 +522,20 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
       });
     };
 
-    $scope.deleteApp = function(Name){
-      var templateUrl = 'ngapp/templates/deleteModal.html',name = Name,
-          type = "App", itemType = "apps";
+    $scope.deleteApp = function (Name) {
+      var templateUrl = 'ngapp/templates/deleteModal.html',
+        name = Name,
+        type = "App",
+        itemType = "apps";
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
-      modalInstance.result.then(function(name) {
-        $scope.apps = _.filter($scope.apps, function(app) {
+      modalInstance.result.then(function (name) {
+        $scope.apps = _.filter($scope.apps, function (app) {
           return app.App.Name != Name;
         });
         $scope.addAlert({
-            type: 'success', message: "App '" + name + "' deleted successfully.",
+            type: 'success',
+            message: "App '" + name + "' deleted successfully.",
             icon: 'glyphicon glyphicon-ok'
         });
         $scope.name = "";
@@ -501,33 +544,38 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         $scope.email = "";
         $scope.internal = false;
         $scope.non_atlantis = false;
-        }, function(result) {
+        }, function (result) {
           $scope.name = "";
           $scope.root = "";
           $scope.repo = "";
           $scope.email = "";
           $scope.internal = false;
           $scope.non_atlantis = false;
-        console.log(result);
+          console.log(result);
       });
     };
 
-    $scope.updateApp = function(name, root, repo, email, internal, non_atlantis){
-      var templateUrl = 'ngapp/register/templates/updateApp.html',name = name,
-          itemType = "apps", root = root, repo = repo, email = email, internal = internal,
+    $scope.updateApp = function (name, root, repo, email, internal, non_atlantis) {
+      var templateUrl = 'ngapp/register/templates/updateApp.html',
+          name = name,
+          itemType = "apps",
+          root = root,
+          repo = repo,
+          email = email,
+          internal = internal,
           non_atlantis = non_atlantis;
 
       modalInstance = updateApp.modalInstance(templateUrl, name, itemType, root, repo,
                       email, internal, non_atlantis);
-      modalInstance.result.then(function(data) {
-        _.filter($scope.apps, function(app) {
+      modalInstance.result.then(function (data) {
+        _.filter($scope.apps, function (app) {
           if (app.App.Name == name){
             app.App.Root = data.root;
             app.App.Repo = data.repo;
             app.App.Email = data.email;
           }
         });
-      }, function(result) {
+      }, function (result) {
         $scope.name = "";
         $scope.root = "";
         $scope.repo = "";
@@ -537,4 +585,4 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         console.log(result);
       });
     };
-}]);
+  }]);

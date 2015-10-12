@@ -18,14 +18,14 @@ containerStatus.factory('statusFactory', ['$http', function ($http) {
   data.isFiltered = function (filterValues, item) {
     var validItem = true;
 
-    angular.forEach(filterValues, function(value, key){
-      if(key === 'Status' && value !== item.Status) {
+    angular.forEach(filterValues, function (value, key) {
+      if (key === 'Status' && value !== item.Status) {
         validItem = false;
-      } else if(key !== 'Status' && value !== item.Container[key]) {
+      } else if (key !== 'Status' && value !== item.Container[key]) {
         validItem = false;
       }
     });
     return validItem;
-  }
+  };
   return data;
 }]);

@@ -1,8 +1,8 @@
 var services = angular.module('atlantisApp.releaseWizardServices', []);
 
-services.factory('appInfoModal', ['$modal', function($modal){
+services.factory('appInfoModal', ['$modal', function ($modal) {
   return {
-    modalInstance:  function(templateUrl, appInfo) {
+    modalInstance:  function (templateUrl, appInfo) {
       return $modal.open({
         templateUrl: templateUrl,
 
@@ -14,11 +14,11 @@ services.factory('appInfoModal', ['$modal', function($modal){
           };
         },
         resolve: {
-          app: function() {
+          app: function () {
             return appInfo;
           }
         }
       });
     }
-  }
+  };
 }]);
