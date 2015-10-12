@@ -1,8 +1,8 @@
 var services = angular.module('atlantisApp.commonServices', []);
 
-services.factory('addModal', ['$modal', function($modal){
+services.factory('addModal', ['$modal', function ($modal) {
   return {
-    modalInstance:  function(templateUrl, name, itemType) {
+    modalInstance:  function (templateUrl, name, itemType) {
       return $modal.open({
         templateUrl: templateUrl,
         controller: function ($scope, $modalInstance, name) {
@@ -18,21 +18,21 @@ services.factory('addModal', ['$modal', function($modal){
           };
         },
         resolve: {
-          name: function() {
+          name: function () {
             return name;
           },
-          itemType: function() {
+          itemType: function () {
             return itemType;
           }
         }
       });
     }
-  }
+  };
 }]);
 
-services.factory('deleteModal', ['$modal', function($modal){
+services.factory('deleteModal', ['$modal', function ($modal) {
   return {
-    modalInstance:  function(templateUrl, name, type, itemType) {
+    modalInstance:  function (templateUrl, name, type, itemType) {
       return $modal.open({
         templateUrl: templateUrl,
         controller: function ($scope, $modalInstance, name) {
@@ -40,7 +40,7 @@ services.factory('deleteModal', ['$modal', function($modal){
           $scope.type = type;
           $scope.name = name;
           $scope.itemType = itemType;
-          $scope.headerText = "<h5>Please type in the "+type+" <b>"+name+"</b> to confirm.</h5>";
+          $scope.headerText = "<h5>Please type in the " + type + " <b>" + name + "</b> to confirm.</h5>";
 
           $scope.ok = function () {
             $modalInstance.close(name);
@@ -51,17 +51,17 @@ services.factory('deleteModal', ['$modal', function($modal){
           };
         },
         resolve: {
-          name: function() {
+          name: function () {
             return name;
           },
-          type: function() {
+          type: function () {
             return type;
           },
-          itemType: function() {
+          itemType: function () {
             return itemType;
           }
         }
       });
     }
-  }
+  };
 }]);

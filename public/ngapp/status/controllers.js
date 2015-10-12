@@ -19,9 +19,9 @@ controllers.controller('StatusCtrl', ['$scope', '$rootScope', '$state', 'statusF
       var filterValues;
 
       $scope.filteredResults = $scope.data;
-      filterValues = _.pick(newVal, function(val, key) {
-        return val !== 'All' }
-      );
+      filterValues = _.pick(newVal, function (val, key) {
+        return val !== 'All';
+      });
 
       if (!_.isEmpty(filterValues)) {
         $scope.filteredResults = $scope.getFilteredResult(filterValues);
