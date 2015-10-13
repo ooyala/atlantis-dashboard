@@ -44,11 +44,11 @@ controllers.controller('StatusCtrl', ['$scope', '$rootScope', '$state', 'statusF
     // This function will decide the orderby sequence for container id.
     $scope.order = function (order) {
       if (order) {
-        $scope.filteredResults = $filter('orderBy')($scope.data, function (data) {
+        $scope.filteredResults = $filter('orderBy')($scope.filteredResults, function (data) {
           return data.Container.ID;
         });
       } else {
-        $scope.filteredResults = $filter('orderBy')($scope.data, function (data) {
+        $scope.filteredResults = $filter('orderBy')($scope.filteredResults, function (data) {
           return -data.Container.ID;
         });
       }
