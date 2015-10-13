@@ -20,7 +20,7 @@
           Non Atlantis
         </div>
         <div class="col-md-1">
-          <switch id="enabled" name="enabled" ng-model="non_atlantis" on="Yes" off="No" class="green"></switch>
+          <switch id="enabled" name="enabled" ng-model="non_atlantis" on="Yes" off="No" class="green" ng-change="setValidityForNonAtlantis(non_atlantis)"></switch>
         </div>
         <div class="col-md-2">
           <input type="text" name="appName" class="form-control" ng-model="name" placeholder="Name..." required></input>

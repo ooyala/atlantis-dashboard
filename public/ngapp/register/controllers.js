@@ -454,7 +454,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
  'deleteModal', 'addModal', '$timeout', 'updateApp',
   function ($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
 
-    $scope.apps = {};
+    $scope.apps = [];
     $scope.name = "";
     $scope.root = "";
     $scope.repo = "";
@@ -584,5 +584,15 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
         $scope.non_atlantis = false;
         console.log(result);
       });
+    };
+
+    $scope.setValidityForNonAtlantis = function (non_atlantis) {
+      if (non_atlantis) {
+        $scope.appInfoForm.repo.$setValidity('required', true);
+        $scope.appInfoForm.root.$setValidity('required', true);
+      } else {
+        $scope.appInfoForm.repo.$setValidity('required', false);
+        $scope.appInfoForm.root.$setValidity('required', false);
+      }
     };
   }]);
