@@ -455,18 +455,23 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
   function ($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
 
     $scope.apps = [];
-    $scope.name = "";
-    $scope.root = "";
-    $scope.repo = "";
-    $scope.email = "";
     $scope.alerts = [];
-    $scope.internal = false;
-    $scope.non_atlantis = false;
 
     $rootScope.title = $state.current.title;
 
-    appsInfoFactory.getAppInfo(function (data) {
-      $scope.apps = data;
+    var initializeData = function () {
+      $scope.name = "";
+      $scope.root = "";
+      $scope.repo = "";
+      $scope.email = "";
+      $scope.internal = false;
+      $scope.non_atlantis = false;
+    };
+
+    initializeData();
+
+    appsInfoFactory.getApps(function (data) {
+      $scope.apps = data.Apps;
     });
 
     $scope.addAlert = function (alert) {
@@ -480,7 +485,9 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
       }, 3000);
     };
 
-    $scope.addApps = function (Name, Root, Repo, Email, Internal, NonAtlantis) {
+
+
+    $scope.addApps = function (Name, Repo, Root, Email, Internal, NonAtlantis) {
       var templateUrl = 'ngapp/templates/addModal.html',
         name = Name,
         itemType = "apps",
@@ -488,36 +495,29 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function (name) {
-        app = _.filter($scope.apps, function (app) {
-          return app.App.Name == Name;
+        var User = 'aaaa',
+          Secret = 'dummysecret',
+          data = {Repo, Root, Email, Internal, NonAtlantis, User, Secret};
+
+        appsInfoFactory.registerApp(name, data, function (response) {
+          if (response.Status === 'OK') {
+            $scope.apps.push(Name);
+            $scope.addAlert({
+              type: 'success',
+              message: "App '" + name + "' added successfully.",
+              icon: 'glyphicon glyphicon-ok'
+            });
+          } else {
+            $scope.addAlert({
+              type: 'danger',
+              message: response.Status,
+              icon: 'glyphicon glyphicon-remove'
+            });
+          }
+          initializeData();
         });
-        if (_.isEmpty(app)) {
-          $scope.apps.push({"App":{Name ,Root, Repo, Email, Internal, NonAtlantis}});
-          $scope.addAlert({
-            type: 'success',
-            message: "App '" + name + "' added successfully.",
-            icon: 'glyphicon glyphicon-ok'
-          });
-        } else {
-          $scope.addAlert({
-            type: 'danger',
-            message: "App '" + name + "' already registered. Please update.",
-            icon: 'glyphicon glyphicon-remove'
-          });
-        }
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
       }, function (result) {
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
+        initializeData();
         console.log(result);
       });
     };
@@ -530,59 +530,54 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function (name) {
-        $scope.apps = _.filter($scope.apps, function (app) {
-          return app.App.Name != Name;
+        appsInfoFactory.deleteApp(name, function(data){
+          $scope.apps = _.filter($scope.apps, function (app) {
+            return app != Name;
+          });
+          $scope.addAlert({
+              type: 'success',
+              message: "App '" + name + "' deleted successfully.",
+              icon: 'glyphicon glyphicon-ok'
+          });
+          initializeData();
         });
-        $scope.addAlert({
-            type: 'success',
-            message: "App '" + name + "' deleted successfully.",
-            icon: 'glyphicon glyphicon-ok'
-        });
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
-        }, function (result) {
-          $scope.name = "";
-          $scope.root = "";
-          $scope.repo = "";
-          $scope.email = "";
-          $scope.internal = false;
-          $scope.non_atlantis = false;
-          console.log(result);
+      }, function (result) {
+        initializeData();
+        console.log(result);
       });
     };
 
-    $scope.updateApp = function (name, root, repo, email, internal, non_atlantis) {
-      var templateUrl = 'ngapp/register/templates/updateApp.html',
-          name = name,
+    $scope.updateApp = function (appName) {
+      appsInfoFactory.getAppInfo(appName, function (data){
+        var templateUrl = 'ngapp/register/templates/updateApp.html',
+          name = data.App.Name,
           itemType = "apps",
-          root = root,
-          repo = repo,
-          email = email,
-          internal = internal,
-          non_atlantis = non_atlantis;
-
-      modalInstance = updateApp.modalInstance(templateUrl, name, itemType, root, repo,
-                      email, internal, non_atlantis);
-      modalInstance.result.then(function (data) {
-        _.filter($scope.apps, function (app) {
-          if (app.App.Name == name){
-            app.App.Root = data.root;
-            app.App.Repo = data.repo;
-            app.App.Email = data.email;
+          root = data.App.Root,
+          repo = data.App.Repo,
+          email = data.App.Email,
+          internal = data.App.Internal,
+          non_atlantis = data.App.NonAtlantis;
+        modalInstance = updateApp.modalInstance(templateUrl, name, itemType, root, repo,
+                        email, internal, non_atlantis);
+        modalInstance.result.then(function (data) {
+          if (data) {
+            $scope.addAlert({
+              type: 'success',
+              message: "App '" + name + "' updated successfully.",
+              icon: 'glyphicon glyphicon-ok'
+            });
+          } else {
+            $scope.addAlert({
+              type: 'danger',
+              message: response.Status,
+              icon: 'glyphicon glyphicon-remove'
+            });
           }
+          initializeData();
+        }, function (result) {
+          initializeData();
+          console.log(result);
         });
-      }, function (result) {
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
-        console.log(result);
       });
     };
 

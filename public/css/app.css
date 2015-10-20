@@ -182,6 +182,9 @@ body > .container {
 .glyphicon.glyphicon-remove-circle:hover {
   color: rgb(229, 66, 66);
 }
+.glyphicon.glyphicon-edit:hover {
+  color: rgb(229, 66, 66);
+}
 
 /*Release-wizard tabs CSS*/
 .release-wizard .release-item {
@@ -392,4 +395,12 @@ tags-input .tags .tag-item {
 
 .container-status-color {
   color: green;
+}
+
+.app-button-height {
+  height: 45px;
+}
+
+.app-border {
+  border-color: darkgray;
 }
