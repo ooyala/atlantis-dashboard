@@ -455,15 +455,20 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
   function ($scope, $rootScope, $state, appsInfoFactory, deleteModal, addModal, $timeout, updateApp) {
 
     $scope.apps = [];
-    $scope.name = "";
-    $scope.root = "";
-    $scope.repo = "";
-    $scope.email = "";
     $scope.alerts = [];
-    $scope.internal = false;
-    $scope.non_atlantis = false;
 
     $rootScope.title = $state.current.title;
+
+    var initializeData = function () {
+      $scope.name = "";
+      $scope.root = "";
+      $scope.repo = "";
+      $scope.email = "";
+      $scope.internal = false;
+      $scope.non_atlantis = false;
+    };
+
+    initializeData();
 
     appsInfoFactory.getApps(function (data) {
       $scope.apps = data.Apps;
@@ -480,6 +485,8 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
       }, 3000);
     };
 
+
+
     $scope.addApps = function (Name, Repo, Root, Email, Internal, NonAtlantis) {
       var templateUrl = 'ngapp/templates/addModal.html',
         name = Name,
@@ -493,7 +500,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
           data = {Repo, Root, Email, Internal, NonAtlantis, User, Secret};
 
         appsInfoFactory.registerApp(name, data, function (response) {
-          if (response.Status == 'OK') {
+          if (response.Status === 'OK') {
             $scope.apps.push(Name);
             $scope.addAlert({
               type: 'success',
@@ -507,20 +514,10 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
               icon: 'glyphicon glyphicon-remove'
             });
           }
-          $scope.name = "";
-          $scope.root = "";
-          $scope.repo = "";
-          $scope.email = "";
-          $scope.internal = false;
-          $scope.non_atlantis = false;
+          initializeData();
         });
       }, function (result) {
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
+        initializeData();
         console.log(result);
       });
     };
@@ -542,20 +539,10 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
               message: "App '" + name + "' deleted successfully.",
               icon: 'glyphicon glyphicon-ok'
           });
-          $scope.name = "";
-          $scope.root = "";
-          $scope.repo = "";
-          $scope.email = "";
-          $scope.internal = false;
-          $scope.non_atlantis = false;
+          initializeData();
         });
       }, function (result) {
-        $scope.name = "";
-        $scope.root = "";
-        $scope.repo = "";
-        $scope.email = "";
-        $scope.internal = false;
-        $scope.non_atlantis = false;
+        initializeData();
         console.log(result);
       });
     };
@@ -586,19 +573,9 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
               icon: 'glyphicon glyphicon-remove'
             });
           }
-          $scope.name = "";
-          $scope.root = "";
-          $scope.repo = "";
-          $scope.email = "";
-          $scope.internal = false;
-          $scope.non_atlantis = false;
+          initializeData();
         }, function (result) {
-          $scope.name = "";
-          $scope.root = "";
-          $scope.repo = "";
-          $scope.email = "";
-          $scope.internal = false;
-          $scope.non_atlantis = false;
+          initializeData();
           console.log(result);
         });
       });

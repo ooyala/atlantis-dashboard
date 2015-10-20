@@ -99,11 +99,10 @@ services.factory('appsInfoFactory', ['$http', function ($http) {
 
   var callPut = function (url, data, callback) {
     var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-      config = {'headers' : headers},
       User = 'aaaa',
       Secret = 'dummysecret',
       param = 'User=' + User + "&Secret=" + Secret;
-    $http.put(url + "?" + param, data, config).success(callback);
+    $http.put(url + "?" + param, data, {'headers' : headers}).success(callback);
   };
 
   var callDelete = function (url, callback) {
