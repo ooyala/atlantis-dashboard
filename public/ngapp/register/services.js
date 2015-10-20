@@ -97,35 +97,60 @@ services.factory('appsInfoFactory', ['$http', function ($http) {
     $http.get(url).success(callback);
   };
 
+  var callPut = function (url, data, callback) {
+    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
+      config = {'headers' : headers},
+      User = 'aaaa',
+      Secret = 'dummysecret',
+      param = 'User=' + User + "&Secret=" + Secret;
+    $http.put(url + "?" + param, data, config).success(callback);
+  };
+
+  var callDelete = function (url, callback) {
+    $http.delete(url).success(callback);
+  };
+
   apps.getApps = function (callback) {
     callGet("/apps", callback);
   };
 
-  apps.getAppInfo = function (callback) {
-    callGet("/allApps", callback);
+  apps.getAppInfo = function (appName, callback) {
+    callGet("/apps/" + appName, callback);
   };
+
+  apps.registerApp = function (appName, data, callback) {
+    callPut("/apps/" + appName, data, callback);
+  };
+
+  apps.deleteApp = function (appName, callback) {
+    callDelete("/apps/" + appName, callback);
+  }
 
   return apps;
 }]);
 
-services.factory('updateApp', ['$modal', function ($modal) {
+services.factory('updateApp', ['$modal', '$http', function ($modal, $http) {
   return {
-    modalInstance:  function (templateUrl, name, itemType, root, repo, email, internal, non_atlantis) {
+    modalInstance:  function (templateUrl, Name, ItemType, Root, Repo, Email, Internal, NonAtlantis) {
       return $modal.open({
         templateUrl: templateUrl,
-        controller: function ($scope, $modalInstance, name, root, repo, email, internal, non_atlantis) {
-          $scope.name = name;
-          $scope.itemType = itemType;
-          $scope.root = root;
-          $scope.repo = repo;
-          $scope.email = email;
+        controller: function ($scope, $modalInstance, Name, Root, Repo, Email, Internal, NonAtlantis) {
+          $scope.name = Name;
+          $scope.itemType = ItemType;
+          $scope.root = Root;
+          $scope.repo = Repo;
+          $scope.email = Email;
           $scope.data = {};
-          $scope.internal = internal;
-          $scope.non_atlantis = non_atlantis;
+          $scope.internal = Internal;
+          $scope.non_atlantis = NonAtlantis;
 
-          $scope.update = function (root, repo, email) {
-            $scope.data = {root, repo, email} ;
-            $modalInstance.close($scope.data);
+          $scope.update = function (Name, Root, Repo, Email, Internal, NonAtlantis) {
+            $scope.data = {Name, Root, Repo, Email, Internal, NonAtlantis};
+            var url = "/apps/" + $scope.data.Name;
+
+            $http.post(url, $scope.data).success(function(data){
+              $modalInstance.close($scope.data);
+            });
           };
 
           $scope.cancel = function () {
@@ -133,26 +158,26 @@ services.factory('updateApp', ['$modal', function ($modal) {
           };
         },
         resolve: {
-          name: function () {
-            return name;
+          Name: function () {
+            return Name;
           },
-          itemType: function () {
-            return itemType;
+          ItemType: function () {
+            return ItemType;
           },
-          root: function () {
-            return root;
+          Root: function () {
+            return Root;
           },
-          repo: function () {
-            return repo;
+          Repo: function () {
+            return Repo;
           },
-          email: function () {
-            return email;
+          Email: function () {
+            return Email;
           },
-          internal: function () {
-            return internal;
+          Internal: function () {
+            return Internal;
           },
-          non_atlantis: function () {
-            return non_atlantis;
+          NonAtlantis: function () {
+            return NonAtlantis;
           }
         }
       });

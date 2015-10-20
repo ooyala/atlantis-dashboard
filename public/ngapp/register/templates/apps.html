@@ -51,37 +51,16 @@
     <div class="col-md-12">
       <div class="panel box supervisor-panel">
         <div class="panel-body">
-          <div ng-repeat="app in apps" class="col-md-4 row-top-margin">
-            <div class="panel box">
-              <div class="row">
-                <div class="col-md-10">
-                  <b class="box-header box-header-color">{{app.App.Name}}</b>
-                </div>
-                <div class="col-md-2">
-                  <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteApp(app.App.Name)"></i>
-                </div>
-              </div>
-              <div class="panel-body">
-                <div ng-hide="app.App.NonAtlantis">
-                  Repo : {{app.App.Repo}}<br>
-                  Root : {{app.App.Root}}<br>
-                </div>
-                Email : {{app.App.Email}}<br>
-                Internal : {{app.App.Internal}}<br>
-                Non Atlantis : {{app.App.NonAtlantis}}<br>
-
-                <!-- consisten box height for non atlatnis-->
-                <div ng-show="app.App.NonAtlantis"><br><br></div>
-              </div>
-              <div class="panel-footer panel-footer-bgcolor">
-                <div class="row">
-                  <div class="col-md-4 col-md-offset-4">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="updateApp(app.App.Name, app.App.Root, app.App.Repo, app.App.Email, app.App.Internal, app.App.NonAtlantis)"> Update</button>
-                  </div>
-                </div>
-              <div>
-            </div>
-          </div>
+          <span ng-repeat="app in apps" class="row-top-margin">
+            <!-- Split button -->
+            <div class="btn-group row-top-margin">
+              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{app}}</button>
+              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                <span class="glyphicon glyphicon-edit" popover="Update" popover-placement="bottom" popover-trigger="mouseenter" ng-click="updateApp(app)"></span> &nbsp;
+                <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteApp(app)"></span>
+              </button>
+            </div><span> &nbsp; &nbsp; &nbsp;</span>
+          </span>
         </div>
       </div>
     </div>

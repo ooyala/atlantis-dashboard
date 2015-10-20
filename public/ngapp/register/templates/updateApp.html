@@ -4,13 +4,6 @@
 <div class="modal-body">
   <div class="panel-body">
     <div class="row" ng-hide="non_atlantis">
-      <div class="col-md-2">Internal : </div>
-      <div class="col-md-6">
-        <switch id="enabled" name="enabled" ng-model="internal" on="Yes" off="No" class="green"></switch>
-      </div>
-    </div>
-    <div class="row"><div class="col-md-12"></div></div>
-    <div class="row" ng-hide="non_atlantis">
       <div class="col-md-2">Repo : </div>
       <div class="col-md-6">
         <input type="text" class="form-control" ng-model="repo" placeholder="Repo: e.g. ssh://git@github.com/abc/atlantis"></input>
@@ -33,6 +26,6 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger" ng-click="update(root, repo, email)">Update</button>
+  <button class="btn btn-danger" ng-click="update(name, root, repo, email, internal, non_atlantis)">Update</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
