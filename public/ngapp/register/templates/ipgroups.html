@@ -17,7 +17,7 @@
           <span class="required-mark">*</span>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addIPGroup(grpName,IPs);" ng-disabled="ipgroupsForm.$invalid"> Register</button>
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addIPGroup(grpName, IPs);" ng-disabled="ipgroupsForm.$invalid"> Register</button>
         </div>
       </div>
     </div>
@@ -26,34 +26,16 @@
     <div class="col-md-12">
       <div class="panel box supervisor-panel">
         <div class="panel-body">
-          <div ng-repeat="data in data.IPGroups">
-            <div class="col-md-4">
-              <div class="panel box row-top-margin">
-                <div class="row">
-                  <div class="col-md-10">
-                    <b class="box-header box-header-color">{{data.Name}}</b>
-                  </div>
-                  <div class="col-md-2">
-                    <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteIPGroup(data.Name)"></i>
-                  </div>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <center>
-                      <h4><span ng-repeat="ip in data.IPs">{{ip}} {{$last ? '' : ', '}}</span></h4>
-                    </center>
-                  </div>
-                </div>
-                <div class="panel-footer panel-footer-bgcolor">
-                  <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="updateIPGroup(data.Name)"> Update</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <span ng-repeat="data in data" class="row-top-margin">
+            <!-- Split button -->
+            <div class="btn-group row-top-margin">
+              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{data}}</button>
+              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                <span class="glyphicon glyphicon-edit" popover="Update" popover-placement="bottom" popover-trigger="mouseenter" ng-click="updateIPGroup(data)"></span> &nbsp;
+                <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteIPGroup(data)"></span>
+              </button>
+            </div><span> &nbsp; &nbsp; &nbsp;</span>
+          </span>
         </div>
       </div>
     </div>
