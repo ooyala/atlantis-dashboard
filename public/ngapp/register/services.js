@@ -7,8 +7,32 @@ services.factory('supervisorFactory', ['$http', function ($http) {
     $http.get(url).success(callback);
   };
 
+  var callPut = function (url, callback) {
+    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
+      User = 'aaaa',
+      Secret = 'dummysecret',
+      data = {User, Secret};
+    $http.put(url, data, {'headers' : headers}).success(callback);
+  };
+
+  var callDelete = function (url, callback) {
+    $http.delete(url).success(callback);
+  };
+
   sup.getSupervisors = function (callback) {
     callGet("/supervisors", callback);
+  };
+
+  sup.registerSupervisor = function (host, callback) {
+    callPut("/supervisors/" + host, callback);
+  };
+
+  sup.getSupervisorStatus = function (id, callback) {
+    callGet("/tasks/" + id, callback);
+  };
+
+  sup.deleteSupervisor = function (name, callback) {
+    callDelete("/supervisors/" + name, callback);
   };
 
   return sup;

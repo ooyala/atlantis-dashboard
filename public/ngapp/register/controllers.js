@@ -32,23 +32,24 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function (name) {
-        $scope.sup = _.filter($scope.supervisors, function (supervisor) {
-          return currentSup === supervisor;
+        supervisorFactory.registerSupervisor(name, function (response) {
+          supervisorFactory.getSupervisorStatus(response.ID, function (response) {
+            if (response.Status === 'DONE') {
+              $scope.supervisors.push(name);
+              $scope.addAlert({
+                type: 'success',
+                message: "Supervisor '" + name + "' added successfully.",
+                icon: 'glyphicon glyphicon-ok'
+              });
+            } else {
+              $scope.addAlert({
+                type: 'danger',
+                message: response.Status,
+                icon: 'glyphicon glyphicon-remove'
+              });
+            }
+          });
         });
-        if (_.isEmpty($scope.sup)) {
-          $scope.supervisors.push(currentSup);
-          $scope.addAlert({
-            type: 'success',
-            message: "Supervisor '" + name + "' added successfully.",
-            icon: 'glyphicon glyphicon-ok'
-          });
-        } else {
-          $scope.addAlert({
-            type: 'danger',
-            message: "Supervisor '" + name + "' already exists.",
-            icon: 'glyphicon glyphicon-remove'
-          });
-        }
         $scope.newSupervisor = "";
       }, function (result) {
         $scope.newSupervisor = "";
@@ -64,15 +65,27 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
 
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function (name) {
-        $scope.supervisors = _.filter($scope.supervisors, function (supervisor) {
-          return currentSup !== supervisor;
+        supervisorFactory.deleteSupervisor(name, function (response) {
+          supervisorFactory.getSupervisorStatus(response.ID, function (response) {
+            if (response.Status === 'DONE') {
+              $scope.supervisors = _.filter($scope.supervisors, function (supervisor) {
+                return currentSup !== supervisor;
+              });
+              $scope.addAlert({
+                type: 'success',
+                message: "Supervisor '" + name + "' deleted successfully.",
+                icon: 'glyphicon glyphicon-ok'
+              });
+            } else {
+              $scope.addAlert({
+                type: 'danger',
+                message: response.Status,
+                icon: 'glyphicon glyphicon-remove'
+              });
+            }
+          });
+          $scope.newSupervisor = "";
         });
-        $scope.addAlert({
-          type: 'success',
-          message: "Supervisor '" + name + "' deleted successfully.",
-          icon: 'glyphicon glyphicon-ok'
-        });
-        $scope.newSupervisor = "";
       }, function (result) {
         $scope.newSupervisor = "";
         console.log(result);
