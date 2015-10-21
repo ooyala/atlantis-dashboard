@@ -422,7 +422,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
       modalInstance.result.then(function (name) {
         ipgrpsFactory.deleteIPGroup(name, function (data) {
           $scope.data = _.filter($scope.data, function (ipgrp) {
-            return ipgrp != name;
+            return ipgrp !== name;
           });
           $scope.addAlert({
             type: 'success',
