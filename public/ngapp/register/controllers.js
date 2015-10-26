@@ -374,7 +374,6 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
       var templateUrl = 'ngapp/templates/addModal.html',
         name = Name,
         itemType = "IPGroup",
-        grp = {},
         IPs = [];
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
@@ -393,10 +392,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
         ipgrpsFactory.registerIPGroup(name, data, function (response) {
 
           if (response.Status === 'OK') {
-            grp = _.filter($scope.data, function (ipgrp) {
-              return ipgrp === name;
-            });
-            if (_.isEmpty(grp)) {
+            if ($scope.data.indexOf(name) === -1) {
               $scope.data.push(name);
               $scope.addAlert({
                 type: 'success',
@@ -405,9 +401,9 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
               });
             } else {
               $scope.addAlert({
-                type: 'success',
-                message: "Successfully added IPs to '" + name + "' group.",
-                icon: 'glyphicon glyphicon-ok'
+                type: 'danger',
+                message: "Group Name '" + name + "' already exists.",
+                icon: 'glyphicon glyphicon-remove'
               });
             }
           } else {
