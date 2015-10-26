@@ -393,7 +393,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
 
           if (response.Status === 'OK') {
             if ($scope.data.indexOf(name) === -1) {
-              $scope.data.push(name);
+              $scope.data.unshift(name);
               $scope.addAlert({
                 type: 'success',
                 message: "Group Name '" + name + "' added successfully.",
@@ -430,9 +430,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
       modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
       modalInstance.result.then(function (name) {
         ipgrpsFactory.deleteIPGroup(name, function (data) {
-          $scope.data = _.filter($scope.data, function (ipgrp) {
-            return ipgrp !== name;
-          });
+          $scope.data.splice($scope.data.indexOf(name), 1)
           $scope.addAlert({
             type: 'success',
             message: "Group '" + name + "' deleted successfully.",
