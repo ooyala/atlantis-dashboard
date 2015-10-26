@@ -382,11 +382,7 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
           Secret = 'dummysecret',
           data = {};
 
-        _.each(ips, function (val, key) {
-          IPs.push(val.text);
-        });
-
-        IPs = IPs.join(',');
+        IPs = _.map(ips, function(ip){ return ip.text; }).join(', ');
         data = {IPs, User, Secret};
 
         ipgrpsFactory.registerIPGroup(name, data, function (response) {
@@ -449,13 +445,8 @@ controllers.controller('IPGroupsCtrl', ['$scope', '$rootScope', '$state', 'ipgrp
         var templateUrl = 'ngapp/register/templates/updateIPGroup.html',
           name = data.IPGroup.Name,
           itemType = "IPGroup";
-        $scope.updatedIPs = [];
 
-        _.each(data.IPGroup.IPs, function (val, key) {
-          $scope.updatedIPs.push(val);
-        });
-
-        modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, $scope.updatedIPs);
+        modalInstance = updateIPGroup.modalInstance(templateUrl, name, itemType, data.IPGroup.IPs);
         modalInstance.result.then(function (response) {
           if (response.Status === 'OK') {
             $scope.addAlert({
