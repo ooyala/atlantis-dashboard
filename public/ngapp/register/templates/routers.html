@@ -14,8 +14,8 @@
               {{zoneBtnText}} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li ng-repeat="routers in data">
-                  <a ng-click="$parent.zone = routers.Router.Name; $parent.zoneBtnText = routers.Router.Name">{{routers.Router.Name}}</a>
+              <li ng-repeat="(zone, IPs) in data">
+                  <a ng-click="$parent.zone = zone; $parent.zoneBtnText=zone;">{{zone}}</a>
               </li>
             </ul>
           </div>
@@ -42,30 +42,18 @@
     <div class="col-md-12">
       <div class="panel box items-panel">
         <div class="panel-body"><br>
-          <div ng-repeat="routers in currentData">
-            <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
-              <div ng-repeat="router in routers">
-                <div ng-repeat="val in router.Host">
-                  <div class="col-md-4">
-                    <div class="panel box row-top-margin">
-                      <div class="row">
-                        <div class="col-md-10">&nbsp;</div>
-                        <div class="col-md-2">
-                          <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(router.Name, val.Name)"></i>
-                        </div>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{router.Name}} : {{val.Name}}" popover-trigger="mouseenter">{{router.Name}} : {{val.Name}}</h4></div>
-                          <div class="col-md-8 col-md-offset-2"><h4>Internal : {{val.Internal}}</h4></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <span ng-repeat="(zone, IPs) in currentData" class="row-top-margin">
+            <div class="col-md-12" ng-class-odd="odd-panel-bg-color" ng-class-even="even-panel-bg-color">
+              <div ng-repeat="routerHost in IPs">
+                <div class="btn-group row-top-margin">
+                  <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{zone}}:{{routerHost}}</button>
+                  <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                    <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(zone, routerHost)"></span>
+                  </button>
+                </div><span> &nbsp; &nbsp; &nbsp;</span>
               </div>
             </div>
-          </div>
+          </span>
         </div>
       </div>
     </div>

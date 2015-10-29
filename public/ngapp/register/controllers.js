@@ -219,9 +219,25 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
 
     $rootScope.title = $state.current.title;
 
-    routerFactory.getRouters(function (data) {
-      $scope.data = data;
-      $scope.currentData = data;
+    var initializeData = function() {
+      $scope.zone = "";
+      $scope.host = "";
+      $scope.ip = "";
+      $scope.zoneBtnText = "Select Zone";
+      $scope.internal = false;
+    };
+
+    routerFactory.getRouters({ Internal: $scope.internal }, function (response) {
+      if(response.Status === 'OK') {
+        $scope.data = response.Routers;
+        $scope.currentData = response.Routers;
+      } else {
+        $scope.addAlert({
+          type: 'danger',
+          message: "Error fetching Routers.",
+          icon: 'glyphicon glyphicon-remove'
+        });
+      }
     });
 
     $scope.addAlert = function (alert) {
@@ -281,17 +297,9 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
             icon: 'glyphicon glyphicon-remove'
           });
         }
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
       }, function (result) {
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
         console.log(result);
       });
     };
@@ -323,17 +331,9 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
           message: "Router '" + name + "' deleted successfully.",
           icon: 'glyphicon glyphicon-ok'
         });
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
       }, function (result) {
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
         console.log(result);
       });
     };

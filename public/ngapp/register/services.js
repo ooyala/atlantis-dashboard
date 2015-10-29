@@ -55,12 +55,12 @@ services.factory('managerFactory', ['$http', function ($http) {
 services.factory('routerFactory', ['$http', function ($http) {
   var routers = {};
 
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
+  var callGet = function (url, options, callback) {
+    $http.get(url, { params: options }).success(callback);
   };
 
-  routers.getRouters = function (callback) {
-    callGet("/routers", callback);
+  routers.getRouters = function (options, callback) {
+    callGet("/routers", options, callback);
   };
 
   return routers;
