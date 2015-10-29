@@ -33,7 +33,7 @@
           <span class="required-mark">*</span>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone, host, internal);" ng-disabled="routersForm.$invalid"> Register</button>
+          <button type="button" class="btn btn-primary element-right-margin btn-sm" ng-click="addRouter(zone, host, ip, internal);" ng-disabled="routersForm.$invalid"> Register</button>
         </div>
       </div>
     </div>
@@ -42,18 +42,16 @@
     <div class="col-md-12">
       <div class="panel box items-panel">
         <div class="panel-body"><br>
-          <span ng-repeat="(zone, IPs) in currentData" class="row-top-margin">
-            <div class="col-md-12" ng-class-odd="odd-panel-bg-color" ng-class-even="even-panel-bg-color">
-              <div ng-repeat="routerHost in IPs">
-                <div class="btn-group row-top-margin">
-                  <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{zone}}:{{routerHost}}</button>
-                  <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
-                    <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(zone, routerHost)"></span>
-                  </button>
-                </div><span> &nbsp; &nbsp; &nbsp;</span>
-              </div>
-            </div>
-          </span>
+          <div ng-repeat="(zone, IPs) in currentData" class="col-md-12">
+            <span ng-repeat="routerHost in IPs">
+              <div class="btn-group row-top-margin">
+                <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{zone}}:{{routerHost}}</button>
+                <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                  <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(zone, routerHost)"></span>
+                </button>
+              </div><span> &nbsp; &nbsp; &nbsp;</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>

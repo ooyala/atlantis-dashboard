@@ -63,6 +63,29 @@ services.factory('routerFactory', ['$http', function ($http) {
     callGet("/routers", options, callback);
   };
 
+  var callPut = function (url, options, callback) {
+    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
+      User = 'aaaa',
+      Secret = 'dummysecret',
+      param = 'User=' + User + "&Secret=" + Secret;
+    $http.put(url + "?" + param, options, {'headers' : headers}).success(callback);
+  };
+
+  routers.registerRouter = function (routerName, options, callback) {
+    var urlSuffix = options.Zone + '/' + routerName + '?User=aa&Secret=dummysecret';
+    callPut("/routers/" + urlSuffix, options, callback);
+  };
+
+  routers.deleteRouter = function (options, callback) {
+    var urlSuffix = options.Zone + '/' + options.Host +
+        '?User=' + options.User + '&Secret=' + options.Secret;
+    callDelete("/supervisors/" + urlSuffix, callback);
+  };
+
+  routers.getTaskStatus = function (id, callback) {
+    callGet("/tasks/" + id, {}, callback);
+  };
+
   return routers;
 }]);
 
