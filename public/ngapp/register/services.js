@@ -71,6 +71,10 @@ services.factory('routerFactory', ['$http', function ($http) {
     $http.put(url + "?" + param, options, {'headers' : headers}).success(callback);
   };
 
+  var callDelete = function (url, callback) {
+    $http.delete(url).success(callback);
+  };
+
   routers.registerRouter = function (routerName, options, callback) {
     var urlSuffix = options.Zone + '/' + routerName + '?User=aa&Secret=dummysecret';
     callPut("/routers/" + urlSuffix, options, callback);
@@ -78,8 +82,9 @@ services.factory('routerFactory', ['$http', function ($http) {
 
   routers.deleteRouter = function (options, callback) {
     var urlSuffix = options.Zone + '/' + options.Host +
-        '?User=' + options.User + '&Secret=' + options.Secret;
-    callDelete("/supervisors/" + urlSuffix, callback);
+        '?User=' + options.User + '&Secret=' + options.Secret +
+        '&Internal=' + options.Internal;
+    callDelete("/routers/" + urlSuffix, callback);
   };
 
   routers.getTaskStatus = function (id, callback) {

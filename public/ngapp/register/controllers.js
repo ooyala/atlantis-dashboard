@@ -292,7 +292,7 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
                   $interval.cancel(timer);
                 }
               });
-            }, 500)
+            }, 500, 6)
           } else {
             $scope.addAlert({
               type: 'danger',
@@ -325,16 +325,20 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
 
         routerFactory.deleteRouter(data, function (task) {
           if (task.ID && task.ID !== '') {
-            routerFactory.getTaskStatus(task.ID, function(response){
-              if(response.Status === 'DONE') {
-                $scope.currentData[currentZone].push(IP);
-                $scope.addAlert({
-                  type: 'success',
-                  message: "Router '" + currentHost + "' added successfully.",
-                  icon: 'glyphicon glyphicon-ok'
-                });
-              }
-            });
+            var timer = $interval(function(){
+              routerFactory.getTaskStatus(task.ID, function(response){
+                if(response.Status === 'DONE') {
+                  var hosts = $scope.currentData[currentZone];
+                  $scope.currentData[currentZone].splice(hosts.indexOf(currentHost), 1);
+                  $scope.addAlert({
+                    type: 'success',
+                    message: "Router '" + currentHost + "' added successfully.",
+                    icon: 'glyphicon glyphicon-ok'
+                  });
+                  $interval.cancel(timer);
+                }
+              });
+            }, 500, 6);
           } else {
             $scope.addAlert({
               type: 'danger',
