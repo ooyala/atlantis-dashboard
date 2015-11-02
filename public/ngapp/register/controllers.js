@@ -202,8 +202,9 @@ controllers.controller("ManagersCtrl", ["$scope", '$rootScope', '$state', 'manag
   }]);
 
 controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'routerFactory',
-  'deleteModal', 'addModal', '$timeout',
-   function ($scope, $rootScope, $state, routerFactory, deleteModal, addModal, $timeout) {
+  'deleteModal', 'addModal', '$timeout', '$interval',
+   function ($scope, $rootScope, $state, routerFactory, deleteModal,
+    addModal, $timeout, $interval) {
 
     $rootScope.title = $state.current.title;
     $scope.zone = "";
@@ -216,12 +217,27 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
     $scope.internal = false;
     $scope.currentZones = [];
     $scope.currentData = {};
-
     $rootScope.title = $state.current.title;
+    $scope.zone = "";
+    $scope.zoneBtnText = "Select Zone";
+    $scope.internal = false;
 
-    routerFactory.getRouters(function (data) {
-      $scope.data = data;
-      $scope.currentData = data;
+    var initializeData = function() {
+      $scope.host = "";
+      $scope.ip = "";
+    };
+
+    routerFactory.getRouters({ Internal: $scope.internal }, function (response) {
+      if(response.Status === 'OK') {
+        $scope.data = response.Routers;
+        $scope.currentData = response.Routers;
+      } else {
+        $scope.addAlert({
+          type: 'danger',
+          message: "Error fetching Routers.",
+          icon: 'glyphicon glyphicon-remove'
+        });
+      }
     });
 
     $scope.addAlert = function (alert) {
@@ -236,104 +252,123 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
     };
 
     $scope.filterData = function (internal) {
-      var filteredHost = [];
-      $scope.filteredData = angular.copy($scope.data);
-      _.each($scope.filteredData, function (data) {
-        filteredHost = _.filter(data.Router.Host, function (host) {
-          return host.Internal === internal;
-        });
-        data.Router.Host = filteredHost;
+      routerFactory.getRouters({ Internal: internal }, function (response) {
+        if(response.Status === 'OK') {
+          $scope.currentData = response.Routers;
+        } else {
+          $scope.addAlert({
+            type: 'danger',
+            message: "Error fetching Routers.",
+            icon: 'glyphicon glyphicon-remove'
+          });
+        }
       });
-      $scope.currentData = $scope.filteredData;
     };
 
-    $scope.addRouter = function (currentZone, currentHost, Internal) {
+    $scope.addRouter = function (currentZone, currentHost, IP, Internal) {
       var templateUrl = 'ngapp/templates/addModal.html',
-        name = currentHost,
         itemType = "router",
         router,
         host;
 
-      modalInstance = addModal.modalInstance(templateUrl, name, itemType);
+      modalInstance = addModal.modalInstance(templateUrl, IP, itemType);
       modalInstance.result.then(function (name) {
-        router = _.filter($scope.currentData, function (data) {
-          return data.Router.Name === currentZone;
+        var User = 'aaaa',
+          Secret = 'dummysecret',
+          Zone = currentZone,
+          data = {User, Secret, Internal, IP, Zone};
+
+        routerFactory.registerRouter(currentHost, data, function (task) {
+          if (task.ID && task.ID !== '') {
+            var timer = $interval(function(){
+              routerFactory.getTaskStatus(task.ID, function(response){
+                if(response.Status === 'DONE') {
+                  $scope.currentData[currentZone].unshift(currentHost);
+                  $scope.addAlert({
+                    type: 'success',
+                    message: "Router '" + currentHost + "' added successfully.",
+                    icon: 'glyphicon glyphicon-ok'
+                  });
+                  $interval.cancel(timer);
+                }
+              });
+            }, 500, 6)
+          } else {
+            $scope.addAlert({
+              type: 'danger',
+              message: response,
+              icon: 'glyphicon glyphicon-remove'
+            });
+          }
         });
-        host = _.filter(router[0].Router.Host, function (Host) {
-          return Host.Name === currentHost;
-        });
-        if (_.isEmpty(host)) {
-          _.each($scope.currentData, function (data) {
-            if (data.Router.Name === currentZone) {
-              data.Router.Host.push({"Name": currentHost, "Internal": Internal});
-              return;
-            }
-          });
-          $scope.addAlert({
-            type: 'success',
-            message: "Router '" + name + "' added successfully.",
-            icon: 'glyphicon glyphicon-ok'
-          });
-        } else {
-          $scope.addAlert({
-            type: 'danger',
-            message: "Router '" + name + "' already exists.",
-            icon: 'glyphicon glyphicon-remove'
-          });
-        }
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+
+        initializeData();
       }, function (result) {
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
         console.log(result);
       });
     };
 
     $scope.deleteRouter = function (currentZone, currentHost) {
       var templateUrl = 'ngapp/templates/deleteModal.html',
-        name = currentHost,
         type = 'Router',
         itemType = "router",
         router,
         hosts;
 
-      modalInstance = deleteModal.modalInstance(templateUrl, name, type, itemType);
+      modalInstance = deleteModal.modalInstance(templateUrl, currentHost, type, itemType);
       modalInstance.result.then(function (nam, hostse) {
-        router = _.filter($scope.currentData, function (data) {
-          return data.Router.Name === currentZone;
-        });
-        hosts = _.filter(router[0].Router.Host, function (Host) {
-          return Host.Name !== currentHost;
-        });
-        _.each($scope.currentData, function (data) {
-          if (data.Router.Name === currentZone) {
-            data.Router["Host"] = hosts;
-            return;
+        var data = {
+          User: 'aa', Secret: 'dummysecret', Internal: $scope.internal,
+          Host: currentHost, Zone: currentZone
+        };
+
+        routerFactory.deleteRouter(data, function (task) {
+          if (task.ID && task.ID !== '') {
+            var timer = $interval(function(){
+              routerFactory.getTaskStatus(task.ID, function(response){
+                if(response.Status === 'DONE') {
+                  var hosts = $scope.currentData[currentZone];
+                  $scope.currentData[currentZone].splice(hosts.indexOf(currentHost), 1);
+                  $scope.addAlert({
+                    type: 'success',
+                    message: "Router '" + currentHost + "' added successfully.",
+                    icon: 'glyphicon glyphicon-ok'
+                  });
+                  $interval.cancel(timer);
+                }
+              });
+            }, 500, 6);
+          } else {
+            $scope.addAlert({
+              type: 'danger',
+              message: response,
+              icon: 'glyphicon glyphicon-remove'
+            });
           }
+          initializeData();
         });
-        $scope.addAlert({
-          type: 'success',
-          message: "Router '" + name + "' deleted successfully.",
-          icon: 'glyphicon glyphicon-ok'
-        });
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+
+        // router = _.filter($scope.currentData, function (data) {
+        //   return data.Router.Name === currentZone;
+        // });
+        // hosts = _.filter(router[0].Router.Host, function (Host) {
+        //   return Host.Name !== currentHost;
+        // });
+        // _.each($scope.currentData, function (data) {
+        //   if (data.Router.Name === currentZone) {
+        //     data.Router["Host"] = hosts;
+        //     return;
+        //   }
+        // });
+        // $scope.addAlert({
+        //   type: 'success',
+        //   message: "Router '" + currentHost + "' deleted successfully.",
+        //   icon: 'glyphicon glyphicon-ok'
+        // });
+        // initializeData();
       }, function (result) {
-        $scope.zone = "";
-        $scope.host = "";
-        $scope.ip = "";
-        $scope.zoneBtnText = "Select Zone";
-        $scope.internal = false;
+        initializeData();
         console.log(result);
       });
     };

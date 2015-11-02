@@ -55,12 +55,40 @@ services.factory('managerFactory', ['$http', function ($http) {
 services.factory('routerFactory', ['$http', function ($http) {
   var routers = {};
 
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
+  var callGet = function (url, options, callback) {
+    $http.get(url, { params: options }).success(callback);
   };
 
-  routers.getRouters = function (callback) {
-    callGet("/routers", callback);
+  routers.getRouters = function (options, callback) {
+    callGet("/routers", options, callback);
+  };
+
+  var callPut = function (url, options, callback) {
+    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
+      User = 'aaaa',
+      Secret = 'dummysecret',
+      param = 'User=' + User + "&Secret=" + Secret;
+    $http.put(url + "?" + param, options, {'headers' : headers}).success(callback);
+  };
+
+  var callDelete = function (url, callback) {
+    $http.delete(url).success(callback);
+  };
+
+  routers.registerRouter = function (routerName, options, callback) {
+    var urlSuffix = options.Zone + '/' + routerName + '?User=aa&Secret=dummysecret';
+    callPut("/routers/" + urlSuffix, options, callback);
+  };
+
+  routers.deleteRouter = function (options, callback) {
+    var urlSuffix = options.Zone + '/' + options.Host +
+        '?User=' + options.User + '&Secret=' + options.Secret +
+        '&Internal=' + options.Internal;
+    callDelete("/routers/" + urlSuffix, callback);
+  };
+
+  routers.getTaskStatus = function (id, callback) {
+    callGet("/tasks/" + id, {}, callback);
   };
 
   return routers;

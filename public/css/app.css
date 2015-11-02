@@ -290,9 +290,13 @@ body > .container {
   width : 200px;
 }
 
-.supervisor-panel {
+.items-panel {
   min-height: 380px;
   overflow-y: scroll;
+}
+
+.items-panel .btn-group button:first-child {
+  pointer-events: none;
 }
 
 .row-top-margin {
