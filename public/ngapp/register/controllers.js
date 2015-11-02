@@ -271,6 +271,15 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
         router,
         host;
 
+      if(currentZone === '') {
+        $scope.addAlert({
+          type: 'danger',
+          message: "Please selct 'Zone'.",
+          icon: 'glyphicon glyphicon-remove'
+        });
+        return;
+      }
+
       modalInstance = addModal.modalInstance(templateUrl, IP, itemType);
       modalInstance.result.then(function (name) {
         var User = 'aaaa',
@@ -301,7 +310,6 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
             });
           }
         });
-
         initializeData();
       }, function (result) {
         initializeData();

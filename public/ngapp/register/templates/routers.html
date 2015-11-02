@@ -25,11 +25,11 @@
           <switch id="enabled" name="enabled" ng-change="filterData(internal)" ng-model="internal" on="Yes" off="No" class="green"></switch>
         </div>
         <div class="col-md-2">
-          <input type="text" class="form-control" ng-model="host" placeholder="Host..." required></input>
+          <input type="text" class="form-control" ng-model="host" placeholder="Host..." ng-pattern="/^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/" required></input>
           <span class="required-mark">*</span>
         </div>
         <div class="col-md-2">
-          <input type="text" class="form-control" ng-model="ip" placeholder="IP..." required></input>
+          <input type="text" class="form-control" ng-model="ip" placeholder="IP..." ng-pattern="/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/" required></input>
           <span class="required-mark">*</span>
         </div>
         <div class="col-md-2">
