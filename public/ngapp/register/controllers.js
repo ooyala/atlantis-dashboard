@@ -35,7 +35,7 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
         supervisorFactory.registerSupervisor(name, function (response) {
           supervisorFactory.getSupervisorStatus(response.ID, function (response) {
             if (response.Status === 'DONE') {
-              $scope.supervisors.push(name);
+              $scope.supervisors.unshift(name);
               $scope.addAlert({
                 type: 'success',
                 message: "Supervisor '" + name + "' added successfully.",
@@ -271,6 +271,15 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
         router,
         host;
 
+      if(currentZone === '') {
+        $scope.addAlert({
+          type: 'danger',
+          message: "Please selct 'Zone'.",
+          icon: 'glyphicon glyphicon-remove'
+        });
+        return;
+      }
+
       modalInstance = addModal.modalInstance(templateUrl, IP, itemType);
       modalInstance.result.then(function (name) {
         var User = 'aaaa',
@@ -280,7 +289,7 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
 
         routerFactory.registerRouter(currentHost, data, function (task) {
           if (task.ID && task.ID !== '') {
-            var timer = $interval(function(){
+            var timer = $interval(function() {
               routerFactory.getTaskStatus(task.ID, function(response){
                 if(response.Status === 'DONE') {
                   $scope.currentData[currentZone].unshift(currentHost);
@@ -301,7 +310,6 @@ controllers.controller("RoutersCtrl", ["$scope", '$rootScope', '$state', 'router
             });
           }
         });
-
         initializeData();
       }, function (result) {
         initializeData();
@@ -554,7 +562,7 @@ controllers.controller('AppsCtrl', ['$scope', '$rootScope', '$state', 'appsInfoF
 
         appsInfoFactory.registerApp(name, data, function (response) {
           if (response.Status === 'OK') {
-            $scope.apps.push(Name);
+            $scope.apps.unshift(Name);
             $scope.addAlert({
               type: 'success',
               message: "App '" + name + "' added successfully.",

@@ -1,38 +1,27 @@
 var services = angular.module('atlantisApp.registerServices', []);
 
+// ------------ Factories ---------------
 services.factory('supervisorFactory', ['$http', function ($http) {
   var sup = {};
 
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
-  };
-
-  var callPut = function (url, callback) {
-    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-      User = 'aaaa',
-      Secret = 'dummysecret',
-      data = {User, Secret};
-    $http.put(url, data, {'headers' : headers}).success(callback);
-  };
-
-  var callDelete = function (url, callback) {
-    $http.delete(url).success(callback);
-  };
-
   sup.getSupervisors = function (callback) {
-    callGet("/supervisors", callback);
+    $http.get("/supervisors").success(callback);
   };
 
   sup.registerSupervisor = function (host, callback) {
-    callPut("/supervisors/" + host, callback);
+    var options = {
+          'headers': {'Content-Type': 'application/x-www-form-urlencoded'}
+        }, User = 'aaaa', Secret = 'dummysecret', data = {User, Secret};
+
+    $http.put("/supervisors/" + host, data, options).success(callback);
   };
 
   sup.getSupervisorStatus = function (id, callback) {
-    callGet("/tasks/" + id, callback);
+    $http.get("/tasks/" + id).success(callback);
   };
 
   sup.deleteSupervisor = function (name, callback) {
-    callDelete("/supervisors/" + name, callback);
+    $http.delete("/supervisors/" + name).success(callback);
   };
 
   return sup;
@@ -41,12 +30,8 @@ services.factory('supervisorFactory', ['$http', function ($http) {
 services.factory('managerFactory', ['$http', function ($http) {
   var managers = {};
 
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
-  };
-
   managers.getManagers = function (callback) {
-    callGet("/managers", callback);
+    $http.get("/managers").success(callback);
   };
 
   return managers;
@@ -55,40 +40,28 @@ services.factory('managerFactory', ['$http', function ($http) {
 services.factory('routerFactory', ['$http', function ($http) {
   var routers = {};
 
-  var callGet = function (url, options, callback) {
-    $http.get(url, { params: options }).success(callback);
-  };
-
   routers.getRouters = function (options, callback) {
-    callGet("/routers", options, callback);
+    $http.get("/routers", { params: options }).success(callback);
   };
 
-  var callPut = function (url, options, callback) {
-    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-      User = 'aaaa',
-      Secret = 'dummysecret',
-      param = 'User=' + User + "&Secret=" + Secret;
-    $http.put(url + "?" + param, options, {'headers' : headers}).success(callback);
-  };
+  routers.registerRouter = function (routerName, data, callback) {
+    var options = {
+      'headers': {'Content-Type': 'application/x-www-form-urlencoded'}
+    }, urlSuffix = data.Zone + '/' + routerName + '?User=aa&Secret=dummysecret';
 
-  var callDelete = function (url, callback) {
-    $http.delete(url).success(callback);
-  };
-
-  routers.registerRouter = function (routerName, options, callback) {
-    var urlSuffix = options.Zone + '/' + routerName + '?User=aa&Secret=dummysecret';
-    callPut("/routers/" + urlSuffix, options, callback);
+    $http.put("/routers/" + urlSuffix, data, options).success(callback);
   };
 
   routers.deleteRouter = function (options, callback) {
     var urlSuffix = options.Zone + '/' + options.Host +
         '?User=' + options.User + '&Secret=' + options.Secret +
         '&Internal=' + options.Internal;
-    callDelete("/routers/" + urlSuffix, callback);
+
+    $http.delete("/routers/" + urlSuffix).success(callback);
   };
 
   routers.getTaskStatus = function (id, callback) {
-    callGet("/tasks/" + id, {}, callback);
+    $http.get("/tasks/" + id).success(callback);
   };
 
   return routers;
@@ -97,41 +70,58 @@ services.factory('routerFactory', ['$http', function ($http) {
 services.factory('ipgrpsFactory', ['$http', function ($http) {
   var IPInfo = {};
 
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
-  };
-
-  var callPut = function (url, data, callback) {
-    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-      User = 'aaaa',
-      Secret = 'dummysecret',
-      param = 'User=' + User + "&Secret=" + Secret;
-    $http.put(url + "?" + param, data, {'headers' : headers}).success(callback);
-  };
-
-  var callDelete = function (url, callback) {
-    $http.delete(url).success(callback);
-  };
-
   IPInfo.getIPs = function (callback) {
-    callGet("/ipgroups", callback);
+    $http.get("/ipgroups").success(callback);
   };
 
   IPInfo.getIPInfo = function (grpName, callback) {
-    callGet("/ipgroups/" + grpName, callback);
+    $http.get("/ipgroups/" + grpName).success(callback);
   };
 
   IPInfo.registerIPGroup = function (grpName, data, callback) {
-    callPut("/ipgroups/" + grpName, data, callback);
+    var options = {
+      'headers': { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }, User = 'aa', Secret = 'dummysecret',
+    param = 'User=' + User + "&Secret=" + Secret;
+
+    $http.put("/ipgroups/" + grpName + '?' + param, data, options).success(callback);
   };
 
   IPInfo.deleteIPGroup = function (grpName, callback) {
-    callDelete("/ipgroups/" + grpName, callback);
+    $http.delete("/ipgroups/" + grpName).success(callback);
   }
 
   return IPInfo;
 }]);
 
+services.factory('appsInfoFactory', ['$http', function ($http) {
+  var apps = {};
+
+  apps.getApps = function (callback) {
+    $http.get("/apps").success(callback);
+  };
+
+  apps.getAppInfo = function (appName, callback) {
+    $http.get("/apps/" + appName).success(callback);
+  };
+
+  apps.registerApp = function (appName, data, callback) {
+    var options = {
+      'headers': { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }, User = 'aa', Secret = 'dummysecret',
+    param = 'User=' + User + "&Secret=" + Secret;
+
+    $http.put("/apps/" + appName + '?' + param, data, options).success(callback);
+  };
+
+  apps.deleteApp = function (appName, callback) {
+    $http.delete("/apps/" + appName).success(callback);
+  };
+
+  return apps;
+}]);
+
+// ------------ Services -------------------
 services.factory('updateIPGroup', ['$modal', '$http', function ($modal, $http) {
   return {
     modalInstance:  function (templateUrl, name, itemType, IPs) {
@@ -150,12 +140,11 @@ services.factory('updateIPGroup', ['$modal', '$http', function ($modal, $http) {
           });
 
           $scope.update = function () {
-            var url = "/ipgroups/" + $scope.name;
-            var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-              User = 'aaaa',
-              Secret = 'dummysecret',
-              param = 'User=' + User + "&Secret=" + Secret,
-              data = {};
+            var options = {
+              'headers': { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }, User = 'aa', Secret = 'dummysecret',
+            param = 'User=' + User + "&Secret=" + Secret, data = {},
+            url = "/ipgroups/" + $scope.name;
 
             _.each($scope.IPs, function (val, key) {
               $scope.updatedIPs.push(val.text);
@@ -164,7 +153,7 @@ services.factory('updateIPGroup', ['$modal', '$http', function ($modal, $http) {
             $scope.updatedIPs = $scope.updatedIPs.join(',');
             data = {'IPs' : $scope.updatedIPs};
 
-            $http.put(url + "?" + param, data, {'headers' : headers}).success(function (response) {
+            $http.put(url + '?' + param, data, options).success(function (response) {
               $modalInstance.close(response);
             });
           };
@@ -189,44 +178,6 @@ services.factory('updateIPGroup', ['$modal', '$http', function ($modal, $http) {
   };
 }]);
 
-services.factory('appsInfoFactory', ['$http', function ($http) {
-  var apps = {};
-
-  var callGet = function (url, callback) {
-    $http.get(url).success(callback);
-  };
-
-  var callPut = function (url, data, callback) {
-    var headers = {'Content-Type': 'application/x-www-form-urlencoded'},
-      User = 'aaaa',
-      Secret = 'dummysecret',
-      param = 'User=' + User + "&Secret=" + Secret;
-    $http.put(url + "?" + param, data, {'headers' : headers}).success(callback);
-  };
-
-  var callDelete = function (url, callback) {
-    $http.delete(url).success(callback);
-  };
-
-  apps.getApps = function (callback) {
-    callGet("/apps", callback);
-  };
-
-  apps.getAppInfo = function (appName, callback) {
-    callGet("/apps/" + appName, callback);
-  };
-
-  apps.registerApp = function (appName, data, callback) {
-    callPut("/apps/" + appName, data, callback);
-  };
-
-  apps.deleteApp = function (appName, callback) {
-    callDelete("/apps/" + appName, callback);
-  };
-
-  return apps;
-}]);
-
 services.factory('updateApp', ['$modal', '$http', function ($modal, $http) {
   return {
     modalInstance:  function (templateUrl, Name, ItemType, Root, Repo, Email, Internal, NonAtlantis) {
@@ -246,7 +197,7 @@ services.factory('updateApp', ['$modal', '$http', function ($modal, $http) {
             $scope.data = {Name, Root, Repo, Email, Internal, NonAtlantis};
             var url = "/apps/" + $scope.data.Name;
 
-            $http.post(url, $scope.data).success(function(data){
+            $http.post(url, $scope.data).success(function(data) {
               $modalInstance.close(data);
             });
           };
