@@ -1,7 +1,6 @@
 var atlantisApp = angular.module('atlantisApp', [
   'ngAnimate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'ang-drag-drop',
-  'atlantisApp.homeControllers', 'atlantisApp.releaseWizardControllers',
-  'atlantisApp.deployControllers', 'atlantisApp.manageControllers',
+  'atlantisApp.homeControllers', 'atlantisApp.releaseWizardControllers', 'atlantisApp.manageControllers',
   'atlantisApp.usersControllers', 'atlantisApp.statusControllers',
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
@@ -112,17 +111,6 @@ atlantisApp.config(["$stateProvider", "$urlRouterProvider",
           }
         },
         title: 'Atlantis - Release Wizard'
-      })
-      .state('root.deploy', {
-        url: 'deploy',
-        views: {
-          'content@' : {
-            templateUrl: 'ngapp/deploy/templates/deploy.html',
-            controller: 'DeployCtrl',
-            controllerAs: 'vm'
-          }
-        },
-        title: 'Atlantis - Deploy'
       })
       .state('root.manage', {
         url: 'manage',
