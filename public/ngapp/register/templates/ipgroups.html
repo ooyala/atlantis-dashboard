@@ -30,10 +30,10 @@
             <!-- Split button -->
             <div class="btn-group row-top-margin">
               <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{data}}</button>
-              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
-                <span class="glyphicon glyphicon-edit" popover="Update" popover-placement="bottom" popover-trigger="mouseenter" ng-click="updateIPGroup(data)"></span> &nbsp;
-                <span class="glyphicon glyphicon-remove-circle" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteIPGroup(data)"></span>
-              </button>
+              <div ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                <span class="glyphicon glyphicon-edit glyphicon-margin" popover="Update" popover-placement="bottom" popover-trigger="mouseenter" ng-click="updateIPGroup(data)"></span> &nbsp;
+                <span class="glyphicon glyphicon-remove-circle glyphicon-margin" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteIPGroup(data)"></span>
+              </div>
             </div><span> &nbsp; &nbsp; &nbsp;</span>
           </span>
         </div>
