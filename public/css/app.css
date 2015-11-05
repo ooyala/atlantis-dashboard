@@ -408,3 +408,7 @@ tags-input .tags .tag-item {
 .app-border {
   border-color: darkgray;
 }
+
+.glyphicon-margin {
+  margin-top: 7px;
+}
