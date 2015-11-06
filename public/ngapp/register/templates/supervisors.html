@@ -22,23 +22,15 @@
     <div class="col-md-12">
       <div class="panel box items-panel">
         <div class="panel-body">
-          <div ng-repeat="sup in supervisors">
-            <div class="col-md-4">
-              <div class="panel box row-top-margin">
-                <div class="row">
-                  <div class="col-md-10">&nbsp;</div>
-                  <div class="col-md-2">
-                    <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteSupervisor(sup)"></i>
-                  </div>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-6 col-md-offset-3"><h4 class="truncate" popover="{{sup}}" popover-placement="bottom" popover-trigger="mouseenter">{{sup}}</h4></div>
-                  </div>
-                </div>
+          <span ng-repeat="sup in supervisors" class="row-top-margin">
+            <!-- Split button -->
+            <div class="btn-group row-top-margin">
+              <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{sup}}</button>
+              <div ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
+                <span class="glyphicon glyphicon-remove-circle glyphicon-margin" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteSupervisor(sup)"></span>
               </div>
-            </div>
-          </div>
+            </div><span> &nbsp; &nbsp; &nbsp;</span>
+          </span>
         </div>
       </div>
     </div>

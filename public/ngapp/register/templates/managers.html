@@ -32,25 +32,17 @@
     <div class="col-md-12">
       <div class="panel box items-panel">
         <div class="panel-body"><br>
-          <div ng-repeat="(key,value) in data.Managers">
+          <div ng-repeat="(region, hosts) in data.Managers">
             <div class="col-md-12" ng-class-odd="'odd-panel-bg-color'" ng-class-even="'even-panel-bg-color'">
-              <div ng-repeat="val in value">
-                <div class="col-md-4">
-                  <div class="panel box row-top-margin">
-                    <div class="row">
-                      <div class="col-md-10">&nbsp;</div>
-                      <div class="col-md-2">
-                        <i class="glyphicon glyphicon-remove-circle element-right-margin pull-right" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteManager(key,val)"></i>
-                      </div>
-                    </div>
-                    <div class="panel-body">
-                      <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><h4 class="truncate" popover="{{key}} : {{val}}" popover-trigger="mouseenter">{{key}} : {{val}}</h4></div>
-                      </div>
-                    </div>
+              <span ng-repeat="host in hosts">
+                <!-- Split button -->
+                <div class="btn-group row-top-margin row-bottom-margin">
+                  <button type="button" class="btn btn-default app-border app-button-height">{{region}} : {{host}}</button>
+                  <div class="btn btn-default app-border app-button-height">
+                    <span class="glyphicon glyphicon-remove-circle glyphicon-margin" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteManager(region, host)"></span>
                   </div>
-                </div>
-              </div>
+                </div><span> &nbsp; &nbsp; &nbsp;</span>
+              </span>
             </div>
           </div>
         </div>
