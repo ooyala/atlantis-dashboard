@@ -412,3 +412,7 @@ tags-input .tags .tag-item {
 .glyphicon-margin {
   margin-top: 7px;
 }
+
+.row-bottom-margin {
+  margin-bottom: 20px;
+}
