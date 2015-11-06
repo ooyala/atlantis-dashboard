@@ -57,5 +57,7 @@
   "/instance_data/app2-d37f05-production-0a6fFGa": "/instance_data/app2-d37f05-production-0a6fFGa.json",
   "/instance_data/app2-d37f05-production-0a6fFGb": "/instance_data/app2-d37f05-production-0a6fFGb.json",
   "/instance_data/app2-d37f05-production-0a6fFGc": "/instance_data/app2-d37f05-production-0a6fFGc.json",
-  "/instance_data/app2-d37f05-production-0a6fFGd": "/instance_data/app2-d37f05-production-0a6fFGd.json"
+  "/instance_data/app2-d37f05-production-0a6fFGd": "/instance_data/app2-d37f05-production-0a6fFGd.json",
+  "/ipgroups/internal-router": "/ipgroups/internal-router.json",
+  "/ipgroups/abc": "/ipgroups/abc.json"
 }
