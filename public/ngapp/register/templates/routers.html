@@ -45,7 +45,7 @@
           <div ng-repeat="(zone, IPs) in currentData" class="col-md-12">
             <span ng-repeat="routerHost in IPs">
               <div class="btn-group row-top-margin">
-                <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{zone}}:{{routerHost}}</button>
+                <button type="button" ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">{{zone}} : {{routerHost}}</button>
                 <div ng-class-odd="'btn odd-panel-bg-color app-border app-button-height'" ng-class-even="'btn btn-default app-button-height'">
                   <span class="glyphicon glyphicon-remove-circle glyphicon-margin" popover="Unregister" popover-placement="bottom" popover-trigger="mouseenter" ng-click="deleteRouter(zone, routerHost)"></span>
                 </div>

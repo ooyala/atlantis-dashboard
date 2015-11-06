@@ -1,19 +1,7 @@
 {
   "IPGroups": [
-      {
-        "Name": "internal-router",
-        "IPs": [
-          "10.10.9.8",
-          "10.10.5.9"
-        ]
-      },
-      {
-        "Name": "abc",
-        "IPs": [
-          "10.10.9.2",
-          "10.10.9.1"
-        ]
-      }
+    "internal-router",
+    "abc"
   ],
   "Status":"OK"
 }

@@ -1,0 +1,11 @@
+{
+  "IPGroup":
+      {
+        "Name": "internal-router",
+        "IPs": [
+          "10.10.9.8",
+          "10.10.5.9"
+        ]
+      },
+  "Status":"OK"
+}
