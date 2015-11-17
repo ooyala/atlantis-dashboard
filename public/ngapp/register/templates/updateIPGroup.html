@@ -1,16 +1,18 @@
-<div class="modal-header">
-  <span class="panel-title">Update <i>'{{name}}'</i></span>
-</div>
-<div class="modal-body">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-12">
-        <tags-input ng-model="IPs" allowed-tags-pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" placeholder="Add IPs..."></tags-input>
+<div disable-navigation>
+  <div class="modal-header">
+    <span class="panel-title">Update <i>'{{name}}'</i></span>
+  </div>
+  <div class="modal-body">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+          <tags-input ng-model="IPs" allowed-tags-pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" placeholder="Add IPs..."></tags-input>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-danger" ng-click="update()">Update</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ng-click="update()">Update</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
 </div>

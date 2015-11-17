@@ -5,7 +5,7 @@ var atlantisApp = angular.module('atlantisApp', [
   'atlantisApp.homeDirectives',
   'atlantisApp.homeServices', 'atlantisApp.releaseWizardServices',
   'atlantisApp.filters', 'atlantisApp.registerControllers',
-  'atlantisApp.registerServices', 'atlantisApp.commonServices',
+  'atlantisApp.registerServices', 'atlantisApp.commonServices', 'atlantisApp.commonDirectives',
   'atlantisApp.statusServices', 'atlantisApp.statusFilters',
   'ngTagsInput', 'uiSwitch',
 ], function ($httpProvider) {
