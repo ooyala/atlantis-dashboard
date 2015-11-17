@@ -1,9 +1,11 @@
-<div class="modal-body">
-  <div ng-show="['supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">
-    <span class="panel-title">Are you sure??</span>
+<div disable-navigation>
+  <div class="modal-body">
+    <div ng-show="['supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">
+      <span class="panel-title">Are you sure??</span>
+    </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-danger" ng-click="ok()" ng-show="['supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">Yes</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ng-click="ok()" ng-show="['supervisor', 'manager', 'router', 'IPGroup', 'apps'].indexOf(itemType) != -1">Yes</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
 </div>
