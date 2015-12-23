@@ -34,6 +34,18 @@ services.factory('managerFactory', ['$http', function ($http) {
     $http.get("/managers").success(callback);
   };
 
+  managers.addManager = function (region, host, data, callback) {
+    var options = {
+      'headers': {'Content-Type': 'application/x-www-form-urlencoded'}
+    }, urlSuffix = region + '/' + host + '?User=aa&Secret=dummysecret';
+
+    $http.put("/managers/" + urlSuffix, data, options).success(callback);
+  };
+
+  managers.getTaskStatus = function (id, callback) {
+    $http.get("/tasks/" + id).success(callback);
+  };
+
   return managers;
 }]);
 
