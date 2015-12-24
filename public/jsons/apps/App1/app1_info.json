@@ -1,0 +1,14 @@
+{
+  "App" :
+    {
+      "NonAtlantis" : false,
+      "Internal":false,
+      "Name":"App1",
+      "Email":"aa@gmail.com",
+      "Repo":"ssh://git@github.com/ooyala/atlantis",
+      "Root":"/",
+      "DependerEnvData" : {},
+      "DependerAppData":{}
+    },
+  "Status" : "OK"
+}

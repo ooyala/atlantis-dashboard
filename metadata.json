@@ -59,5 +59,9 @@
   "/instance_data/app2-d37f05-production-0a6fFGc": "/instance_data/app2-d37f05-production-0a6fFGc.json",
   "/instance_data/app2-d37f05-production-0a6fFGd": "/instance_data/app2-d37f05-production-0a6fFGd.json",
   "/ipgroups/internal-router": "/ipgroups/internal-router.json",
-  "/ipgroups/abc": "/ipgroups/abc.json"
+  "/ipgroups/abc": "/ipgroups/abc.json",
+  "/apps/App1": "/apps/App1/app1_info.json",
+  "/apps/App2": "/apps/App2/app2_info.json",
+  "/instances": "/instances/all_instances.json",
+  "/instances/hello-go-ec8e09-staging-KjHdfw": "/instances/hello-go-ec8e09-staging-KjHdfw.json"
 }
