@@ -1,0 +1,29 @@
+{
+  "Container":
+    {
+      "ID": "hello-go-ec8e09-staging-KjHdfw",
+      "DockerID": "132ba3a0896bfb4cedbfab6c5a12a6d3cf494e0e33922ba727e02e1713b973cd",
+      "IP": "10.0.0.5",
+      "Pid": 702,
+      "Host": "172.17.0.13",
+      "PrimaryPort": 61003,
+      "SecondaryPorts": [61203, 61303, 61403, 61503, 61603],
+      "SSHPort": 61103,
+      "App": "hello-go",
+      "Sha": "ec8e09710831947f596079fdd9036f123a78de3c",
+      "Env": "staging",
+      "Manifest":
+        {
+          "Name": "hello-go",
+          "Description": "Hello World Go Server",
+          "Instances": 1,
+          "CPUShares": 1,
+          "MemoryLimit": 256,
+          "AppType": "go1.3",
+          "JavaType": "",
+          "RunCommands": ["./hello"],
+          "Deps":{}
+        }
+    },
+  "Status":"OK"
+}
