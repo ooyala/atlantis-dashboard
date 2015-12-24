@@ -94,8 +94,8 @@ controllers.controller('SupervisorsCtrl', ['$scope', '$rootScope', '$state', 'su
   }]);
 
 controllers.controller("ManagersCtrl", ["$scope", '$rootScope', '$state', 'managerFactory',
-  'deleteModal', 'addModal', '$timeout',
-  function ($scope, $rootScope, $state, managerFactory, deleteModal, addModal, $timeout) {
+  'deleteModal', 'addModal', '$timeout','$interval',
+  function ($scope, $rootScope, $state, managerFactory, deleteModal, addModal, $timeout, $interval) {
 
     $scope.region = "";
     $scope.host = "";
@@ -121,7 +121,7 @@ controllers.controller("ManagersCtrl", ["$scope", '$rootScope', '$state', 'manag
       }, 3000);
     };
 
-    $scope.addManager = function (currentRegion, currentHost) {
+    $scope.addManager = function (currentRegion, currentHost, managerCName, registyCName) {
       var templateUrl = 'ngapp/templates/addModal.html',
         name = currentHost,
         itemType = "manager",
@@ -130,28 +130,55 @@ controllers.controller("ManagersCtrl", ["$scope", '$rootScope', '$state', 'manag
 
       modalInstance = addModal.modalInstance(templateUrl, name, itemType);
       modalInstance.result.then(function (name) {
-        region = _.pick($scope.data.Managers, currentRegion);
-        if (_.isEmpty(region)) {
-          hosts.push(currentHost);
-          $scope.data.Managers[currentRegion] = hosts;
-        } else {
-          _.mapObject(region, function (val, key) {
-            if (_.contains(val, currentHost)) {
-              $scope.addAlert({
-                type: 'danger',
-                message: "Manager '" + name + "' already exists.",
-                icon: 'glyphicon glyphicon-remove'
+        var User = 'aaaa',
+          Secret = 'dummysecret',
+          data = {User, Secret, managerCName, registyCName};
+
+        managerFactory.addManager(currentRegion, currentHost, data, function(task){
+          if (task.ID && task.ID !== '') {
+            var timer = $interval(function() {
+              managerFactory.getTaskStatus(task.ID, function(response){
+                if(response.Status === 'DONE') {
+                  region = _.pick($scope.data.Managers, currentRegion);
+                  if (_.isEmpty(region)) {
+                    hosts.push(currentHost);
+                    $scope.data.Managers[currentRegion] = hosts;
+                    $scope.addAlert({
+                      type: 'success',
+                      message: "Manager '" + name + "' added successfully.",
+                      icon: 'glyphicon glyphicon-ok'
+                    });
+                  } else {
+                    _.mapObject(region, function (val, key) {
+                      if (_.contains(val, currentHost)) {
+                        $scope.addAlert({
+                          type: 'danger',
+                          message: "Manager '" + name + "' already exists.",
+                          icon: 'glyphicon glyphicon-remove'
+                        });
+                      } else {
+                        $scope.data.Managers[currentRegion].push(currentHost);
+                        $scope.addAlert({
+                          type: 'success',
+                          message: "Manager '" + name + "' added successfully.",
+                          icon: 'glyphicon glyphicon-ok'
+                        });
+                      }
+                    });
+                  }
+                  $interval.cancel(timer);
+                }
               });
-            } else {
-              $scope.data.Managers[currentRegion].push(currentHost);
-              $scope.addAlert({
-                type: 'success',
-                message: "Manager '" + name + "' added successfully.",
-                icon: 'glyphicon glyphicon-ok'
-              });
-            }
-          });
-        }
+            }, 500, 6)
+          } else {
+            $scope.addAlert({
+              type: 'danger',
+              message: "Manager cannot be added",
+              icon: 'glyphicon glyphicon-remove'
+            });
+          }
+        });
+
         $scope.region = "";
         $scope.host = "";
         $scope.managerCName = "";

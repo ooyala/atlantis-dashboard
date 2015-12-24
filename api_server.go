@@ -5,13 +5,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 )
 
 const (
 	staticDir = "/public/"
+	chars     = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 )
 
 var (
@@ -21,6 +24,14 @@ var (
 	filename       string
 	content        []byte
 )
+
+type status struct {
+	Status string
+}
+
+type taskId struct {
+	ID string
+}
 
 func readJSON(filepath string) []byte {
 	jsonDir := strings.Trim(staticDir, "/") + "/jsons/"
@@ -69,18 +80,51 @@ func main() {
 	http.ListenAndServe(fmt.Sprint(":", port), nil)
 }
 
+func handleNonGetRequest(w http.ResponseWriter, r *http.Request) {
+	var (
+		appUrl        = regexp.MustCompile(`/apps/[a-zA-Z]+`)
+		ipgroupUrl    = regexp.MustCompile(`/ipgroups/[a-zA-Z]+`)
+		managerUrl    = regexp.MustCompile(`/managers/[a-zA-Z]+`)
+		routerUrl     = regexp.MustCompile(`/routers/[a-zA-Z]+`)
+		supervisorUrl = regexp.MustCompile(`/supervisors/[a-zA-Z]+`)
+		url           = r.URL.String()
+	)
+
+	if appUrl.MatchString(url) || ipgroupUrl.MatchString(url) {
+		buff, _ := json.Marshal(status{Status: "OK"})
+		w.Write(buff)
+	} else if managerUrl.MatchString(url) || routerUrl.MatchString(url) ||
+		supervisorUrl.MatchString(url) {
+		result := make([]byte, 20)
+		for i := 0; i < 20; i++ {
+			result[i] = chars[rand.Intn(len(chars))]
+		}
+		buff, _ := json.Marshal(taskId{ID: string(result)})
+		w.Write(buff)
+	}
+}
+
 // Handler
 func handler(w http.ResponseWriter, r *http.Request) {
-	if strings.Contains(r.URL.Path, staticDir) {
-		staticHTTP.ServeHTTP(w, r)
+	var taskUrl = regexp.MustCompile(`/tasks/[a-zA-Z]+`)
+
+	if r.Method == "GET" && taskUrl.MatchString(r.URL.String()) {
+		buff, _ := json.Marshal(status{Status: "DONE"})
+		w.Write(buff)
+	} else if r.Method != "GET" {
+		handleNonGetRequest(w, r)
 	} else {
-		r.Header.Set("Content-Type", "application/json")
-		filePATH := urlJSONMapping[r.URL.Path]
-		if filePATH != nil {
-			content = readJSON(filePATH.(string))
-			w.Write(content)
+		if strings.Contains(r.URL.Path, staticDir) {
+			staticHTTP.ServeHTTP(w, r)
 		} else {
-			http.NotFound(w, r)
+			r.Header.Set("Content-Type", "application/json")
+			filePATH := urlJSONMapping[r.URL.Path]
+			if filePATH != nil {
+				content = readJSON(filePATH.(string))
+				w.Write(content)
+			} else {
+				http.NotFound(w, r)
+			}
 		}
 	}
 }
