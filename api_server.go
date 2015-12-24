@@ -87,13 +87,14 @@ func handleNonGetRequest(w http.ResponseWriter, r *http.Request) {
 		managerUrl    = regexp.MustCompile(`/managers/[a-zA-Z]+`)
 		routerUrl     = regexp.MustCompile(`/routers/[a-zA-Z]+`)
 		supervisorUrl = regexp.MustCompile(`/supervisors/[a-zA-Z]+`)
+		url           = r.URL.String()
 	)
 
-	if appUrl.MatchString(r.URL.String()) || ipgroupUrl.MatchString(r.URL.String()) {
+	if appUrl.MatchString(url) || ipgroupUrl.MatchString(url) {
 		buff, _ := json.Marshal(status{Status: "OK"})
 		w.Write(buff)
-	} else if managerUrl.MatchString(r.URL.String()) || routerUrl.MatchString(r.URL.String()) ||
-		supervisorUrl.MatchString(r.URL.String()) {
+	} else if managerUrl.MatchString(url) || routerUrl.MatchString(url) ||
+		supervisorUrl.MatchString(url) {
 		result := make([]byte, 20)
 		for i := 0; i < 20; i++ {
 			result[i] = chars[rand.Intn(len(chars))]
